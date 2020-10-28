@@ -8,7 +8,9 @@ type Props = {
 
 const AdminLoginPage: FC<Props> = ({ className }) => {
   return (
-    <div className={cn(styles.adminLoginPage, className)}>sign-in page</div>
+    <div className={cn(styles.adminLoginPage, className)}>
+      <div className={styles.container}>sign-in page</div>
+    </div>
   );
 };
 
