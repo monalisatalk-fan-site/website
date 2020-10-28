@@ -1,0 +1,22 @@
+{
+  "functions": {
+    "source": "workspaces/functions",
+    "predeploy": "yarn --cwd \"$RESOURCE_DIR\" build",
+    "runtime": "nodejs12"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "workspaces/website/dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}
