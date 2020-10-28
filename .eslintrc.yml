@@ -7,9 +7,11 @@ extends:
 plugins:
   - '@typescript-eslint'
   - react
+  - autofix
 rules:
   prettier/prettier:
     - error
     - singleQuote: true
       trailingComma: es5
       semi: true
+  autofix/no-unused-vars: error

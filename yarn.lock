@@ -2028,7 +2028,7 @@ acorn@^6.4.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.2.tgz#35866fd710528e92de10cf06016498e47e39e1e6"
   integrity sha512-XtGIhXwF8YM8bJhGxG5kXgjkEuNGLTkoYqVE+KMR+aspr4KGYmKYg7yUe3KghyQ9yheNwLnjmzh/7+gfDBmHCQ==
 
-acorn@^7.4.0:
+acorn@^7.1.1, acorn@^7.4.0:
   version "7.4.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
@@ -3776,6 +3776,17 @@ eslint-module-utils@^2.6.0:
     debug "^2.6.9"
     pkg-dir "^2.0.0"
 
+eslint-plugin-autofix@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-autofix/-/eslint-plugin-autofix-1.0.2.tgz#9283c56539b1fe536bf2c88b3150e2519240b7df"
+  integrity sha512-nEYdYSN73V/ZT6okB6WGzLzlV7xlLfikmjEgWaCRO2gCdDsY0QKhc2u0H0p/yyHXJSC1hMrqBDwkLWt6knuTdw==
+  dependencies:
+    eslint-rule-composer "^0.3.0"
+    espree "^6.1.2"
+    esutils "^2.0.2"
+    lodash "^4.17.15"
+    string-similarity "^4.0.1"
+
 eslint-plugin-flowtype@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-5.2.0.tgz#a4bef5dc18f9b2bdb41569a4ab05d73805a3d261"
@@ -3848,6 +3859,11 @@ eslint-plugin-react@^7.21.5:
     prop-types "^15.7.2"
     resolve "^1.18.1"
     string.prototype.matchall "^4.0.2"
+
+eslint-rule-composer@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-rule-composer/-/eslint-rule-composer-0.3.0.tgz#79320c927b0c5c0d3d3d2b76c8b4a488f25bbaf9"
+  integrity sha512-bt+Sh8CtDmn2OajxvNO+BX7Wn4CIWMpTRm3MaiKPCQcnnlm0CS2mhui6QaoeQugs+3Kj2ESKEEGJUdVafwhiCg==
 
 eslint-scope@^4.0.3:
   version "4.0.3"
@@ -3924,6 +3940,15 @@ eslint@^7.12.1:
     table "^5.2.3"
     text-table "^0.2.0"
     v8-compile-cache "^2.0.3"
+
+espree@^6.1.2:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/espree/-/espree-6.2.1.tgz#77fc72e1fd744a2052c20f38a5b575832e82734a"
+  integrity sha512-ysCxRQY3WaXJz9tdbWOwuWr5Y/XrPTGX9Kiz3yoUXwW0VZ4w30HTkQLaGx/+ttFjF8i+ACbArnB4ce68a9m5hw==
+  dependencies:
+    acorn "^7.1.1"
+    acorn-jsx "^5.2.0"
+    eslint-visitor-keys "^1.1.0"
 
 espree@^7.3.0:
   version "7.3.0"
@@ -7836,6 +7861,11 @@ string-natural-compare@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/string-natural-compare/-/string-natural-compare-3.0.1.tgz#7a42d58474454963759e8e8b7ae63d71c1e7fdf4"
   integrity sha512-n3sPwynL1nwKi3WJ6AIsClwBMa0zTi54fn2oLU6ndfTSIO05xaznjSf15PcBZU6FNWbmN5Q6cxT4V5hGvB4taw==
+
+string-similarity@^4.0.1:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/string-similarity/-/string-similarity-4.0.2.tgz#1dc29518d0e92e50509499ce2974368f77bbb1b1"
+  integrity sha512-eCsPPyoQBgY4TMpVD6DVfO7pLrimUONriaO4Xjp3WPUW0YnNLqdHgRj23xotLlqrL90eJhBeq3zdAJf2mQgfBQ==
 
 string-width@^1.0.1:
   version "1.0.2"
