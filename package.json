@@ -2,13 +2,13 @@
   "name": "monalisatalk-fan.site",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "lint:css": "stylelint \"**/*.scss\"",
+    "lint:js": "eslint --ext ts,tsx .",
+    "wf": "yarn workspace functions",
+    "ww": "yarn workspace website"
+  },
   "workspaces": [
     "workspaces/*"
-  ],
-  "scripts": {
-    "wf": "yarn workspace functions",
-    "ww": "yarn workspace website",
-    "lint:js": "eslint --ext ts,tsx .",
-    "lint:css": "stylelint \"**/*.scss\""
-  }
+  ]
 }
