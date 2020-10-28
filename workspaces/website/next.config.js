@@ -28,6 +28,12 @@ module.exports = {
     FIREBASE_APP_ID,
     FIREBASE_MEASUREMENT_ID,
   },
+  exportTrailingSlash: true,
+  exportPathMap: () => {
+    return {
+      '/404.html': { page: '/404' },
+    };
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
