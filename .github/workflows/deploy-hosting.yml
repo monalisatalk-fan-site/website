@@ -10,6 +10,7 @@ on:
       - .github/workflows/deploy-hosting.yml
 env:
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  PROJECT_ID: default
 
 jobs:
   deploy-functions:
@@ -29,4 +30,4 @@ jobs:
         run: yarn ww build
       - uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting -m "${{ github.event.head_commit.message }}"
+          args: deploy --only hosting
