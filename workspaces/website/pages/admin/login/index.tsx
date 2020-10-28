@@ -1,8 +1,9 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import cn from 'classnames';
 import { BaseInput } from '@/components/BaseInput';
-import { AdminAuth } from '@/components/AdminAuth';
+import { AdminLayout } from '@/components/AdminLayout';
 import { useReactiveState, auth } from '@/helpers';
 import styles from './index.module.scss';
 
@@ -31,7 +32,7 @@ const AdminLoginPage: FC<Props> = ({ className }) => {
   );
 
   return (
-    <AdminAuth onlyGuest>
+    <AdminLayout onlyGuest>
       <Head>
         <title>LOGIN</title>
         <link
@@ -64,7 +65,7 @@ const AdminLoginPage: FC<Props> = ({ className }) => {
           </form>
         </div>
       </div>
-    </AdminAuth>
+    </AdminLayout>
   );
 };
 
