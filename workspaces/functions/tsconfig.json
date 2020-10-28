@@ -4,7 +4,7 @@
     "outDir": "dist",
     "module": "CommonJS",
     "target": "es6",
-    "sourceMap": true,
+    "sourceMap": false,
     "isolatedModules": false,
     "noEmit": false
   },
