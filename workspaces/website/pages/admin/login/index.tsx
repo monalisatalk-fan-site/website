@@ -60,7 +60,7 @@ const AdminLoginPage: FC<Props> = ({ className }) => {
               value={password}
             />
             <button className={styles.submit} disabled={isLoading.value}>
-              LOGIN
+              LOGIN!
             </button>
           </form>
         </div>
