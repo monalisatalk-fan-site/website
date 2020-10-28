@@ -1,4 +1,4 @@
-name: Deploy Firebase Firestore rules
+name: Deploy Firebase Storage rules
 on:
   push:
     branches:
@@ -11,7 +11,7 @@ env:
 
 jobs:
   deploy-functions:
-    name: Deploy Firebase Firestore rules
+    name: Deploy Firebase Storage rules
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -20,4 +20,4 @@ jobs:
           fetch-depth: 1
       - uses: w9jds/firebase-action@master
         with:
-          args: deploy --only firestore:rules
+          args: deploy --only storage
