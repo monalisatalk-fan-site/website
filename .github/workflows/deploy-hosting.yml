@@ -1,19 +1,20 @@
-name: Deploy Firebase Cloud Functions
+name: Deploy Firebase Hosting
 on:
   push:
     branches:
       - develop
     paths:
-      - workspaces/functions/**.ts
-      - workspaces/functions/package.json
-      - .github/workflows/deploy-functions.yml
+      - workspaces/website/**.tsx?
+      - workspaces/website/**.scss
+      - workspaces/website/package.json
+      - .github/workflows/deploy-hosting.yml
 env:
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
   PROJECT_ID: default
 
 jobs:
   deploy-functions:
-    name: Deploy Firebase Cloud Functions
+    name: Deploy Firebase Hosting
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -25,6 +26,9 @@ jobs:
           node-version: 12.x
       - name: Install dependencies
         run: yarn wf install --frozen-lockfile
+      - name: Build Next.js app
+        run: yarn wf build
+      - run: echo "${{ github.event.head_commit }}"
       - uses: w9jds/firebase-action@master
         with:
-          args: deploy --only functions
+          args: deploy --only hosting
