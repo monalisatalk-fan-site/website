@@ -4,12 +4,15 @@
     "target": "es6",
     "module": "esnext",
     "moduleResolution": "node",
+    "jsx": "preserve",
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
     "noEmit": true,
     "types": []
-  },
+  }
 }
