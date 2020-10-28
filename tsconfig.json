@@ -13,6 +13,10 @@
     "strict": true,
     "noImplicitAny": true,
     "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["workspaces/website/*"]
+    },
     "types": []
   }
 }
