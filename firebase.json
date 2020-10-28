@@ -9,7 +9,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "workspaces/website/dist",
+    "public": "workspaces/website/out",
     "ignore": [
       "firebase.json",
       "**/.*",

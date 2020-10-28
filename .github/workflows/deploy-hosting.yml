@@ -25,10 +25,10 @@ jobs:
         with:
           node-version: 12.x
       - name: Install dependencies
-        run: yarn wf install --frozen-lockfile
+        run: yarn ww install --frozen-lockfile
       - name: Build Next.js app
-        run: yarn wf build
-      - run: echo "${{ github.event.head_commit }}"
+        run: yarn ww build
+      - run: echo ${{ github.event.head_commit }}
       - uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
