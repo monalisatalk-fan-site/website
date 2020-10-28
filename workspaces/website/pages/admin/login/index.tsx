@@ -1,9 +1,9 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
 import { BaseInput } from '@/components/BaseInput';
-import { useReactiveState, auth } from '@/helpers';
+import { useReactiveState, useAuth, auth } from '@/helpers';
 import styles from './index.module.scss';
 
 type Props = {
@@ -12,6 +12,7 @@ type Props = {
 
 const AdminLoginPage: FC<Props> = ({ className }) => {
   const router = useRouter();
+  const { isLoggedIn } = useAuth();
   const isLoading = useReactiveState(false);
   const email = useReactiveState('');
   const password = useReactiveState('');
@@ -24,14 +25,18 @@ const AdminLoginPage: FC<Props> = ({ className }) => {
 
       try {
         await auth.signInWithEmailAndPassword(email.value, password.value);
-
-        await router.replace('/admin');
       } finally {
         isLoading.update(false);
       }
     },
-    [router, email, password, isLoading]
+    [email, password, isLoading]
   );
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.replace('/admin');
+    }
+  }, [isLoggedIn, router]);
 
   return (
     <>
