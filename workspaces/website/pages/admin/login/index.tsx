@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect } from 'react';
+import React, { FC, useCallback } from 'react';
 import Head from 'next/head';
 import cn from 'classnames';
 import { BaseInput } from '@/components/BaseInput';
