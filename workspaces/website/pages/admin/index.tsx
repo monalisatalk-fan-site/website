@@ -9,7 +9,7 @@ type Props = {
 const AdminPage: FC<Props> = ({ className }) => {
   return (
     <div className={cn(styles.adminPage, className)}>
-      <p>admin top page</p>
+      <p>admin top page.</p>
     </div>
   );
 };
