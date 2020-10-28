@@ -2,7 +2,6 @@ import React, { FC, useMemo, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
 import { auth, useAuth } from '@/helpers';
-import styles from './index.module.scss';
 
 type Props = {
   className?: string;
@@ -42,17 +41,15 @@ export const AdminLayout: FC<Props> = ({
   }, [router, isLoggedIn, onlyGuest]);
 
   return (
-    <div className={cn(styles.adminAuth, className)}>
-      <div className={styles.sidebar}>
+    <div className={cn('', className)}>
+      <div>
         {isLoggedIn ? (
           <div>
             <button onClick={signOut}>サインアウト</button>
           </div>
         ) : null}
       </div>
-      <div className={styles.main}>
-        {isLoading ? <p>loading...</p> : children}
-      </div>
+      <div>{isLoading ? <p>loading...</p> : children}</div>
     </div>
   );
 };

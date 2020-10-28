@@ -1,16 +1,10 @@
 import React, { FC } from 'react';
-import cn from 'classnames';
 import { AdminLayout } from '@/components/AdminLayout';
-import styles from './index.module.scss';
 
-type Props = {
-  className?: string;
-};
-
-const AdminPage: FC<Props> = ({ className }) => {
+const AdminPage: FC = () => {
   return (
     <AdminLayout>
-      <div className={cn(styles.adminPage, className)}>
+      <div>
         <p>admin top page !</p>
       </div>
     </AdminLayout>
