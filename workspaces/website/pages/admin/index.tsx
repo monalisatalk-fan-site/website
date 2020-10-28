@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import cn from 'classnames';
+import { AdminAuth } from '@/components/AdminAuth';
 import styles from './index.module.scss';
 
 type Props = {
@@ -8,9 +9,11 @@ type Props = {
 
 const AdminPage: FC<Props> = ({ className }) => {
   return (
-    <div className={cn(styles.adminPage, className)}>
-      <p>admin top page !</p>
-    </div>
+    <AdminAuth>
+      <div className={cn(styles.adminPage, className)}>
+        <p>admin top page !</p>
+      </div>
+    </AdminAuth>
   );
 };
 
