@@ -7,6 +7,7 @@ on:
       - workspaces/website/**.tsx?
       - workspaces/website/**.scss
       - workspaces/website/package.json
+      - workspaces/website/next.config.js
       - .github/workflows/deploy-hosting.yml
 env:
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
