@@ -4,6 +4,7 @@ extends:
   - prettier/@typescript-eslint
   - react-app
   - plugin:prettier/recommended
+  - plugin:tailwind/recommended
 plugins:
   - '@typescript-eslint'
   - react
