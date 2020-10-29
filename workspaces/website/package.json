@@ -33,6 +33,7 @@
     "eslint-plugin-tailwind": "^0.2.0",
     "fibers": "^5.0.0",
     "postcss-flexbugs-fixes": "^4.2.1",
+    "postcss-nested": "^5.0.1",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.1.2",
     "stylelint": "^13.7.1",

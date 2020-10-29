@@ -28,10 +28,6 @@ const AdminLoginPage: FC = () => {
     <AdminLayout onlyGuest>
       <Head>
         <title>LOGIN</title>
-        <link
-          rel="stylesheet"
-          href="//fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap"
-        />
       </Head>
       <div>
         <div>
