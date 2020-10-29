@@ -5,7 +5,7 @@ const AdminPage: FC = () => {
   return (
     <AdminLayout>
       <div>
-        <p className="text-red-300">admin top page !</p>
+        <p className="text-red-300">admin top page !!</p>
       </div>
     </AdminLayout>
   );

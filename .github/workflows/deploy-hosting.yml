@@ -40,4 +40,4 @@ jobs:
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
       - uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting -m "${{ github.event.last_commit.message }}"
+          args: deploy --only hosting
