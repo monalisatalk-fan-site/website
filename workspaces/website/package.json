@@ -2,6 +2,9 @@
   "name": "website",
   "version": "1.0.0",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.12",
     "classnames": "^2.2.6",
     "firebase": "^8.0.0",
     "next": "^10.0.0",

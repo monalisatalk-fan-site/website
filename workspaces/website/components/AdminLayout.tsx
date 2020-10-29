@@ -15,6 +15,10 @@ export const AdminLayout: FC<Props> = ({ children, onlyGuest = false }) => {
   }, [isLoggedIn, onlyGuest]);
 
   const signOut = useCallback(async () => {
+    if (!window.confirm('管理画面からログアウトします。よろしいですか？')) {
+      return;
+    }
+
     await auth.signOut();
   }, []);
 
@@ -29,15 +33,11 @@ export const AdminLayout: FC<Props> = ({ children, onlyGuest = false }) => {
 
       return;
     }
-
-    if (onlyGuest && isLoggedIn) {
-      router.push('/admin/dummy');
-    }
   }, [router, isLoggedIn, onlyGuest]);
 
   return (
     <div className="flex">
-      <AdminSidebar />
+      <AdminSidebar isLoggedIn={isLoggedIn} signOut={signOut} />
       <div>{isLoading ? <p>loading...</p> : children}</div>
     </div>
   );
