@@ -37,8 +37,18 @@ export const AdminLayout: FC<Props> = ({ children, onlyGuest = false }) => {
 
   return (
     <div className="flex">
-      <AdminSidebar isLoggedIn={isLoggedIn} signOut={signOut} />
-      <div>{isLoading ? <p>loading...</p> : children}</div>
+      <div className="flex-shrink-0 min-h-screen">
+        <AdminSidebar isLoggedIn={isLoggedIn} signOut={signOut} />
+      </div>
+      <div className="flex-grow">
+        {isLoading ? (
+          <p>loading...</p>
+        ) : (
+          <div className="w-full">
+            <div className="w-full max-w-5xl px-6 mx-auto">{children}</div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

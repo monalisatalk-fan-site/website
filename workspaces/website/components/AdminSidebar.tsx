@@ -15,7 +15,7 @@ const menuItems = [
 
 export const AdminSidebar: FC<Props> = ({ isLoggedIn, signOut }) => {
   return (
-    <div className="relative w-0 min-h-screen overflow-y-auto bg-gray-400 sm:w-auto">
+    <div className="relative w-0 h-full overflow-y-auto bg-gray-400 sm:w-auto">
       <div className="flex flex-col w-64 max-w-full min-h-full pb-4">
         <img
           alt=""
@@ -27,7 +27,7 @@ export const AdminSidebar: FC<Props> = ({ isLoggedIn, signOut }) => {
         {isLoggedIn ? (
           <div className="flex flex-col flex-grow">
             {menuItems.map(({ href, icon, label }) => (
-              <Link href={href}>
+              <Link href={href} key={href}>
                 <a className="flex items-center w-full px-5 py-3 mb-2 text-sm text-gray-800 hover:text-blue-600">
                   <FontAwesomeIcon
                     icon={icon}

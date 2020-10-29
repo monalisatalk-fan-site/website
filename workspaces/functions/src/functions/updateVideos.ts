@@ -6,7 +6,14 @@ const bucket = admin.storage().bucket();
 const VIDEO_SNIPPET_FILE = 'resources/video-snippet/data.json';
 const VIDEO_SNIPPET_META_FILE = 'resources/video-snippet/meta.json';
 
-export const updateVideos = functions.https.onCall(async () => {
+export const updateVideos = functions.https.onCall(async (data, context) => {
+  if (!context.auth?.uid) {
+    throw new functions.https.HttpsError(
+      'unauthenticated',
+      '管理者アカウントにログインしてくださいログインしてください'
+    );
+  }
+
   const items = await fetchYouTubeVideos(true);
   const videoSnippetFile = bucket.file(VIDEO_SNIPPET_FILE);
   const videoSnippetMetaFile = bucket.file(VIDEO_SNIPPET_META_FILE);
