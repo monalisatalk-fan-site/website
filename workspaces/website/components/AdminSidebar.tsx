@@ -9,8 +9,8 @@ type Props = {
 };
 
 const menuItems = [
-  { href: '/videos', icon: faPlayCircle, label: 'Videos' },
-  { href: '/characters', icon: faChild, label: 'Characters' },
+  { href: '/admin/videos', icon: faPlayCircle, label: 'Videos' },
+  { href: '/admin/characters', icon: faChild, label: 'Characters' },
 ];
 
 export const AdminSidebar: FC<Props> = ({ isLoggedIn, signOut }) => {
