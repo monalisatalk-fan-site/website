@@ -28,6 +28,7 @@ module.exports = {
     FIREBASE_APP_ID,
     FIREBASE_MEASUREMENT_ID,
   },
+  trailingSlash: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
