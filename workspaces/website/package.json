@@ -4,18 +4,27 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@nuxt/typescript-runtime": "^2.0.0",
     "firebase": "^8.0.0",
+    "nuxt": "^2.14.7",
     "rfdc": "^1.1.4"
   },
   "devDependencies": {
+    "@nuxt/types": "^2.14.7",
+    "@nuxt/typescript-build": "^2.0.3",
+    "@nuxtjs/composition-api": "^0.14.0",
+    "@nuxtjs/eslint-config-typescript": "^4.0.0",
     "@types/node": "^14.14.5",
     "@types/rfdc": "^1.1.0",
-    "@typescript-eslint/eslint-plugin": "^4.6.0",
-    "@typescript-eslint/parser": "^4.6.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
+    "fibers": "^5.0.0",
     "prettier": "^2.1.2",
+    "pug": "^3.0.0",
+    "pug-plain-loader": "^1.0.0",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.0.5",
     "stylelint": "^13.7.1",
     "stylelint-config-recess-order": "^2.1.0",
     "stylelint-config-standard": "^20.0.0",
@@ -23,5 +32,8 @@
     "stylelint-scss": "^3.18.0",
     "typescript": "^4.0.5"
   },
-  "scripts": {}
+  "scripts": {
+    "dev": "nuxt-ts dev",
+    "build": "nuxt-ts generate"
+  }
 }

@@ -1,28 +1,14 @@
-parser: '@typescript-eslint/parser'
 extends:
-  - plugin:@typescript-eslint/recommended
-  - prettier/@typescript-eslint
-  - react-app
+  - '@nuxtjs/eslint-config-typescript'
   - plugin:prettier/recommended
-  - plugin:tailwind/recommended
-plugins:
-  - '@typescript-eslint'
-  - react
-  - autofix
+  - prettier/@typescript-eslint
 rules:
   prettier/prettier:
     - error
     - singleQuote: true
       trailingComma: es5
       semi: true
-  autofix/no-unused-vars: error
-  jsx-a11y/anchor-is-valid:
-    - error
-    - components:
-        - Link
-      specialLink:
-        - hrefLeft
-        - hrefRight
-      aspects:
-        - invalidHref
-        - preferButton
+  no-unused-vars: 'off'
+  '@typescript-eslint/no-unused-vars':
+    - warn
+    - args: after-used

@@ -6,6 +6,7 @@
     "lint:css": "stylelint \"**/*.scss\"",
     "lint:js": "eslint --ext ts,tsx .",
     "wf": "yarn workspace functions",
+    "ws": "yarn workspace shared",
     "ww": "yarn workspace website"
   },
   "workspaces": [
