@@ -19,6 +19,10 @@
     "paths": {
       "@/*": ["workspaces/website/*"]
     },
-    "types": []
+    "types": [
+      "node",
+      "@nuxt/types",
+      "@nuxtjs/firebase"
+    ]
   }
 }

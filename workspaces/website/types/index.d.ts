@@ -15,3 +15,7 @@ export type VideoResource = {
   updatedAt: string;
   items: Video[];
 };
+
+export type VideoMeta = {
+  updatedAt: string;
+};

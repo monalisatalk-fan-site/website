@@ -1705,6 +1705,15 @@
     eslint-plugin-unicorn "^22.0.0"
     eslint-plugin-vue "^6.2.2"
 
+"@nuxtjs/firebase@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/firebase/-/firebase-7.0.0.tgz#26a527c7f3d2a4a4205f59b7a306ea5ee6fd1be6"
+  integrity sha512-DHfvp6CqKgkIfm2Y2ZCPUTVFfmCZS+J3TP92mCDHmhSALQxqfkX/x629VsBaw1Zfm040jizLtHElT9IlxYecSQ==
+  dependencies:
+    consola "^2.15.0"
+  optionalDependencies:
+    firebase-admin "^9.3.0"
+
 "@nuxtjs/youch@^4.2.3":
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/@nuxtjs/youch/-/youch-4.2.3.tgz#36f8b22df5a0efaa81373109851e1d857aca6bed"

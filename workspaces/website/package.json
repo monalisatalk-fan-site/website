@@ -5,6 +5,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@nuxt/typescript-runtime": "^2.0.0",
+    "@nuxtjs/firebase": "^7.0.0",
     "firebase": "^8.0.0",
     "nuxt": "^2.14.7",
     "reset-css": "^5.0.1",

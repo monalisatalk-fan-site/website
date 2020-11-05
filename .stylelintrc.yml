@@ -21,10 +21,4 @@ rules:
         - variants
         - responsive
         - screen
-  rscss/class-format:
-    - true
-    - component: ^[a-z0-9]+[A-Z][a-zA-Z0-9]+$
-      element: ^[a-z0-9]+$
-      helper: ^_[a-zA-Z0-9]+$
-      variant: ^[A-Z][a-zA-Z0-9]+$
-      maxDepth: 3
+  rscss/class-format: true
