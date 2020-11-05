@@ -1,9 +1,0 @@
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-}
-
-button, input, textarea {
-  font-weight: inherit;
-}
