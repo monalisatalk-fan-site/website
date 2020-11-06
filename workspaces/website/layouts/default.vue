@@ -3,7 +3,7 @@
   .body
     nuxt
   .footer
-    GlobalFooter
+    GlobalFooter.footer
     MonaLisaNoSillyTalk(secondary)
 </template>
 
@@ -72,6 +72,10 @@ export default defineComponent({
   & > .footer {
     margin-top: auto;
   }
+
+  & > .footer > .footer {
+    margin-top: 64px;
+  }
 }
 </style>
 
@@ -85,9 +89,19 @@ html {
 body {
   font-family: Kosugi Maru, sans-serif;
   font-size: 1.4rem;
+  background: #eee;
 }
 
 a {
   color: inherit;
+}
+
+input,
+textarea {
+  font-family: sans-serif;
+}
+
+button {
+  font-family: inherit;
 }
 </style>

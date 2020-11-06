@@ -41,13 +41,14 @@ export default defineComponent({
   }
 
   & > .container > .copyright {
-    margin: 32px 0 8px;
+    margin: 32px 0 16px;
     font-size: 1.2rem;
     text-align: center;
   }
 
   & > .container > .note {
     font-size: 1rem;
+    line-height: 1.5;
     color: #888;
     text-align: center;
   }
