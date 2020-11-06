@@ -48,7 +48,8 @@ export default defineComponent({
     link: [
       {
         rel: 'stylesheet',
-        href: '//fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap',
+        href:
+          '//fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap',
       },
     ],
     titleTemplate: (chunk) =>
@@ -81,27 +82,4 @@ export default defineComponent({
 
 <style lang="scss">
 @import 'main';
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  font-family: Kosugi Maru, sans-serif;
-  font-size: 1.4rem;
-  background: #eee;
-}
-
-a {
-  color: inherit;
-}
-
-input,
-textarea {
-  font-family: sans-serif;
-}
-
-button {
-  font-family: inherit;
-}
 </style>
