@@ -1,10 +1,11 @@
 <template lang="pug">
-.layout-container
-  .body
-    nuxt
-  .footer
-    GlobalFooter
-    MonaLisaNoSillyTalk(secondary)
+v-app
+  v-main.layout-container
+    .body
+      nuxt
+    .footer
+      GlobalFooter
+      MonaLisaNoSillyTalk(secondary)
 </template>
 
 <script lang="ts">
@@ -60,7 +61,7 @@ export default defineComponent({
       {
         rel: 'stylesheet',
         href:
-          '//fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap',
+          '//fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap',
       },
     ],
     titleTemplate: (chunk) =>

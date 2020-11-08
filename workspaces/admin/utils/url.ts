@@ -1,4 +1,3 @@
-import { realpath } from 'fs';
 import { Location } from 'vue-router';
 
 export const PAGE_URL = {
@@ -7,13 +6,13 @@ export const PAGE_URL = {
     path: '/sign-in',
     query: ['from'],
   },
-  ADMIN_DASHBOARD: '/admin/dashboard',
-  ADMIN_VIDEOS: '/admin/videos',
-  ADMIN_VIDEOS_DETAIL: {
-    path: '/admin/videos/_videoId',
+  DASHBOARD: '/dashboard',
+  VIDEOS: '/videos',
+  VIDEOS_DETAIL: {
+    path: '/videos/_videoId',
     params: ['videoId'],
   },
-  ADMIN_CHARACTERS: '/admin/characters',
+  CHARACTERS: '/characters',
 };
 
 export const url = (

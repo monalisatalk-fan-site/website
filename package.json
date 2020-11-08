@@ -6,7 +6,7 @@
     "lint:css": "stylelint \"**/*.scss\"",
     "lint:js": "eslint --ext ts,vue --debug .",
     "wf": "yarn workspace functions",
-    "ws": "yarn workspace shared",
+    "wa": "yarn workspace admin",
     "ww": "yarn workspace website"
   },
   "workspaces": [

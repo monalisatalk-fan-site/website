@@ -5,7 +5,7 @@ import {
   DefineStoreModule,
 } from '@lollipop-onl/vuex-typesafe-helper';
 import type { VideoResource, VideoMeta, Video } from '@/types';
-import { VideoResourceCache } from '@/utils';
+import { VideoResourceCache } from '@/utils/VideoResourceCache';
 
 export type State = {
   videos: Video[] | null;

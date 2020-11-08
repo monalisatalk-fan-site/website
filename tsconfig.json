@@ -16,9 +16,6 @@
     "noImplicitAny": true,
     "noEmit": true,
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["workspaces/website/*"]
-    },
     "types": [
       "node",
       "@nuxt/types",
