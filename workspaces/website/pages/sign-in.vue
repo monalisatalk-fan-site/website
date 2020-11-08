@@ -16,7 +16,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, useContext } from '@nuxtjs/composition-api';
+import {
+  defineComponent,
+  ref,
+  computed,
+  useContext,
+} from '@nuxtjs/composition-api';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import MonaLisaNoSillyTalk from '@/components/MonaLisaNoSillyTalk.vue';
 
@@ -27,9 +32,15 @@ export default defineComponent({
     MonaLisaNoSillyTalk,
   },
   setup() {
-    const { app, redirect } = useContext();
+    const { app, route, redirect } = useContext();
     const email = ref('');
     const password = ref('');
+    const nextUrl = computed((): string => {
+      const fromInQuery = route.value.query.from;
+      const fromUrl = Array.isArray(fromInQuery) ? fromInQuery[0] : fromInQuery;
+
+      return fromUrl || '/admin/dashboard';
+    });
 
     const signIn = async () => {
       await app.$fire.auth.signInWithEmailAndPassword(
@@ -37,7 +48,7 @@ export default defineComponent({
         password.value
       );
 
-      redirect('/admin/dashboard');
+      redirect(nextUrl.value);
     };
 
     return {

@@ -3,18 +3,21 @@
   .body
     nuxt
   .footer
-    GlobalFooter.footer
+    GlobalFooter
     MonaLisaNoSillyTalk(secondary)
 </template>
 
 <script lang="ts">
 import {
   defineComponent,
+  useContext,
   onMounted,
   onUnmounted,
 } from '@nuxtjs/composition-api';
+import firebase from 'firebase/app';
 import GlobalFooter from '@/components/GlobalFooter.vue';
 import MonaLisaNoSillyTalk from '@/components/MonaLisaNoSillyTalk.vue';
+import { useTypedStore } from '@/helpers';
 
 export default defineComponent({
   name: 'DefaultLayout',
@@ -23,6 +26,9 @@ export default defineComponent({
     MonaLisaNoSillyTalk,
   },
   setup() {
+    const { app } = useContext();
+    const store = useTypedStore();
+
     const setBaseVh = () => {
       const vh = window.innerHeight * 0.01;
       const { documentElement } = document;
@@ -34,6 +40,11 @@ export default defineComponent({
 
     onMounted(() => {
       window.addEventListener('resize', setBaseVh);
+
+      app.$fire.auth.onAuthStateChanged((user) => {
+        // @ts-expect-error
+        store.commit('auth/setUser', user && user.toJSON());
+      });
     });
 
     onUnmounted(() => {
@@ -72,10 +83,6 @@ export default defineComponent({
 
   & > .footer {
     margin-top: auto;
-  }
-
-  & > .footer > .footer {
-    margin-top: 64px;
   }
 }
 </style>

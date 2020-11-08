@@ -58,7 +58,7 @@ const config: NuxtConfig = {
       },
     ],
   ],
-  plugins: ['@/plugins/fontAwesome'],
+  plugins: ['@/plugins/libraries', '@/plugins/fontAwesome'],
   render: {
     ssrLog: 'collapsed',
   },

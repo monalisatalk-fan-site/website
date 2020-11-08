@@ -1,5 +1,9 @@
 import Vue from 'vue';
-import { ActionContext } from 'vuex';
+import {
+  Converter,
+  DefineActionContext,
+  DefineStoreModule,
+} from '@lollipop-onl/vuex-typesafe-helper';
 import type { VideoResource, VideoMeta, Video } from '@/types';
 import { VideoResourceCache } from '@/utils';
 
@@ -15,6 +19,8 @@ export const state = (): State => ({
 
 export const getters = {};
 
+export type Getters = Converter<typeof getters, {}>;
+
 export const mutations = {
   setVideos: (state: State, videos: Video[]) => {
     state.videos = videos;
@@ -24,11 +30,18 @@ export const mutations = {
   },
 };
 
+export type Mutations = Converter<
+  typeof mutations,
+  {
+    setVideos: 'video/setVideos';
+    setVideoMeta: 'video/setVideoMeta';
+  }
+>;
+
+export type Ctx = DefineActionContext<State, typeof getters, typeof mutations>;
+
 export const actions = {
-  async fetchVideoResources(
-    this: Vue,
-    { state, commit }: ActionContext<State, any>
-  ): Promise<void> {
+  async fetchVideoResources(this: Vue, { state, commit }: Ctx): Promise<void> {
     if (state.meta) {
       return;
     }
@@ -60,3 +73,18 @@ export const actions = {
     cache.update(data);
   },
 };
+
+export type Actions = Converter<
+  typeof actions,
+  {
+    fetchVideoResources: 'video/fetchVideoResources';
+  }
+>;
+
+export type Store = DefineStoreModule<
+  'video',
+  State,
+  Getters,
+  Mutations,
+  Actions
+>;
