@@ -12,7 +12,8 @@
           .icon
             FontAwesomeIcon(icon="lock")
           input.field(v-model="password" type="password" placeholder="Password")
-        button.submit ログイン
+        p.error(v-if="errorMessage") {{ errorMessage }}
+        button.submit(:disabled="isSignInProcessing") ログイン
 </template>
 
 <script lang="ts">
@@ -36,6 +37,8 @@ export default defineComponent({
     const { app, route, redirect } = useContext();
     const email = ref('');
     const password = ref('');
+    const isSignInProcessing = ref(false);
+    const errorMessage = ref<string | null>(null);
     const nextUrl = computed((): string => {
       const fromInQuery = route.value.query.from;
       const fromUrl = Array.isArray(fromInQuery) ? fromInQuery[0] : fromInQuery;
@@ -44,17 +47,27 @@ export default defineComponent({
     });
 
     const signIn = async () => {
-      await app.$fire.auth.signInWithEmailAndPassword(
-        email.value,
-        password.value
-      );
+      try {
+        isSignInProcessing.value = true;
+        errorMessage.value = null;
 
-      redirect(nextUrl.value);
+        await app.$fire.auth.signInWithEmailAndPassword(
+          email.value,
+          password.value
+        );
+
+        redirect(nextUrl.value);
+      } catch (err) {
+        isSignInProcessing.value = false;
+        errorMessage.value = err.message;
+      }
     };
 
     return {
       email,
       password,
+      isSignInProcessing,
+      errorMessage,
       signIn,
     };
   },
@@ -85,6 +98,12 @@ export default defineComponent({
 
   & > .form > .input {
     margin-top: 16px;
+  }
+
+  & > .form > .error {
+    margin: 16px 0;
+    line-height: 1.8;
+    color: red;
   }
 
   & > .form > .submit {

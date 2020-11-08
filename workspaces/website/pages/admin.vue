@@ -32,13 +32,17 @@ export default defineComponent({
     const isInitialized = computed(() => store.state.auth.isInitialized);
     const isSignedIn = computed(() => store.getters['auth/isSignedIn']);
 
-    watch([isInitialized, isSignedIn], () => {
-      if (isInitialized.value && !isSignedIn.value) {
-        redirect(
-          url('SIGN_IN', { query: { from: route.value.fullPath } }).toString()
-        );
-      }
-    });
+    watch(
+      [isInitialized, isSignedIn],
+      () => {
+        if (isInitialized.value && !isSignedIn.value) {
+          redirect(
+            url('SIGN_IN', { query: { from: route.value.fullPath } }).toString()
+          );
+        }
+      },
+      { immediate: true }
+    );
 
     return {
       isInitialized,

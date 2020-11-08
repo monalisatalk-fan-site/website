@@ -8,10 +8,12 @@ export const PAGE_URL = {
     query: ['from'],
   },
   ADMIN_DASHBOARD: '/admin/dashboard',
-  ADMIN_VIDEO_DETAIL: {
+  ADMIN_VIDEOS: '/admin/videos',
+  ADMIN_VIDEOS_DETAIL: {
     path: '/admin/videos/_videoId',
     params: ['videoId'],
   },
+  ADMIN_CHARACTERS: '/admin/characters',
 };
 
 export const url = (
