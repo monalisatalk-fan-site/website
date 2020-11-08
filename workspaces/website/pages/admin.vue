@@ -19,6 +19,7 @@ import {
 } from '@nuxtjs/composition-api';
 import AdminSidebar from '@/components/AdminSidebar.vue';
 import { useTypedStore } from '@/helpers';
+import { url } from '@/utils';
 
 export default defineComponent({
   name: 'AdminLayout',
@@ -33,7 +34,9 @@ export default defineComponent({
 
     watch([isInitialized, isSignedIn], () => {
       if (isInitialized.value && !isSignedIn.value) {
-        redirect(401, '/sign-in', { from: route.value.fullPath });
+        redirect(
+          url('SIGN_IN', { query: { from: route.value.fullPath } }).toString()
+        );
       }
     });
 

@@ -24,6 +24,7 @@ import {
 } from '@nuxtjs/composition-api';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import MonaLisaNoSillyTalk from '@/components/MonaLisaNoSillyTalk.vue';
+import { url } from '@/utils';
 
 export default defineComponent({
   name: 'SignInPage',
@@ -39,7 +40,7 @@ export default defineComponent({
       const fromInQuery = route.value.query.from;
       const fromUrl = Array.isArray(fromInQuery) ? fromInQuery[0] : fromInQuery;
 
-      return fromUrl || '/admin/dashboard';
+      return fromUrl || url('ADMIN_DASHBOARD').toString();
     });
 
     const signIn = async () => {
