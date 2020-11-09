@@ -1,14 +1,14 @@
-name: Deploy Firebase Hosting
+name: Deploy Firebase Hosting (www)
 on:
   push:
     branches:
       - develop
     paths:
-      - workspaces/website/**.tsx?
-      - workspaces/website/**.scss
-      - workspaces/website/package.json
-      - workspaces/website/next.config.js
-      - .github/workflows/deploy-hosting.yml
+      - workspaces/www/**.tsx?
+      - workspaces/www/**.scss
+      - workspaces/www/package.json
+      - workspaces/www/next.config.js
+      - .github/workflows/deploy-hosting-www.yml
 env:
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
   PROJECT_ID: default
@@ -40,4 +40,4 @@ jobs:
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
       - uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting
+          args: deploy --only hosting:www

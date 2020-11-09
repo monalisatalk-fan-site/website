@@ -7,7 +7,7 @@
     "lint:js": "eslint --ext ts,vue --debug .",
     "wf": "yarn workspace functions",
     "wa": "yarn workspace admin",
-    "ww": "yarn workspace website"
+    "ww": "yarn workspace www"
   },
   "workspaces": [
     "workspaces/*"
