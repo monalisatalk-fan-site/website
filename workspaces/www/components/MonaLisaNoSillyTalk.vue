@@ -50,14 +50,16 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     background-image: url(~assets/images/monalisanosillytalk.png);
-    filter: invert(67%) sepia(87%) saturate(219%) hue-rotate(149deg) brightness(87%) contrast(93%);
+    filter: invert(67%) sepia(87%) saturate(219%) hue-rotate(149deg)
+      brightness(87%) contrast(93%);
     background-repeat: repeat-x;
     background-size: auto 24px;
     animation: move-left 12s linear infinite;
   }
 
   &.-secondary > .text {
-    filter: invert(11%) sepia(85%) saturate(4131%) hue-rotate(343deg) brightness(112%) contrast(93%);
+    filter: invert(11%) sepia(85%) saturate(4131%) hue-rotate(343deg)
+      brightness(112%) contrast(93%);
     animation: move-right 12s linear infinite;
   }
 }

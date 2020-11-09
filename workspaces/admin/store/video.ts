@@ -31,7 +31,7 @@ export const mutations = {
   },
   setError: (state: State, error: Error | null) => {
     state.error = error;
-  }
+  },
 };
 
 export type Mutations = Converter<
