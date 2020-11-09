@@ -4,7 +4,7 @@ import {
   DefineActionContext,
   DefineStoreModule,
 } from '@lollipop-onl/vuex-typesafe-helper';
-import type { VideoResource, VideoMeta, Video } from '@/types';
+import type { VideoResource, Video } from '@/types';
 
 export type State = {
   updatedAt: string | null;

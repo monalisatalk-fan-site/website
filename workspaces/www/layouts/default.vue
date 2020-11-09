@@ -15,7 +15,6 @@ import {
   onMounted,
   onUnmounted,
 } from '@nuxtjs/composition-api';
-import firebase from 'firebase/app';
 import GlobalFooter from '@/components/GlobalFooter.vue';
 import MonaLisaNoSillyTalk from '@/components/MonaLisaNoSillyTalk.vue';
 import { useTypedStore } from '@/helpers';

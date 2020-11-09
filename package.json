@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "lint:css": "stylelint \"**/*.scss\"",
-    "lint:js": "eslint --ext ts,vue --debug .",
+    "lint:js": "eslint --ext ts,vue .",
     "wf": "yarn workspace functions",
     "wa": "yarn workspace admin",
     "ww": "yarn workspace www"
