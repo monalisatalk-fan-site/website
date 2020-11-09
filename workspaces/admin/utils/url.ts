@@ -22,12 +22,12 @@ export const url = (
   const { params = {}, query = {} } = options;
   const targetPath = PAGE_URL[key];
   const path = typeof targetPath === 'string' ? targetPath : targetPath.path;
-  const toString = (): string => {
-    const realPath = path.replace(/\/_([^/]+)/, (matched) => {
-      const param = params[matched];
+  const realPath = path.replace(/\/_([^/]+)/, (matched, $1) => {
+    const param = params[$1];
 
-      return param ? `/${param}` : `/_${matched}`;
-    });
+    return param ? `/${param}` : `/_${$1}`;
+  });
+  const toString = (): string => {
     const queryString = Object.entries(query)
       .flatMap<Array<string | null>>(([key, value]) =>
         value
@@ -47,8 +47,9 @@ export const url = (
   };
 
   return {
-    path,
     ...options,
+    path: realPath,
+    params: {},
     toString,
   };
 };
