@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: yarn wa install --frozen-lockfile
       - name: Build Next.js app
-        run: yarn ww build
+        run: yarn wa build
         env:
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
           FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
