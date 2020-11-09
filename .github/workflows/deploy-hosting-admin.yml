@@ -1,14 +1,14 @@
-name: Deploy Firebase Hosting (www)
+name: Deploy Firebase Hosting (admin)
 on:
   push:
     branches:
       - develop
     paths:
-      - workspaces/www/**.tsx?
-      - workspaces/www/**.scss
-      - workspaces/www/package.json
-      - workspaces/www/next.config.js
-      - .github/workflows/deploy-hosting-www.yml
+      - workspaces/admin/**.tsx?
+      - workspaces/admin/**.scss
+      - workspaces/admin/package.json
+      - workspaces/admin/next.config.js
+      - .github/workflows/deploy-hosting-admin.yml
 env:
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
   PROJECT_ID: default
@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: 12.x
       - name: Install dependencies
-        run: yarn ww install --frozen-lockfile
+        run: yarn wa install --frozen-lockfile
       - name: Build Next.js app
         run: yarn ww build
         env:
