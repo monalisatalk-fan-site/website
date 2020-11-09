@@ -15,12 +15,9 @@ const {
 } = process.env;
 
 const config: NuxtConfig = {
+  target: 'static',
   modern: true,
-  buildModules: [
-    '@nuxt/typescript-build',
-    '@nuxtjs/composition-api',
-    '@nuxtjs/vuetify',
-  ],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api'],
   build: {
     loaders: {
       scss: {
