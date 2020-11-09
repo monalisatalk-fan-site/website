@@ -19,7 +19,7 @@
       ],
       "rewrites": [{
         "source": "**",
-        "destination": "/index.html"
+        "destination": "/200.html"
       }]
     },
     {
@@ -32,7 +32,7 @@
       ],
       "rewrites": [{
         "source": "**",
-        "destination": "/index.html"
+        "destination": "/200.html"
       }]
     }
   ],
