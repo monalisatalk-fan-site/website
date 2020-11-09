@@ -22,15 +22,7 @@ const config: NuxtConfig = {
     '@nuxtjs/composition-api',
     '@nuxtjs/vuetify',
   ],
-  build: {
-    loaders: {
-      scss: {
-        sassOptions: {
-          includePaths: [path.resolve(__dirname, 'assets/styles')],
-        },
-      },
-    },
-  },
+  build: {},
   vue: {
     config: {
       productionTip: false,

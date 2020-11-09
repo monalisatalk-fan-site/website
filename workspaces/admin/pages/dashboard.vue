@@ -11,7 +11,3 @@ export default defineComponent({
   setup() {},
 });
 </script>
-
-<style lang="scss" scoped>
-@import 'resources';
-</style>
