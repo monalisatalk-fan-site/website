@@ -1,7 +1,7 @@
 import path from 'path';
 import { NuxtConfig } from '@nuxt/types';
 
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
 const {
   FIREBASE_API_KEY,
