@@ -4,7 +4,8 @@ on:
     branches:
       - develop
     paths:
-      - workspaces/www/**.tsx?
+      - workspaces/www/**.vue
+      - workspaces/www/**.ts
       - workspaces/www/**.scss
       - workspaces/www/package.json
       - workspaces/www/next.config.js
