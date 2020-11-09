@@ -25,6 +25,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-admin-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-admin-
       - name: Install dependencies
         run: yarn wa install --frozen-lockfile
       - name: Build Next.js app

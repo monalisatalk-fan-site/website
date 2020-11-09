@@ -34,6 +34,6 @@
   },
   "scripts": {
     "dev": "nuxt-ts dev",
-    "build": "nuxt-ts generate"
+    "build": "nuxt-ts build"
   }
 }

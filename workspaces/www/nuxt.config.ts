@@ -15,7 +15,6 @@ const {
 } = process.env;
 
 const config: NuxtConfig = {
-  ssr: false,
   modern: true,
   buildModules: [
     '@nuxt/typescript-build',
