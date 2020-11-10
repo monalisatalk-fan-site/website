@@ -25,7 +25,7 @@
               v-col.text-right
                 v-btn(
                   type="submit"
-                  color="grey darken-4"
+                  color="primary"
                   dark
                   :disabled="!isValid"
                   :loading="isLoading"
