@@ -53,6 +53,14 @@ const config: NuxtConfig = {
         },
       },
     ],
+    [
+      '@nuxtjs/dayjs',
+      {
+        locales: ['en'],
+        defaultLocale: 'en',
+        plugins: ['relativeTime'],
+      },
+    ],
   ],
   plugins: ['@/plugins/libraries'],
   render: {

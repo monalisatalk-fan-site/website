@@ -20,6 +20,7 @@
       "node",
       "@nuxt/types",
       "@nuxtjs/firebase",
+      "@nuxtjs/dayjs",
       "@lollipop-onl/vue-typed-reactive"
     ]
   }

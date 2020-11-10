@@ -10,16 +10,21 @@
       @click:row="onClickRow"
     )
       template(v-slot:top)
-        v-text-field.mx-4.mb-2(
-          v-model="keyword"
-          label="検索キーワード"
-          hideDetails
-          outlined
-          clearable
-        )
+        .mx-4.mb-2
+          p.text-right.body-2.text--secondary
+            | Last modified: {{ formatDate(updatedAt) }}
+          v-text-field(
+            v-model="keyword"
+            label="検索キーワード"
+            hideDetails
+            outlined
+            clearable
+          )
       template(v-slot:item.thumbnail="{ item }")
         .pa-2
           v-img(:src="item.thumbnail" width="96" height="72")
+      template(v-slot:item.publishedAt="{ item }")
+        | {{ formatDate(item.publishedAt) }}
 </template>
 
 <script lang="ts">
@@ -37,20 +42,21 @@ import { Video } from '@/types';
 export default defineComponent({
   name: 'VideosPage',
   setup() {
-    const { redirect } = useContext();
+    const { app, redirect } = useContext();
     const store = useTypedStore();
     const keyword = ref('');
     const items = computed(() => store.state.video.videos);
     const isLoading = computed(
       () => !store.state.video.updatedAt && !store.state.video.error
     );
+    const updatedAt = computed(() => store.state.video.updatedAt);
     const headers = [
       {
-        text: 'Thumbnail',
+        text: 'サムネイル',
         value: 'thumbnail',
         sortable: false,
       },
-      { text: 'Title', value: 'title' },
+      { text: 'タイトル', value: 'title' },
       { text: '公開日時', value: 'publishedAt' },
     ];
     const footerProps = {
@@ -62,6 +68,16 @@ export default defineComponent({
     const onClickRow = (video: Video) => {
       redirect(url('VIDEOS_DETAIL', { params: { videoId: video.id } }));
     };
+    const formatDate = (datetime: string) => {
+      const d = app.$dayjs(datetime);
+
+      if (app.$dayjs().diff(d, 'd') >= 25) {
+        return d.format('YYYY/MM/DD');
+      }
+
+      // @ts-expect-error
+      return d.fromNow();
+    };
 
     onMounted(async () => {
       await store.dispatch('video/fetchVideoResources');
@@ -72,8 +88,10 @@ export default defineComponent({
       items,
       keyword,
       isLoading,
+      updatedAt,
       footerProps,
       onClickRow,
+      formatDate,
     };
   },
 });

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
+    "@nuxtjs/dayjs": "^1.2.0",
     "@nuxtjs/firebase": "^7.0.0",
     "@nuxtjs/vuetify": "^1.11.2",
     "firebase": "^8.0.0",
