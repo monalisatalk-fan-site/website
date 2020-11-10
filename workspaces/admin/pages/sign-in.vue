@@ -25,9 +25,8 @@
               v-col.text-right
                 v-btn(
                   type="submit"
-                  color="primary"
+                  color="grey darken-4"
                   dark
-                  :disabled="!isValid"
                   :loading="isLoading"
                 ) LOGIN
 </template>
@@ -54,7 +53,6 @@ export default defineComponent({
     const errorMessage = ref<string | null>(null);
     const isInitialized = computed(() => store.state.auth.isInitialized);
     const isSignedIn = computed(() => store.getters['auth/isSignedIn']);
-    const isValid = computed((): boolean => !!(email.value && password.value));
     const signIn = async () => {
       try {
         isLoading.value = true;
@@ -87,7 +85,6 @@ export default defineComponent({
     );
 
     return {
-      isValid,
       isLoading,
       email,
       password,
