@@ -11,28 +11,13 @@
         )
         v-slider.mt-3(
           v-model="playSpeed"
-          step="0.2"
-          min="1"
+          step="0.25"
+          min="0.25"
           max="2"
           prependIcon="mdi-play-speed"
           thumb-label
           ticks
         )
-        v-sheet.mt-6(
-          v-if="previousVideo"
-          light
-          outlined
-        )
-          v-list-item(
-            link
-            exact
-            :to="getVideoUrl(previousVideo)"
-          )
-            v-list-item-icon
-              v-icon mdi-arrow-left
-            v-list-item-content
-              v-list-item-title 前のビデオ
-              v-list-item-subtitle {{ previousVideo.title }}
         v-sheet.mt-4(
           v-if="nextVideo"
           light
@@ -44,10 +29,25 @@
             :to="getVideoUrl(nextVideo)"
           )
             v-list-item-icon
-              v-icon mdi-arrow-right
+              v-icon mdi-arrow-left
             v-list-item-content
               v-list-item-title 次のビデオ
               v-list-item-subtitle {{ nextVideo.title }}
+        v-sheet.mt-6(
+          v-if="previousVideo"
+          light
+          outlined
+        )
+          v-list-item(
+            link
+            exact
+            :to="getVideoUrl(previousVideo)"
+          )
+            v-list-item-icon
+              v-icon mdi-arrow-right
+            v-list-item-content
+              v-list-item-title 前のビデオ
+              v-list-item-subtitle {{ previousVideo.title }}
       v-col(cols="8")
         template(v-if="video")
           .text-h5.mt-6 {{ video.title }}
