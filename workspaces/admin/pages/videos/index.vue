@@ -23,6 +23,11 @@
       template(v-slot:item.thumbnail="{ item }")
         .pa-2
           v-img(:src="item.thumbnail" width="96" height="72")
+      template(v-slot:item.title="{ item }")
+        | {{ item.title }}
+        v-row.mx-2.mt-2
+          v-chip.mr-2(x-small) コウジ
+          v-chip.mr-2(x-small) ソラ
       template(v-slot:item.publishedAt="{ item }")
         | {{ formatDate(item.publishedAt) }}
 </template>

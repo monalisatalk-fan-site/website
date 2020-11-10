@@ -8,7 +8,7 @@ import type { VideoResource, Video } from '@/types';
 
 export type State = {
   updatedAt: string | null;
-  videos: Video[] | null;
+  videos: Video[];
   error: Error | null;
 };
 
