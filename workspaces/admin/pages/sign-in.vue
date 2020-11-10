@@ -33,22 +33,27 @@
 </template>
 
 <script lang="ts">
-import { url } from '@/utils';
 import {
   computed,
   defineComponent,
   ref,
   useContext,
+  watch,
 } from '@nuxtjs/composition-api';
+import { useTypedStore } from '@/helpers';
+import { url } from '@/utils';
 
 export default defineComponent({
   name: 'SignInPage',
   setup() {
     const { app, redirect } = useContext();
+    const store = useTypedStore();
     const isLoading = ref(false);
     const email = ref('');
     const password = ref('');
     const errorMessage = ref<string | null>(null);
+    const isInitialized = computed(() => store.state.auth.isInitialized);
+    const isSignedIn = computed(() => store.getters['auth/isSignedIn']);
     const isValid = computed((): boolean => !!(email.value && password.value));
     const signIn = async () => {
       try {
@@ -66,6 +71,20 @@ export default defineComponent({
         errorMessage.value = err.message;
       }
     };
+
+    watch(
+      [isInitialized, isSignedIn],
+      () => {
+        if (isLoading.value) {
+          return;
+        }
+
+        if (isInitialized.value && isSignedIn.value) {
+          redirect(url('DASHBOARD'));
+        }
+      },
+      { immediate: true }
+    );
 
     return {
       isValid,

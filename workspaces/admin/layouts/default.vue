@@ -1,9 +1,12 @@
 <template lang="pug">
   v-app
-    AdminAppBar
-    AdminDrawer(v-if="isSignedIn")
-    v-main
-      nuxt
+    template(v-if="isInitialized")
+      AdminAppBar
+      AdminDrawer(v-if="isSignedIn")
+      v-main
+        nuxt
+    template(v-else)
+      p loading...
 </template>
 
 <script lang="ts">
@@ -32,8 +35,12 @@ export default defineComponent({
     const isSignedIn = computed(() => store.getters['auth/isSignedIn']);
 
     watch(
-      [isInitialized, isSignedIn],
+      [isInitialized, isSignedIn, route],
       () => {
+        if (route.value.path === url('SIGN_IN').path) {
+          return;
+        }
+
         if (isInitialized.value && !isSignedIn.value) {
           redirect(
             url('SIGN_IN', { query: { from: route.value.fullPath } }).toString()
