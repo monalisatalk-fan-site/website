@@ -7,12 +7,14 @@ import {
 import type { VideoResource, Video } from '@/types';
 
 export type State = {
+  isLoading: boolean;
   updatedAt: string | null;
   videos: Video[];
   error: Error | null;
 };
 
 export const state = (): State => ({
+  isLoading: false,
   videos: [],
   updatedAt: null,
   error: null,
@@ -23,6 +25,9 @@ export const getters = {};
 export type Getters = Converter<typeof getters, {}>;
 
 export const mutations = {
+  setLoadingState: (state: State, isLoading: boolean) => {
+    state.isLoading = isLoading;
+  },
   setVideos: (state: State, videos: Video[]) => {
     state.videos = videos;
   },
@@ -37,6 +42,7 @@ export const mutations = {
 export type Mutations = Converter<
   typeof mutations,
   {
+    setLoadingState: 'video/setLoadingState';
     setVideos: 'video/setVideos';
     setUpdatedAt: 'video/setUpdatedAt';
     setError: 'video/setError';
@@ -55,9 +61,15 @@ export const actions = {
       return;
     }
 
+    if (state.isLoading) {
+      return;
+    }
+
     commit('setUpdatedAt', null);
 
     try {
+      commit('setLoadingState', true);
+
       const videosResourceUrl = await this.$fire.storage
         .ref('resources/video-snippet/data.json')
         .getDownloadURL();
@@ -70,6 +82,8 @@ export const actions = {
     } catch (err) {
       commit('setVideos', []);
       commit('setError', err);
+    } finally {
+      commit('setLoadingState', true);
     }
   },
 };

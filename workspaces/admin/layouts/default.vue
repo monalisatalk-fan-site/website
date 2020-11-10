@@ -6,7 +6,9 @@
       v-main
         nuxt
     template(v-else)
-      p loading...
+      transition(name="fade")
+        .progress-circular
+          v-progress-circular(indeterminate)
 </template>
 
 <script lang="ts">
@@ -36,7 +38,7 @@ export default defineComponent({
 
     watch(
       [isInitialized, isSignedIn, route],
-      () => {
+      async () => {
         if (route.value.path === url('SIGN_IN').path) {
           return;
         }
@@ -45,6 +47,10 @@ export default defineComponent({
           redirect(
             url('SIGN_IN', { query: { from: route.value.fullPath } }).toString()
           );
+        }
+
+        if (isSignedIn.value && !store.state.video.updatedAt) {
+          await store.dispatch('video/fetchVideoResources');
         }
       },
       { immediate: true }
@@ -79,3 +85,28 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.12s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.progress-circular {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  transform: translate(-50%, -50%);
+}
+</style>
