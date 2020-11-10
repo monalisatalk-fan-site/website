@@ -18,7 +18,7 @@
         v-list-item-content
           v-list-item-title {{ item.label }}
     template(v-slot:append)
-      v-list-item(link @click="signOut" dark dense)
+      v-list-item(link @click="signOut" dark)
         v-list-item-icon
           v-icon mdi-logout
         v-list-item-content サインアウト

@@ -1,7 +1,7 @@
 <template lang="pug">
   v-app
     AdminAppBar
-    AdminDrawer
+    AdminDrawer(v-if="isSignedIn")
     v-main
       nuxt
 </template>

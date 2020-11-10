@@ -6,6 +6,7 @@
     flat
   )
     v-btn.mr-3(
+      v-if="isSignedIn"
       elevation="0"
       fab
       small
@@ -15,6 +16,7 @@
     v-toolbar-title(v-text="'モナ・リザの戯言 ファンサイト'")
     v-spacer
     v-btn(
+      v-if="isSignedIn"
       min-width="0"
       text
       @click="updateVideos"
@@ -39,6 +41,7 @@ export default defineComponent({
     const store = useTypedStore();
     const isUpdating = ref(false);
     const drawer = computed(() => store.state.ui.drawer);
+    const isSignedIn = computed(() => store.getters['auth/isSignedIn']);
     const toggleDrawer = () => store.commit('ui/setDrawer', !drawer.value);
     const updateVideos = async () => {
       if (!window.confirm('動画リストを最新にアップデートしますか？')) {
@@ -60,6 +63,7 @@ export default defineComponent({
 
     return {
       isUpdating,
+      isSignedIn,
       toggleDrawer,
       updateVideos,
     };
