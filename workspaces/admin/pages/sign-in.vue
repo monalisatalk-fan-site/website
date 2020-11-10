@@ -5,7 +5,7 @@
         v-card
           v-toolbar(color="grey darken-4" dark flat)
             v-toolbar-title LOGIN
-          v-container
+          v-container.mt-4.px-6
             v-form(@submit.prevent="signIn")
               v-text-field(
                 v-model="email"
