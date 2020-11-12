@@ -1,9 +1,18 @@
 <template lang="pug">
   div(v-if="video")
     | {{ video.title }}
-    v-row.ml-2.mt-2(v-if="videoContext")
-      CharacterChip.mr-2(
+    .d-flex.align-center.flex-wrap.mx-1.mt-2(v-if="videoContext")
+      CharacterChip.mx-1(
         v-for="character in videoContext.mainCharacters"
+        :id="character"
+        :xSmall="true"
+      )
+      v-icon(
+        v-if="videoContext.subCharacters.length > 0"
+        size="small"
+      ) mdi-slash-forward
+      CharacterChip.mx-1(
+        v-for="character in videoContext.subCharacters"
         :id="character"
         :xSmall="true"
       )
