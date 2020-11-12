@@ -175,7 +175,7 @@ export default defineComponent({
       if (e.code === 'ArrowLeft') {
         e.preventDefault();
 
-        player.seekTo(currentTime - 3);
+        player.seekTo(currentTime - 5);
       }
     };
 

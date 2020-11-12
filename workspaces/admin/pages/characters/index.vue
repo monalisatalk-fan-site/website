@@ -12,6 +12,9 @@
         v-toolbar(flat)
           v-toolbar-title Characters
           v-spacer
+          v-btn(text)
+            v-icon.mr-2 mdi-upload-outline
+            | Modify
           v-dialog(
             v-model="isEditorOpen"
             persistent

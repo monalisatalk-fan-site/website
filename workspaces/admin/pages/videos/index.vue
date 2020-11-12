@@ -18,7 +18,7 @@
             :loading="isModifying"
             @click="modifyVideos"
           )
-            v-icon.mr-2 mdi-video-plus-outline
+            v-icon.mr-2 mdi-upload-outline
             | Modify
           p.text-right.body-2.text--secondary.ma-0
             | Last modified: {{ formatDate(updatedAt) }}
