@@ -86,6 +86,7 @@
 import {
   computed,
   defineComponent,
+  onBeforeUnmount,
   onMounted,
   ref,
   useContext,
@@ -142,6 +143,40 @@ export default defineComponent({
     const formatDate = (datetime: string) =>
       app.$dayjs(datetime).format('YYYY/MM/DD HH:ss Z');
 
+    const onKeydown = async (e: KeyboardEvent) => {
+      e.preventDefault();
+
+      if (!youtubeRef.value) {
+        return;
+      }
+
+      const player = youtubeRef.value.player;
+
+      if (e.code === 'Space') {
+        const playerState = await player.getPlayerState();
+
+        if (playerState === 1 || playerState === 3) {
+          player.pauseVideo();
+        } else {
+          player.playVideo();
+        }
+
+        return;
+      }
+
+      const currentTime = await player.getCurrentTime();
+
+      if (e.code === 'ArrowRight') {
+        player.seekTo(currentTime + 5);
+
+        return;
+      }
+
+      if (e.code === 'ArrowLeft') {
+        player.seekTo(currentTime - 5);
+      }
+    };
+
     const save = async () => {
       try {
         isSaving.value = true;
@@ -191,6 +226,14 @@ export default defineComponent({
 
       mainCharacters.value = value.mainCharacters || [];
       subCharacters.value = value.subCharacters || [];
+    });
+
+    onMounted(() => {
+      window.addEventListener('keydown', onKeydown);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('keydown', onKeydown);
     });
 
     return {
