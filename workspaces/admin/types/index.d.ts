@@ -1,8 +1,3 @@
-export type ReactiveState<T> = {
-  value: T;
-  update: (value: T) => void;
-};
-
 export type Video = {
   id: string;
   title: string;
@@ -19,3 +14,14 @@ export type VideoResource = {
 export type VideoMeta = {
   updatedAt: string;
 };
+
+export type Character = {
+  id: string;
+  name: string;
+  color: string;
+  textColor: string;
+  inactive?: boolean;
+  transfer?: string;
+};
+
+export type DatabaseCharacter = Omit<Character, 'id'>;

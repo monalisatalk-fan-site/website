@@ -47,6 +47,7 @@ const config: NuxtConfig = {
         services: {
           auth: true,
           firestore: true,
+          database: true,
           functions: true,
           storage: true,
           analytics: true,

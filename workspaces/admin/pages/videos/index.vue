@@ -3,16 +3,26 @@
     v-data-table(
       :headers="headers"
       :items="items"
-      :items-per-page="25"
+      :itemsPerPage="25"
       :loading="isLoading"
       :search="keyword"
       :footerProps="footerProps"
       @click:row="onClickRow"
     )
       template(v-slot:top)
-        .mx-4.mb-2
-          p.text-right.body-2.text--secondary
+        v-toolbar(flat)
+          v-toolbar-title Videos
+          v-spacer
+          v-btn.mr-2(
+            text
+            :loading="isModifying"
+            @click="modifyVideos"
+          )
+            v-icon.mr-2 mdi-video-plus-outline
+            | Modify
+          p.text-right.body-2.text--secondary.ma-0
             | Last modified: {{ formatDate(updatedAt) }}
+        .mx-4.my-2
           v-text-field(
             v-model="keyword"
             label="検索キーワード"
@@ -50,6 +60,7 @@ export default defineComponent({
     const { app, redirect } = useContext();
     const store = useTypedStore();
     const keyword = ref('');
+    const isModifying = ref(false);
     const items = computed(() => store.state.video.videos);
     const isLoading = computed(
       () => !store.state.video.updatedAt && !store.state.video.error
@@ -73,6 +84,23 @@ export default defineComponent({
     const onClickRow = (video: Video) => {
       redirect(url('VIDEOS_DETAIL', { params: { videoId: video.id } }));
     };
+    const modifyVideos = async () => {
+      if (!window.confirm('動画リストを最新にアップデートしますか？')) {
+        return;
+      }
+
+      try {
+        isModifying.value = true;
+
+        const updateVideos = app.$fire.functions.httpsCallable('updateVideos');
+
+        await updateVideos();
+
+        await store.dispatch('video/fetchVideoResources');
+      } finally {
+        isModifying.value = false;
+      }
+    };
     const formatDate = (datetime: string) => {
       const d = app.$dayjs(datetime);
 
@@ -92,10 +120,12 @@ export default defineComponent({
       headers,
       items,
       keyword,
+      isModifying,
       isLoading,
       updatedAt,
       footerProps,
       onClickRow,
+      modifyVideos,
       formatDate,
     };
   },
