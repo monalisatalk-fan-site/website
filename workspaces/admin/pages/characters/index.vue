@@ -12,7 +12,11 @@
         v-toolbar(flat)
           v-toolbar-title Characters
           v-spacer
-          v-btn(text)
+          v-btn(
+            text
+            :loading="isModifying"
+            @click="modifyCharacters"
+          )
             v-icon.mr-2 mdi-upload-outline
             | Modify
           v-dialog(
@@ -60,6 +64,7 @@ export default defineComponent({
     const items = ref<Character[]>([]);
     const editingCharacter = ref<Character | null>(null);
     const isLoading = ref(true);
+    const isModifying = ref(false);
     const isEditorOpen = ref(false);
     const isDeletingOpen = ref(false);
     const headers = [
@@ -78,6 +83,24 @@ export default defineComponent({
     const edit = (character: Character) => {
       editingCharacter.value = character;
       isEditorOpen.value = true;
+    };
+
+    const modifyCharacters = async () => {
+      if (!window.confirm('キャラクターリストを最新にアップデートしますか？')) {
+        return;
+      }
+
+      try {
+        isModifying.value = true;
+
+        const updateCharacters = app.$fire.functions.httpsCallable(
+          'updateCharacters'
+        );
+
+        await updateCharacters();
+      } finally {
+        isModifying.value = false;
+      }
     };
 
     watch([isEditorOpen], () => {
@@ -111,12 +134,14 @@ export default defineComponent({
       items,
       editingCharacter,
       isLoading,
+      isModifying,
       isEditorOpen,
       isDeletingOpen,
       headers,
       footerProps,
       getTransferCharacters,
       edit,
+      modifyCharacters,
     };
   },
 });

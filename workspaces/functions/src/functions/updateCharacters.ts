@@ -2,8 +2,8 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
 const bucket = admin.storage().bucket();
-const CHARACTERS_FILE = 'resources/video-snippet/data.json';
-const CHARACTERS_META_FILE = 'resources/video-snippet/meta.json';
+const CHARACTERS_FILE = 'resources/characters/data.json';
+const CHARACTERS_META_FILE = 'resources/characters/meta.json';
 
 export const updateCharacters = functions.https.onCall(
   async (data, context) => {
