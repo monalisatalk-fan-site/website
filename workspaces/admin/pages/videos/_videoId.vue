@@ -122,19 +122,17 @@ export default defineComponent({
     const currentVideoIndex = computed((): number =>
       store.state.video.videos.findIndex((video) => video.id === videoId.value)
     );
-    const previousVideo = computed(
-      (): Video | undefined =>
-        store.state.video.videos[currentVideoIndex.value - 1]
-    );
-    const nextVideo = computed((): Video | undefined =>
+    const previousVideo = computed((): Video | undefined =>
       currentVideoIndex.value >= 0
         ? store.state.video.videos[currentVideoIndex.value + 1]
         : undefined
     );
+    const nextVideo = computed(
+      (): Video | undefined =>
+        store.state.video.videos[currentVideoIndex.value - 1]
+    );
     const playerVars = {
       enablejsapi: 1,
-      iv_load_policy: 3,
-      fs: 0,
     };
 
     const getVideoUrl = (video: Video) =>
@@ -169,7 +167,7 @@ export default defineComponent({
       if (e.code === 'ArrowRight') {
         e.preventDefault();
 
-        player.seekTo(currentTime + 5);
+        player.seekTo(currentTime + 3);
 
         return;
       }
@@ -177,7 +175,7 @@ export default defineComponent({
       if (e.code === 'ArrowLeft') {
         e.preventDefault();
 
-        player.seekTo(currentTime - 5);
+        player.seekTo(currentTime - 3);
       }
     };
 
