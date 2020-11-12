@@ -4,6 +4,7 @@
     .d-flex.align-center.flex-wrap.mx-1.mt-2(v-if="videoContext")
       CharacterChip.mx-1(
         v-for="character in videoContext.mainCharacters"
+        :key="character"
         :id="character"
         :xSmall="true"
       )
@@ -13,6 +14,7 @@
       ) mdi-slash-forward
       CharacterChip.mx-1(
         v-for="character in videoContext.subCharacters"
+        :key="character"
         :id="character"
         :xSmall="true"
       )
