@@ -34,10 +34,7 @@
         .pa-2
           v-img(:src="item.thumbnail" width="96" height="72")
       template(v-slot:item.title="{ item }")
-        | {{ item.title }}
-        v-row.mx-2.mt-2
-          v-chip.mr-2(x-small) コウジ
-          v-chip.mr-2(x-small) ソラ
+        VideoTableTitle(:id="item.id")
       template(v-slot:item.publishedAt="{ item }")
         | {{ formatDate(item.publishedAt) }}
 </template>
@@ -50,12 +47,16 @@ import {
   ref,
   useContext,
 } from '@nuxtjs/composition-api';
+import VideoTableTitle from '@/components/VideoTableTitle.vue';
 import { useTypedStore } from '@/helpers';
 import { url } from '@/utils';
 import { Video } from '@/types';
 
 export default defineComponent({
   name: 'VideosPage',
+  components: {
+    VideoTableTitle,
+  },
   setup() {
     const { app, redirect } = useContext();
     const store = useTypedStore();
@@ -113,7 +114,10 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      await store.dispatch('video/fetchVideoResources');
+      await Promise.all([
+        store.dispatch('video/fetchVideoResources'),
+        store.dispatch('character/fetchCharacters'),
+      ]);
     });
 
     return {

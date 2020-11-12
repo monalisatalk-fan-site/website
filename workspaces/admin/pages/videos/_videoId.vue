@@ -52,31 +52,68 @@
         template(v-if="video")
           .text-h5.mt-6 {{ video.title }}
           .text-body-2.text--secondary.mt-4 {{ formatDate(video.publishedAt) }}
+          .text-h6.mt-6.mb-2 登場人物（メイン）
+          .d-flex.flex-wrap
+            v-checkbox.my-2.mx-3(
+              v-for="character in characters"
+              :key="character.id"
+              v-model="mainCharacters"
+              :value="character.id"
+              hideDetails
+            )
+              template(#label)
+                CharacterChip(:id="character.id" :small="true")
+          .text-h6.mt-6.mb-2 登場人物（サブ）
+          .d-flex.flex-wrap
+            v-checkbox.my-2.mx-3(
+              v-for="character in characters"
+              :key="character.id"
+              v-model="subCharacters"
+              :value="character.id"
+              hideDetails
+            )
+              template(#label)
+                CharacterChip(:id="character.id" :small="true")
+          .mt-6
+            v-btn(
+              color="primary"
+              :loading="isSaving"
+              @click="save"
+            ) Save
 </template>
 
 <script lang="ts">
-import { useTypedStore } from '@/helpers';
-import { Video } from '@/types';
-import { url } from '@/utils';
 import {
   computed,
   defineComponent,
+  onMounted,
   ref,
   useContext,
   watch,
 } from '@nuxtjs/composition-api';
+import CharacterChip from '@/components/CharacterChip.vue';
+import { useTypedStore } from '@/helpers';
+import { Video, DatabaseVideoContext } from '@/types';
+import { url } from '@/utils';
 
 export default defineComponent({
   name: 'VideoDetailPage',
+  components: {
+    CharacterChip,
+  },
   setup() {
     const store = useTypedStore();
     const { app, route } = useContext();
     const playSpeed = ref(1);
+    const mainCharacters = ref<string[]>([]);
+    const subCharacters = ref<string[]>([]);
     const youtubeRef = ref<any | null>(null);
+    const isSaving = ref(false);
     const videoId = computed(() => route.value.params.videoId);
     const video = computed((): Video | undefined =>
       store.state.video.videos.find((video) => video.id === videoId.value)
     );
+    const characters = computed(() => store.state.character.characters);
     const breadcrumbItems = computed(() => [
       { text: 'Videos', exact: true, to: url('VIDEOS') },
       { text: 'here', disabled: true },
@@ -105,6 +142,24 @@ export default defineComponent({
     const formatDate = (datetime: string) =>
       app.$dayjs(datetime).format('YYYY/MM/DD HH:ss Z');
 
+    const save = async () => {
+      try {
+        isSaving.value = true;
+
+        const data: DatabaseVideoContext = {
+          mainCharacters: mainCharacters.value,
+          subCharacters: subCharacters.value,
+        };
+
+        await app.$fire.database
+          .ref('videoContext')
+          .child(videoId.value)
+          .set(data);
+      } finally {
+        isSaving.value = false;
+      }
+    };
+
     watch(
       playSpeed,
       () => {
@@ -119,17 +174,41 @@ export default defineComponent({
       }
     );
 
+    onMounted(async () => {
+      await store.dispatch('character/fetchCharacters');
+    });
+
+    onMounted(async () => {
+      const snapshot = await app.$fire.database
+        .ref('videoContext')
+        .child(videoId.value)
+        .once('value');
+      const value: DatabaseVideoContext | null = snapshot.val();
+
+      if (!value) {
+        return;
+      }
+
+      mainCharacters.value = value.mainCharacters;
+      subCharacters.value = value.subCharacters;
+    });
+
     return {
       playSpeed,
       youtubeRef,
+      isSaving,
       videoId,
       video,
+      mainCharacters,
+      subCharacters,
+      characters,
       breadcrumbItems,
       previousVideo,
       nextVideo,
       playerVars,
       getVideoUrl,
       formatDate,
+      save,
     };
   },
 });

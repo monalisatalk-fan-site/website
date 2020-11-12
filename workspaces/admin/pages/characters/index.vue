@@ -4,6 +4,7 @@
       :headers="headers"
       :items="items"
       :loading="isLoading"
+      :footerProps="footerProps"
       disablePagination
       disableSort
     )
@@ -63,6 +64,7 @@ export default defineComponent({
       { text: '名前', value: 'name' },
       { text: 'Actions', value: 'actions' },
     ];
+    const footerProps = {};
     const charactersRef = app.$fire.database.ref('characters');
 
     const getTransferCharacters = (id: string) =>
@@ -109,6 +111,7 @@ export default defineComponent({
       isEditorOpen,
       isDeletingOpen,
       headers,
+      footerProps,
       getTransferCharacters,
       edit,
     };

@@ -15,6 +15,14 @@ export type VideoMeta = {
   updatedAt: string;
 };
 
+export type VideoContext = {
+  id: string;
+  mainCharacters: string[];
+  subCharacters: string[];
+};
+
+export type DatabaseVideoContext = Omit<VideoContext, 'id'>;
+
 export type Character = {
   id: string;
   name: string;
