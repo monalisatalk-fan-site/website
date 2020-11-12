@@ -189,8 +189,8 @@ export default defineComponent({
         return;
       }
 
-      mainCharacters.value = value.mainCharacters;
-      subCharacters.value = value.subCharacters;
+      mainCharacters.value = value.mainCharacters || [];
+      subCharacters.value = value.subCharacters || [];
     });
 
     return {
