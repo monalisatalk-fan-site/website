@@ -18,7 +18,7 @@ export const updateVideoContext = functions.https.onCall(
     const snapshot = await ref.once('value');
     const value: Record<string, any> | null = snapshot.val();
     const items = value
-      ? Object.entries(value).forEach(([id, context]) => ({ ...context, id }))
+      ? Object.entries(value).map(([id, context]) => ({ ...context, id }))
       : [];
     const videoContextFile = bucket.file(VIDEO_CONTEXT_FILE);
     const videoContextMetaFile = bucket.file(VIDEO_CONTEXT_META_FILE);

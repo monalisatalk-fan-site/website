@@ -18,7 +18,7 @@ export const updateCharacters = functions.https.onCall(
     const snapshot = await ref.once('value');
     const value: Record<string, any> | null = snapshot.val();
     const items = value
-      ? Object.entries(value).forEach(([id, context]) => ({ ...context, id }))
+      ? Object.entries(value).map(([id, context]) => ({ ...context, id }))
       : [];
     const charactersFile = bucket.file(CHARACTERS_FILE);
     const charactersMetaFile = bucket.file(CHARACTERS_META_FILE);
