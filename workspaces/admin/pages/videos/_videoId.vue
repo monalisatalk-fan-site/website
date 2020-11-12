@@ -144,8 +144,6 @@ export default defineComponent({
       app.$dayjs(datetime).format('YYYY/MM/DD HH:ss Z');
 
     const onKeydown = async (e: KeyboardEvent) => {
-      e.preventDefault();
-
       if (!youtubeRef.value) {
         return;
       }
@@ -153,6 +151,8 @@ export default defineComponent({
       const player = youtubeRef.value.player;
 
       if (e.code === 'Space') {
+        e.preventDefault();
+
         const playerState = await player.getPlayerState();
 
         if (playerState === 1 || playerState === 3) {
@@ -167,12 +167,16 @@ export default defineComponent({
       const currentTime = await player.getCurrentTime();
 
       if (e.code === 'ArrowRight') {
+        e.preventDefault();
+
         player.seekTo(currentTime + 5);
 
         return;
       }
 
       if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+
         player.seekTo(currentTime - 5);
       }
     };
