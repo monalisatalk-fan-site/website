@@ -14,7 +14,7 @@
           </n-link>
         </li>
       </ul>
-      <ul class="navbar-nav navbar-right">
+      <ul v-if="user" class="navbar-nav navbar-right">
         <li
           class="dropdown"
           v-outside="() => isDropdownVisible = false"
@@ -25,8 +25,7 @@
             class="nav-link dropdown-toggle nav-link-lg nav-link-user"
             @click.native.prevent="isDropdownVisible = !isDropdownVisible"
           >
-            <img class="rounded-circle mr-1" src="//placehold.jp/320x320.png" width="30" alt="">
-            <div class="d-sm-none d-lg-inline-block">Hi, simochee</div>
+            <div class="d-sm-none d-lg-inline-block">Hi, {{user.email}}</div>
           </n-link>
           <div
             class="dropdown-menu dropdown-menu-right"
@@ -34,7 +33,7 @@
           >
             <div class="dropdown-title">Logged in 5 min ago</div>
             <div class="dropdown-divider"></div>
-            <n-link to="#" class="dropdown-item has-icon text-danger">
+            <n-link to="#" class="dropdown-item has-icon text-danger" @click.native.prevent="logout">
               <AppIcon name="log-out" /> サインアウト
             </n-link>
           </div>
@@ -45,7 +44,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api';
+import { defineComponent, ref, useContext, watch } from '@nuxtjs/composition-api';
+import { useAuthState } from '@/composables';
 import { outsideDirective } from '@/directives';
 
 export default defineComponent({
@@ -57,16 +57,27 @@ export default defineComponent({
     outside: outsideDirective,
   },
   setup() {
+    const { app, redirect } = useContext();
     const isDropdownVisible = ref(false);
+    const { user } = useAuthState();
+
     const toggleSidebar = () => {
       const { classList } = document.body;
 
       classList.toggle('sidebar-mini');
     };
 
+    const logout = async () => {
+      await app.$fire.auth.signOut();
+
+      redirect('/login');
+    };
+
     return {
       isDropdownVisible,
+      user,
       toggleSidebar,
+      logout,
     };
   },
 });

@@ -11,10 +11,13 @@
               <h4>Login</h4>
             </template>
             <template #body>
-              <form @submit.prevent class="needs-validation">
+              <form @submit.prevent="onSubmit" class="needs-validation">
+                <div v-show="errorMessage" class="alert alert-danger">
+                  {{errorMessage}}
+                </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" id="email" class="form-control" required />
+                  <input type="email" id="email" class="form-control" autocomplete="username" v-model="email" required />
                 </div>
                 <div class="form-group">
                   <div class="d-block">
@@ -25,10 +28,10 @@
                       </n-link>
                     </div>
                   </div>
-                  <input type="password" id="password" class="form-control" required />
+                  <input type="password" id="password" class="form-control" autocomplete="current-password" v-model="password" required />
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-primary btn-lg btn-block">Send a reset link</button>
+                  <button class="btn btn-primary btn-lg btn-block" :disabled="isLoading">Login</button>
                 </div>
               </form>
             </template>
@@ -43,10 +46,49 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineComponent, ref, useContext } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'LoginPage',
-  setup() {},
+  components: {
+    AppCard: () => import('@/components/AppCard.vue'),
+  },
+  setup() {
+    const { app, redirect } = useContext();
+    const isLoading = ref(false);
+    const email = ref('');
+    const password = ref('');
+    const errorMessage = ref('');
+
+    const onSubmit = async () => {
+      try {
+        isLoading.value = true;
+
+        errorMessage.value = '';
+
+        await app.$fire.auth.signInWithEmailAndPassword(email.value, password.value);
+
+        redirect('/admin/dashboard');
+      } catch (err: unknown) {
+        isLoading.value = false;
+
+        if (err instanceof Error) {
+          errorMessage.value = err.message;
+
+          return;
+        }
+
+        errorMessage.value = 'Unknown error';
+      }
+    };
+
+    return {
+      isLoading,
+      email,
+      password,
+      errorMessage,
+      onSubmit,
+    };
+  },
 });
 </script>
