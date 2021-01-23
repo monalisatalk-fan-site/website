@@ -4,7 +4,12 @@
     <nav class="navbar navbar-expand-lg main-navbar">
       <ul class="navbar-nav mr-auto">
         <li>
-          <n-link to="#" class="nav-link nav-link-lg" data-toggle="sidebar">
+          <n-link
+            to="#"
+            class="nav-link nav-link-lg"
+            data-toggle="sidebar"
+            @click.native.prevent="toggleSidebar"
+          >
             <AppIcon name="menu" />
           </n-link>
         </li>
@@ -53,9 +58,15 @@ export default defineComponent({
   },
   setup() {
     const isDropdownVisible = ref(false);
+    const toggleSidebar = () => {
+      const { classList } = document.body;
+
+      classList.toggle('sidebar-mini');
+    };
 
     return {
       isDropdownVisible,
+      toggleSidebar,
     };
   },
 });

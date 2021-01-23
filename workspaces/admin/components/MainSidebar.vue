@@ -7,21 +7,21 @@
       <div class="sidebar-brand sidebar-brand-sm">
         MLTF
       </div>
-      <div class="sidebar-menu mt-2">
+      <ul class="sidebar-menu mt-2">
         <li class="menu-header">Dashboard</li>
         <li>
           <n-link class="nav-link" to="/admin/dashboard">
             <AppIcon name="speedometer" filled />
-            Dashboard
+            <span>Dashboard</span>
           </n-link>
         </li>
         <li>
           <n-link class="nav-link" to="/admin/videos">
             <AppIcon name="logo-youtube" />
-            Videos
+            <span>Videos</span>
           </n-link>
         </li>
-      </div>
+      </ul>
     </aside>
   </div>
 </template>
