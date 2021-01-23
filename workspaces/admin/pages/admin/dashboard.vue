@@ -21,7 +21,7 @@
         <div class="card card-statistic-1">
           <div class="card-icon bg-danger">
             <AppIcon name="logo-youtube" />
-          </div>
+          </div>card
           <div class="card-wrap">
             <div class="card-header">
               <h4>Total Videos</h4>
@@ -40,7 +40,7 @@
 import { defineComponent } from '@nuxtjs/composition-api';
 
 export default defineComponent({
-  name: 'DashboardPage',
+  name: 'AdminDashboardPage',
   components: {
     AppIcon: () => import('@/components/AppIcon.vue'),
     SectionHeader: () => import('@/components/SectionHeader.vue'),
