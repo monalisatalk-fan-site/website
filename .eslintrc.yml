@@ -2,6 +2,7 @@ extends:
   - '@nuxtjs/eslint-config-typescript'
   - plugin:prettier/recommended
   - prettier/@typescript-eslint
+  - prettier/stylelint
 rules:
   prettier/prettier:
     - error
