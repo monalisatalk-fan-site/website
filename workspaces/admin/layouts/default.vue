@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="main-wrapper">
+      <MainNavbar />
       <MainSidebar />
       <div class="main-content">
         <section class="section">
@@ -23,6 +24,7 @@ export default defineComponent({
     ],
   },
   components: {
+    MainNavbar: () => import('@/components/MainNavbar.vue'),
     MainSidebar: () => import('@/components/MainSidebar.vue'),
     MainFooter: () => import('@/components/MainFooter.vue'),
   },

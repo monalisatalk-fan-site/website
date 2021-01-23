@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <SectionHeader title="Dashboard" />
+  <div class="section-header">
+    <h1>{{title}}</h1>
   </div>
 </template>
 
@@ -8,9 +8,12 @@
 import { defineComponent } from '@nuxtjs/composition-api';
 
 export default defineComponent({
-  name: 'IndexPage',
-  components: {
-    SectionHeader: () => import('@/components/SectionHeader.vue'),
+  name: 'SectionHeader',
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
   },
   setup() {},
 });
