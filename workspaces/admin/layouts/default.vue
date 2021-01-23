@@ -19,8 +19,8 @@ import { defineComponent } from '@nuxtjs/composition-api';
 export default defineComponent({
   name: 'DefaultLayout',
   head: {
-    link: [
-      { rel: 'stylesheet', href: '//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' },
+    script: [
+      { type: 'module', src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js' },
     ],
   },
   components: {

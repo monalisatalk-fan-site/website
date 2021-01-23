@@ -5,7 +5,7 @@
       <ul class="navbar-nav mr-auto">
         <li>
           <n-link to="#" class="nav-link nav-link-lg" data-toggle="sidebar">
-            <i class="ion-navicon"></i>
+            <AppIcon name="menu" />
           </n-link>
         </li>
       </ul>
@@ -30,7 +30,7 @@
             <div class="dropdown-title">Logged in 5 min ago</div>
             <div class="dropdown-divider"></div>
             <n-link to="#" class="dropdown-item has-icon text-danger">
-              <i class="ion-log-out"></i> サインアウト
+              <AppIcon name="log-out" /> サインアウト
             </n-link>
           </div>
         </li>
@@ -45,6 +45,9 @@ import { outsideDirective } from '@/directives';
 
 export default defineComponent({
   name: 'MainNavbar',
+  components: {
+    AppIcon: () => import('@/components/AppIcon.vue'),
+  },
   directives: {
     outside: outsideDirective,
   },

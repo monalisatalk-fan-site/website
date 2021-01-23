@@ -11,7 +11,7 @@
         <li class="menu-header">Dashboard</li>
         <li>
           <n-link class="nav-link" to="/">
-            <i class="ion-speedometer"></i>
+            <AppIcon name="speedometer" />
             Dashboard
           </n-link>
         </li>
@@ -25,6 +25,9 @@ import { defineComponent } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'MainSideBar',
+  components: {
+    AppIcon: () => import('@/components/AppIcon.vue'),
+  },
   setup() {},
 });
 </script>
