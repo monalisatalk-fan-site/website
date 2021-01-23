@@ -4,6 +4,9 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.1",
     "@nuxtjs/composition-api": "^0.18.1",
+    "@nuxtjs/firebase": "^7.4.1",
+    "dotenv": "^8.2.0",
+    "firebase": "^8.2.4",
     "ionicons": "^5.3.0",
     "nuxt": "^2.14.12"
   },

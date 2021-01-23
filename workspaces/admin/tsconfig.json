@@ -15,7 +15,9 @@
       "@/*": ["*"]
     },
     "types": [
-      "@nuxt/types"
+      "node",
+      "@nuxt/types",
+      "@nuxtjs/firebase"
     ]
   }
 }
