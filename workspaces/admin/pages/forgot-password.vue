@@ -43,6 +43,9 @@ import { defineComponent, ref, useContext } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'ForgotPasswordPage',
+  head: {
+    title: 'Forgot Password',
+  },
   components: {
     AppCard: () => import('@/components/AppCard.vue'),
     CopyrightText: () => import('@/components/CopyrightText.vue'),

@@ -58,6 +58,9 @@ import { computed, defineComponent, ref, useContext, watch } from '@nuxtjs/compo
 
 export default defineComponent({
   name: 'LoginPage',
+  head: {
+    title: 'Login',
+  },
   components: {
     AppCard: () => import('@/components/AppCard.vue'),
     CopyrightText: () => import('@/components/CopyrightText.vue'),

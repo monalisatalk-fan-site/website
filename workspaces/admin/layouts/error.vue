@@ -10,6 +10,7 @@
           <div class="mt-4">
             <n-link
               class="btn btn-lg btn-primary"
+              :class="{ 'btn-progress': isLoading }"
               :to="user ? '/authorized/dashboard' : '/login'"
             >
               <template v-if="user">
@@ -35,14 +36,18 @@ import { useAuthState } from '@/composables';
 
 export default defineComponent({
   name: 'ErrorLayout',
+  head: {
+    title: 'Page Not Found',
+  },
   components: {
     CopyrightText: () => import('@/components/CopyrightText.vue'),
   },
   setup() {
-    const { user } = useAuthState();
+    const { user, isLoading } = useAuthState();
 
     return {
       user,
+      isLoading,
     };
   },
 });

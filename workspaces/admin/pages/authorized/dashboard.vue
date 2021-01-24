@@ -41,6 +41,9 @@ import { defineComponent } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'AuthorizedDashboardPage',
+  head: {
+    title: 'Dashboard',
+  },
   components: {
     AppIcon: () => import('@/components/AppIcon.vue'),
     SectionHeader: () => import('@/components/SectionHeader.vue'),

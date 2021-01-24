@@ -72,6 +72,9 @@ import { defineComponent } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'AuthorizedVideosPage',
+  head: {
+    title: 'Videos',
+  },
   components: {
     AppIcon: () => import('@/components/AppIcon.vue'),
     SectionHeader: () => import('@/components/SectionHeader.vue'),
