@@ -3,10 +3,8 @@
     <div class="container mt-5">
       <div class="page-error">
         <div class="page-inner">
-          <h1>404</h1>
-          <p class="page-description">
-            The page you were looking for cloud not be found.
-          </p>
+          <h1>{{error.statusCode}}</h1>
+          <p class="page-description">{{error.message}}</p>
           <div class="mt-4">
             <n-link
               class="btn btn-lg btn-primary"
@@ -39,11 +37,16 @@ export default defineComponent({
   head: {
     title: 'Page Not Found',
   },
+  props: {
+    error: {},
+  },
   components: {
     CopyrightText: () => import('@/components/CopyrightText.vue'),
   },
-  setup() {
+  setup(props) {
     const { user, isLoading } = useAuthState();
+
+    console.log(props);
 
     return {
       user,

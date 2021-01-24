@@ -22,26 +22,12 @@
                   id: '#',
                   thumbnail: 'Thumbnail',
                   title: 'Title',
-                  publishedAt: 'Published At'
+                  publishedAt: 'Published'
                 }"
                 :rows="videoIdList"
               >
                 <template #default="{ item }">
-                  <VideoTableRow :id="item" />
-                </template>
-                <template #id="{ item }">
-                  <n-link :to="`/authorized/videos/${item}`" class="btn">{{item}}</n-link>
-                </template>
-                <template #thumbnail="{ item }">
-                  <img :src="item.thumbnail" :alt="item.title" width="120">
-                </template>
-                <template #title="{ item }">
-                  {{item.title}}
-                  <div class="table-links">
-                    <a :href="`//www.monalisatalk-fan.site/?id=${item.id}`" target="_blank" rel="noreferrer noopener">View on monalisatalk-fan.site</a>
-                    <div class="bullet"></div>
-                    <a :href="`//www.youtube.com/watch?v=${item.id}`" target="_blank" rel="noreferrer noopener">View on YouTube</a>
-                  </div>
+                  <VideoTableRow :key="item" :id="item" />
                 </template>
               </AppTable>
             </template>

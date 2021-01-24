@@ -20,6 +20,7 @@
     "sass-loader": "^10.1.1"
   },
   "scripts": {
-    "dev": "nuxt-ts dev"
+    "dev": "nuxt-ts dev",
+    "build": "nuxt-ts build"
   }
 }

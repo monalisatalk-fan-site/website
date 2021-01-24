@@ -28,12 +28,19 @@ export const captureVideosOnTheChannel = authorizedFunctionsHttps(async () => {
   await Promise.all(videos.map((video) => {
     const { id, snippet, statistics } = video;
 
+    if (!snippet) {
+      return;
+    }
+
+    const { title, description, publishedAt, thumbnails } = snippet;
+
     const body = {
       original: {
-        title: snippet?.title,
-        description: snippet?.description,
+        title: title,
+        description: description,
       },
-      thumbnails: snippet?.thumbnails,
+      publishedAt: publishedAt,
+      thumbnails: thumbnails,
       statistics: omit(statistics, 'dislikeCount', 'favoriteCount'),
     };
 

@@ -6,14 +6,30 @@
     <td>
       <img :key="id" :src="`//i.ytimg.com/vi/${id}/default.jpg`" alt="" width="120" height="90">
     </td>
-    <td>{{title}}</td>
-    <td>2020/01/01</td>
+    <td>
+      <template v-if="isLoading">
+        Loading...
+      </template>
+      <template v-else>
+        {{title}}
+        <div class="table-links">
+          <a :href="`//www.monalisatalk-fan.site/?id=${id}`" target="_blank" rel="noreferrer noopener">View on monalisatalk-fan.site</a>
+          <div class="bullet"></div>
+          <a :href="`//www.youtube.com/watch?v=${id}`" target="_blank" rel="noreferrer noopener">View on YouTube</a>
+        </div>
+      </template>
+    </td>
+    <td>
+      <template v-show="!isLoading">
+        {{publishedAt}}
+      </template>
+    </td>
   </tr>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted, ref, useContext } from '@nuxtjs/composition-api';
-import type firebase from 'firebase/app';
+import { computed, defineComponent } from '@nuxtjs/composition-api';
+import { useVideoDetail } from '@/composables';
 
 export default defineComponent({
   name: 'VideoTableRow',
@@ -24,27 +40,20 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { app } = useContext();
-    const originalTitle = ref('');
-    const unsubscribe = ref<firebase.Unsubscribe>();
-    const title = computed(() => originalTitle.value);
-
-    onMounted(() => {
-      unsubscribe.value = app.$fire.firestore.collection('videos').doc(props.id).onSnapshot((snapshot) => {
-        const data = snapshot.data();
-
-        originalTitle.value = data ? data.original.title : '';
-      });
-    });
-
-    onUnmounted(() => {
-      if (unsubscribe.value) {
-        unsubscribe.value();
+    const [video, isLoading] = useVideoDetail(props.id);
+    const title = computed(() => video.value?.original.title);
+    const publishedAt = computed(() => {
+      if (!video.value?.publishedAt) {
+        return;
       }
+
+      return new Intl.DateTimeFormat('ja').format(new Date(video.value.publishedAt));
     });
 
     return {
+      isLoading,
       title,
+      publishedAt,
     };
   },
 });

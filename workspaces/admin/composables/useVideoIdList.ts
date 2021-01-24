@@ -7,7 +7,7 @@ export const useVideoIdList = () => {
   const unsubscribe = ref<firebase.Unsubscribe>();
 
   onMounted(() => {
-    unsubscribe.value = app.$fire.firestore.collection('videos').onSnapshot((snapshot) => {
+    unsubscribe.value = app.$fire.firestore.collection('videos').orderBy('publishedAt', 'desc').onSnapshot((snapshot) => {
       videoIdList.value = snapshot.docs.map((doc) => doc.id);
     });
   });
