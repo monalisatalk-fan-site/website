@@ -42,7 +42,7 @@
                 </template>
               </AppCard>
               <div class="simple-footer">
-                Copyright &copy; MONA LISA TALK - FAN!! 2021
+                <CopyrightText />
               </div>
             </div>
           </div>
@@ -60,6 +60,7 @@ export default defineComponent({
   name: 'LoginPage',
   components: {
     AppCard: () => import('@/components/AppCard.vue'),
+    CopyrightText: () => import('@/components/CopyrightText.vue'),
   },
   setup() {
     const { app, redirect } = useContext();

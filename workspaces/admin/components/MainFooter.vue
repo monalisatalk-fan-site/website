@@ -11,6 +11,9 @@ import { defineComponent } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'MainFooter',
+  components: {
+    CopyrightText: () => import('@/components/CopyrightText.vue'),
+  },
   setup() {},
 });
 </script>
