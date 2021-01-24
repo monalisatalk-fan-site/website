@@ -27,9 +27,7 @@
                 :rows="videos"
               >
                 <template #id="{ item }">
-                  <a :href="`//www.youtube.com/watch?v=${item.id}`" target="_blank" rel="noreferrer noopener" class="btn">
-                    {{item.id}}
-                  </a>
+                  <n-link :to="`/authorized/videos/${item.id}`" class="btn">{{item.id}}</n-link>
                 </template>
                 <template #thumbnail="{ item }">
                   <img :src="item.thumbnail" :alt="item.title" width="120">
@@ -37,9 +35,9 @@
                 <template #title="{ item }">
                   {{item.title}}
                   <div class="table-links">
-                    <n-link :to="`/authorized/videos/${item.id}`" class="text-primary">Edit video details</n-link>
+                    <a :href="`//www.monalisatalk-fan.site/?id=${item.id}`" target="_blank" rel="noreferrer noopener">View on monalisatalk-fan.site</a>
                     <div class="bullet"></div>
-                    <a :href="`//www.youtube.com/watch?v=${item.id}`" target="_blank" rel="noreferrer noopener">View on monalisatalk-fan.site</a>
+                    <a :href="`//www.youtube.com/watch?v=${item.id}`" target="_blank" rel="noreferrer noopener">View on YouTube</a>
                   </div>
                 </template>
               </AppTable>
