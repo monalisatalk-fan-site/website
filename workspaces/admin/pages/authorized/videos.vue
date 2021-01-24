@@ -10,55 +10,39 @@
     <div class="section-body">
       <h2 class="section-title">Videos</h2>
       <p class="section-lead">Available videos.</p>
-      <div class="row">
-        <div class="col-12">
-          <AppCard class="mb-0">
-            <template #body>
-              <ul class="nav nav-pills">
-                <li class="nav-item">
-                  <n-link to="#" class="nav-link active">
-                    All <span class="badge badge-white">12</span>
-                  </n-link>
-                </li>
-                <li class="nav-item">
-                  <n-link to="#" class="nav-link">
-                    Draft <span class="badge badge-primary">1</span>
-                  </n-link>
-                </li>
-              </ul>
-            </template>
-          </AppCard>
-        </div>
-      </div>
       <div class="row mt-4">
         <div class="col-12">
           <AppCard>
             <template #header>
-              <h4>All Posts</h4>
+              <h4>Available Videos</h4>
             </template>
             <template #body>
-              <div class="float-right">
-                <nav>
-                  <ul class="pagination">
-                    <li class="page-item disabled">
-                      <n-link class="page-link" to="#">
-                        <AppIcon name="chevron-back" />
-                      </n-link>
-                    </li>
-                    <li class="page-item active">
-                      <n-link class="page-link" to="#">1</n-link>
-                    </li>
-                    <li class="page-item">
-                      <n-link class="page-link" to="#">2</n-link>
-                    </li>
-                    <li class="page-item">
-                      <n-link class="page-link" to="#">
-                        <AppIcon name="chevron-forward" />
-                      </n-link>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+              <AppTable
+                :headers="{
+                  id: '#',
+                  thumbnail: 'Thumbnail',
+                  title: 'Title',
+                  publishedAt: 'Published At'
+                }"
+                :rows="videos"
+              >
+                <template #id="{ item }">
+                  <a :href="`//www.youtube.com/watch?v=${item.id}`" target="_blank" rel="noreferrer noopener" class="btn">
+                    {{item.id}}
+                  </a>
+                </template>
+                <template #thumbnail="{ item }">
+                  <img :src="item.thumbnail" :alt="item.title" width="120">
+                </template>
+                <template #title="{ item }">
+                  {{item.title}}
+                  <div class="table-links">
+                    <n-link :to="`/authorized/videos/${item.id}`" class="text-primary">Edit video details</n-link>
+                    <div class="bullet"></div>
+                    <a :href="`//www.youtube.com/watch?v=${item.id}`" target="_blank" rel="noreferrer noopener">View on monalisatalk-fan.site</a>
+                  </div>
+                </template>
+              </AppTable>
             </template>
           </AppCard>
         </div>
@@ -68,7 +52,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+import { computed, defineComponent } from '@nuxtjs/composition-api';
+import type { TableRow } from '@/components/AppTable.vue';
 
 export default defineComponent({
   name: 'AuthorizedVideosPage',
@@ -76,10 +61,29 @@ export default defineComponent({
     title: 'Videos',
   },
   components: {
-    AppIcon: () => import('@/components/AppIcon.vue'),
     SectionHeader: () => import('@/components/SectionHeader.vue'),
+    AppIcon: () => import('@/components/AppIcon.vue'),
     AppCard: () => import('@/components/AppCard.vue'),
+    AppTable: () => import('@/components/AppTable.vue'),
   },
-  setup() {},
+  setup() {
+    const videos = computed((): TableRow[] => [
+      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-01' },
+      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-02' },
+      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-03' },
+      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-04' },
+      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-05' },
+      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-06' },
+      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-07' },
+      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-08' },
+      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-09' },
+      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-10' },
+      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-11' },
+    ]);
+
+    return {
+      videos,
+    }
+  },
 });
 </script>

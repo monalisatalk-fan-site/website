@@ -4,14 +4,14 @@
     <nav class="navbar navbar-expand-lg main-navbar">
       <ul class="navbar-nav mr-auto">
         <li>
-          <n-link
-            to="#"
+          <a
+            href="#"
             class="nav-link nav-link-lg"
             data-toggle="sidebar"
-            @click.native.prevent="toggleSidebar"
+            @click.prevent="toggleSidebar"
           >
             <AppIcon name="menu" />
-          </n-link>
+          </a>
         </li>
       </ul>
       <ul v-if="user" class="navbar-nav navbar-right">
@@ -19,14 +19,14 @@
           class="dropdown"
           v-outside="() => isDropdownVisible = false"
         >
-          <n-link
-            to="#"
+          <a
+            href="#"
             data-toggle="dropdown"
             class="nav-link dropdown-toggle nav-link-lg nav-link-user"
-            @click.native.prevent="isDropdownVisible = !isDropdownVisible"
+            @click.prevent="isDropdownVisible = !isDropdownVisible"
           >
             <div class="d-sm-none d-lg-inline-block">Hi, {{user.email}}</div>
-          </n-link>
+          </a>
           <div
             class="dropdown-menu dropdown-menu-right"
             :class="{ show: isDropdownVisible }"

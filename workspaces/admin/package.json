@@ -8,11 +8,13 @@
     "dotenv": "^8.2.0",
     "firebase": "^8.2.4",
     "ionicons": "^5.3.0",
+    "lodash-es": "^4.17.20",
     "nuxt": "^2.14.12"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.12",
     "@nuxt/typescript-build": "^2.0.4",
+    "@types/lodash-es": "^4.17.4",
     "fibers": "^5.0.0",
     "sass": "^1.32.5",
     "sass-loader": "^10.1.1"
