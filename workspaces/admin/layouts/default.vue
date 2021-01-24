@@ -27,3 +27,9 @@ export default defineComponent({
   setup() {},
 });
 </script>
+
+<style>
+body {
+  overflow-y: scroll;
+}
+</style>

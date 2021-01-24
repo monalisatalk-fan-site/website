@@ -12,9 +12,7 @@
         <MainFooter />
       </div>
     </template>
-    <template v-else>
-      <p>loading...</p>
-    </template>
+    <LoadingScreen :loading="!isLoggedIn" />
   </div>
 </template>
 
@@ -28,6 +26,7 @@ export default defineComponent({
     MainNavbar: () => import('@/components/MainNavbar.vue'),
     MainSidebar: () => import('@/components/MainSidebar.vue'),
     MainFooter: () => import('@/components/MainFooter.vue'),
+    LoadingScreen: () => import('@/components/LoadingScreen.vue'),
   },
   setup() {
     const { redirect } = useContext();

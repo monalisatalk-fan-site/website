@@ -1,9 +1,6 @@
 <template>
   <div>
-    <template v-if="isLoggedIn">
-      <p>welcome.</p>
-    </template>
-    <template v-else>
+    <template v-if="!isLoggedIn">
       <section class="section">
         <div class="container mt-5">
           <div class="row">
@@ -49,6 +46,7 @@
         </div>
       </section>
     </template>
+    <LoadingScreen :loading="isLoggedIn" />
   </div>
 </template>
 
@@ -64,6 +62,7 @@ export default defineComponent({
   components: {
     AppCard: () => import('@/components/AppCard.vue'),
     CopyrightText: () => import('@/components/CopyrightText.vue'),
+    LoadingScreen: () => import('@/components/LoadingScreen.vue'),
   },
   setup() {
     const { app, redirect } = useContext();
