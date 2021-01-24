@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="spinner-border text-primary" role="status"></div>
     <nuxt />
   </div>
 </template>

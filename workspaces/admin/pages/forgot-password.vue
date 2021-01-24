@@ -16,12 +16,12 @@
                 {{errorMessage}}
               </div>
               <div v-show="isSent" class="alert alert-success">
-                再設定メールを送信しました
+                Sent a password reset email. Please check your inbox.
               </div>
               <form @submit.prevent="sendPasswordResetEmail" class="needs-validation">
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" id="email" class="form-control" v-model="email" required />
+                  <input type="email" id="email" class="form-control" v-model="email" :disabled="isSent" required />
                 </div>
                 <div class="form-group">
                   <button class="btn btn-primary btn-lg btn-block" :disabled="isLoading || isSent">Send password reset email</button>

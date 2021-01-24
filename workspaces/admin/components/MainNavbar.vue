@@ -69,8 +69,6 @@ export default defineComponent({
 
     const logout = async () => {
       await app.$fire.auth.signOut();
-
-      redirect('/login');
     };
 
     return {

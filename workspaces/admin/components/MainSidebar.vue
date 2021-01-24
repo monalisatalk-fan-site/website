@@ -10,13 +10,13 @@
       <ul class="sidebar-menu mt-2">
         <li class="menu-header">Dashboard</li>
         <li>
-          <n-link class="nav-link" to="/admin/dashboard">
+          <n-link class="nav-link" to="/authorized/dashboard">
             <AppIcon name="speedometer" filled />
             <span>Dashboard</span>
           </n-link>
         </li>
         <li>
-          <n-link class="nav-link" to="/admin/videos">
+          <n-link class="nav-link" to="/authorized/videos">
             <AppIcon name="logo-youtube" />
             <span>Videos</span>
           </n-link>
