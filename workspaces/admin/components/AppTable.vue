@@ -13,19 +13,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="(item, index) in items"
-            :key="index"
-          >
-            <td
-              v-for="(value, key) in headers"
-              :key="key"
-            >
-              <slot :name="key" :item="item">
-                {{item[key]}}
-              </slot>
-            </td>
-          </tr>
+          <template v-for="(item, index) in items">
+            <template v-if="$scopedSlots.default || $slots.default">
+              <slot name="default" :item="item" />
+            </template>
+            <template v-else>
+              <tr :key="index">
+                <td
+                  v-for="(value, key) in headers"
+                  :key="key"
+                >
+                  <slot :name="key" :item="item">
+                    {{item[key]}}
+                  </slot>
+                </td>
+              </tr>
+            </template>
+          </template>
         </tbody>
       </table>
     </div>
@@ -73,7 +77,7 @@ export default defineComponent({
       required: true,
     },
     rows: {
-      type: Array as PropType<TableRow[]>,
+      type: Array as PropType<unknown[]>,
       default: () => [],
     },
     rowsPerPage: {

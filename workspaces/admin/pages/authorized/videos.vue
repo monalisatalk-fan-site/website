@@ -3,7 +3,7 @@
     <SectionHeader title="Videos">
       <template #buttons>
         <div class="section-header-button">
-          <button class="btn btn-primary">Update Videos</button>
+          <button class="btn btn-primary" :class="{ 'btn-progress': isLoadingUpdateVideos }" @click.prevent="updateVideos">Update Videos</button>
         </div>
       </template>
     </SectionHeader>
@@ -24,10 +24,13 @@
                   title: 'Title',
                   publishedAt: 'Published At'
                 }"
-                :rows="videos"
+                :rows="videoIdList"
               >
+                <template #default="{ item }">
+                  <VideoTableRow :id="item" />
+                </template>
                 <template #id="{ item }">
-                  <n-link :to="`/authorized/videos/${item.id}`" class="btn">{{item.id}}</n-link>
+                  <n-link :to="`/authorized/videos/${item}`" class="btn">{{item}}</n-link>
                 </template>
                 <template #thumbnail="{ item }">
                   <img :src="item.thumbnail" :alt="item.title" width="120">
@@ -50,8 +53,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api';
-import type { TableRow } from '@/components/AppTable.vue';
+import { computed, defineComponent, ref, useContext } from '@nuxtjs/composition-api';
+import { useVideoIdList } from '@/composables';
 
 export default defineComponent({
   name: 'AuthorizedVideosPage',
@@ -63,24 +66,33 @@ export default defineComponent({
     AppIcon: () => import('@/components/AppIcon.vue'),
     AppCard: () => import('@/components/AppCard.vue'),
     AppTable: () => import('@/components/AppTable.vue'),
+    VideoTableRow: () => import('@/components/VideoTableRow.vue'),
   },
   setup() {
-    const videos = computed((): TableRow[] => [
-      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-01' },
-      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-02' },
-      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-03' },
-      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-04' },
-      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-05' },
-      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-06' },
-      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-07' },
-      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-08' },
-      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-09' },
-      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-10' },
-      { id: 'yysixBSc63M', thumbnail: '//i.ytimg.com/vi/yysixBSc63M/hqdefault.jpg', title: '【漫画】DQNネームの親子「かわいそうな名前ぇｗｗｗ」妹「…」→他人の名前を嘲笑う親子に特大ブーメランが…！？', publishedAt: '2020-01-11' },
-    ]);
+    const { app } = useContext();
+    const videoIdList = useVideoIdList();
+    const isLoadingUpdateVideos = ref(false);
+
+    const updateVideos = async () => {
+      isLoadingUpdateVideos.value = true;
+
+      try {
+        const captureVideosOnTheChannel = app.$fire.functions.httpsCallable('captureVideosOnTheChannel');
+
+        let timer = Date.now();
+
+        const result = await captureVideosOnTheChannel();
+
+        console.log(result, Date.now() - timer);
+      } finally {
+        isLoadingUpdateVideos.value = false;
+      }
+    }
 
     return {
-      videos,
+      videoIdList,
+      isLoadingUpdateVideos,
+      updateVideos,
     }
   },
 });
