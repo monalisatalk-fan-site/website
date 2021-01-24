@@ -41,7 +41,7 @@ export default defineComponent({
   },
   setup(props) {
     const [video, isLoading] = useVideoDetail(props.id);
-    const title = computed(() => video.value?.original.title);
+    const title = computed(() => video.value?.details?.title || video.value?.original.title);
     const publishedAt = computed(() => {
       if (!video.value?.publishedAt) {
         return;

@@ -27,7 +27,7 @@
               <h4>Total Videos</h4>
             </div>
             <div class="card-body">
-              405
+              {{videoCount}}
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineComponent, onMounted, ref, useContext } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'AuthorizedDashboardPage',
@@ -48,6 +48,19 @@ export default defineComponent({
     AppIcon: () => import('@/components/AppIcon.vue'),
     SectionHeader: () => import('@/components/SectionHeader.vue'),
   },
-  setup() {},
+  setup() {
+    const { app } = useContext();
+    const videoCount = ref<number>();
+
+    onMounted(async () => {
+      const snapshot = await app.$fire.firestore.collection('videos').get();
+
+      videoCount.value = snapshot.size;
+    });
+
+    return {
+      videoCount,
+    };
+  },
 });
 </script>
