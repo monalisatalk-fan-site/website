@@ -12,12 +12,19 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@shared/*": ["../shared/*"]
     },
     "types": [
       "node",
       "@nuxt/types",
       "@nuxtjs/firebase"
     ]
-  }
+  },
+  "references": [
+    {
+      "path": "../shared/types.d.ts",
+      "prepare": true,
+    }
+  ]
 }

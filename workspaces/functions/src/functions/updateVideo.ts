@@ -1,6 +1,7 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import axios from 'axios';
+import { database } from '../helpers/database';
 import { youtube, CHANNEL_ID, GCP_API_KEY } from '../helpers/fetchChannelVideos';
 
 export const SLACK_CHANNEL_WEBHOOK_URL = functions.config().slack.webhook_url;
@@ -55,7 +56,7 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
     return;
   }
 
-  const { title, description, publishedAt, thumbnails, channelId } = snippet;
+  const { title, description, publishedAt, channelId } = snippet;
 
   if (channelId !== CHANNEL_ID) {
     res.status(400).json({ message: 'Invalid channel id', data: channelId });
@@ -63,17 +64,21 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
     return;
   }
 
-  const body = {
-    original: {
-      title,
-      description,
-    },
-    publishedAt,
-    thumbnails,
-    statistics,
-  };
-
-  await firestore.collection('videos').doc(videoId).update(body);
+  await Promise.all([
+    database.ref('videos').child('basic').child(videoId).update({
+      publishedAt: +new Date(publishedAt || ''),
+    }),
+    database.ref('videos').child('original').child(videoId).set({
+      title: title || '',
+      description: description || '',
+    }),
+    database.ref('videos').child('statistics').child(videoId).set({
+      viewCount: +(statistics?.viewCount || 0),
+      likeCount: +(statistics?.likeCount || 0),
+      commentCount: +(statistics?.commentCount || 0),
+      updatedAt: Date.now(),
+    }),
+  ]);
 
   try {
     await axios.post(SLACK_CHANNEL_WEBHOOK_URL, {

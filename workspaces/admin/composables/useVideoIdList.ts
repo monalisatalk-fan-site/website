@@ -11,7 +11,7 @@ export const useVideoIdList = () => {
 
     isLoading.value = false;
 
-    videoIdList.value = snapshot.docs.map((doc) => doc.id);
+    videoIdList.value = snapshot.docs.map((doc) => ({ id: doc.id, publishedAt: doc.data().publishedAt }));
   });
 
   return [videoIdList, isLoading] as const;

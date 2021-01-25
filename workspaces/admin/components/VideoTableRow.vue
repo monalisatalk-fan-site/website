@@ -4,7 +4,7 @@
       <n-link :to="`/authorized/videos/${id}`" class="btn">{{id}}</n-link>
     </td>
     <td>
-      <img :key="id" :src="`//i.ytimg.com/vi/${id}/mqdefault.jpg`" alt="" width="160" height="90">
+      <img :key="id" :src="`//i.ytimg.com/vi/${id}/mqdefault.jpg`" loading="lazy" alt="" width="160" height="90">
     </td>
     <td>
       <template v-if="isLoading">
@@ -28,8 +28,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api';
-import { useVideoDetail } from '@/composables';
+import { computed, defineComponent, onMounted, ref, useContext } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   name: 'VideoTableRow',
@@ -38,22 +37,43 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    publishedAt: {
+      type: String,
+      required: true,
+    },
   },
   setup(props) {
-    const [video, isLoading] = useVideoDetail(props.id);
-    const title = computed(() => video.value?.details?.title || video.value?.original.title);
-    const publishedAt = computed(() => {
-      if (!video.value?.publishedAt) {
-        return;
-      }
+    const { app } = useContext();
+    const isLoading = ref(true);
+    const title = ref('');
 
-      return new Intl.DateTimeFormat('ja').format(new Date(video.value.publishedAt));
+    onMounted(async () => {
+      try {
+        const videoDetailSnapshot = await app.$fire.firestore.collection('videoDetails').doc(props.id).get();
+        const videoDetail = videoDetailSnapshot.data();
+
+        if (videoDetail && videoDetail.title) {
+          title.value = videoDetail.title;
+
+          return;
+        }
+
+        const originalVideoSnapshot = await app.$fire.firestore.collection('originalVideos').doc(props.id).get();
+        const originalVideo = originalVideoSnapshot.data();
+
+        if (!originalVideo) {
+          return;
+        }
+
+        title.value = originalVideo.title;
+      } finally {
+        isLoading.value = false;
+      }
     });
 
     return {
       isLoading,
       title,
-      publishedAt,
     };
   },
 });

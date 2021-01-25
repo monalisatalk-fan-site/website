@@ -31,7 +31,7 @@
                   :rows="videoIdList"
                 >
                   <template #default="{ item }">
-                    <VideoTableRow :key="item" :id="item" />
+                    <VideoTableRow :key="item.id" :id="item.id" :publishedAt="item.publishedAt" />
                   </template>
                 </AppTable>
               </template>

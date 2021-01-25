@@ -81,6 +81,9 @@
 <script lang="ts">
 import { useVideoDetail } from '@/composables';
 import { computed, defineComponent, onMounted, ref, useContext, watch } from '@nuxtjs/composition-api';
+import { VideoDetail } from '@shared/types';
+
+const videoDetail: VideoDetail = {};
 
 export default defineComponent({
   name: 'VideoDetailPage',
@@ -89,48 +92,45 @@ export default defineComponent({
     AppCard: () => import('@/components/AppCard.vue'),
   },
   setup() {
-    const { app, route } = useContext();
-    const titleValue = ref('');
-    const descriptionValue = ref('');
-    const videoId = computed(() => route.value.params.videoId);
-    const [video, isLoading] = useVideoDetail(videoId.value, true);
-    const title = computed(() => video.value?.details?.title || video.value?.original.title);
+    // const { app, route } = useContext();
+    // const titleValue = ref('');
+    // const descriptionValue = ref('');
+    // const videoId = computed(() => route.value.params.videoId);
+    // const title = computed(() => video.value?.details?.title || video.value?.original.title);
 
-    const pasteTitle = () => {
-      titleValue.value = video.value?.original.title || '';
-    };
+    // const pasteTitle = () => {
+    //   titleValue.value = video.value?.original.title || '';
+    // };
 
-    const pasteDescription = () => {
-      descriptionValue.value = video.value?.original.description || '';
-    };
+    // const pasteDescription = () => {
+    //   descriptionValue.value = video.value?.original.description || '';
+    // };
 
-    const saveChanges = async () => {
-      const videoRef = app.$fire.firestore.collection('videos').doc(videoId.value);
+    // const saveChanges = async () => {
+    //   const videoRef = app.$fire.firestore.collection('videoDetails').doc(videoId.value);
 
-      await videoRef.update({
-        details: {
-          title: titleValue.value,
-          description: descriptionValue.value,
-        },
-      })
-    };
+    //   await videoRef.update({
+    //     title: titleValue.value,
+    //     description: descriptionValue.value,
+    //   });
+    // };
 
-    watch(video, () => {
-      titleValue.value = video.value?.details?.title;
-      descriptionValue.value = video.value?.details?.description;
-    }, { immediate: true });
+    // watch(video, () => {
+    //   titleValue.value = video.value?.details?.title;
+    //   descriptionValue.value = video.value?.details?.description;
+    // }, { immediate: true });
 
-    return {
-      video,
-      titleValue,
-      descriptionValue,
-      videoId,
-      isLoading,
-      title,
-      pasteTitle,
-      pasteDescription,
-      saveChanges,
-    };
+    // return {
+    //   video,
+    //   titleValue,
+    //   descriptionValue,
+    //   videoId,
+    //   isLoading,
+    //   title,
+    //   pasteTitle,
+    //   pasteDescription,
+    //   saveChanges,
+    // };
   },
 });
 </script>
