@@ -27,7 +27,7 @@ import { useDatabase } from '@/composables/useDatabase';
 
 export type VideoTableRow = {
   id: string;
-  title: string;
+  title?: string;
   publishedAt: number;
 };
 
@@ -58,7 +58,7 @@ export default defineComponent({
       const snapshot = await database.ref('videos').child('original').child(props.id).child('title').once('value');
 
       isLoading.value = false;
-      originalTitle.value = snapshot.val();
+      originalTitle.value = snapshot.val() || '';
     });
 
     return {

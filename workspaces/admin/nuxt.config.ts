@@ -16,6 +16,9 @@ const {
 
 const config: NuxtConfig = {
   ssr: false,
+  server: {
+    port: 4001,
+  },
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api'],
   modules: [
     [

@@ -76,8 +76,6 @@ export default defineComponent({
         let timer = Date.now();
 
         const result = await captureVideosOnTheChannel();
-
-        console.log(result, Date.now() - timer);
       } finally {
         isLoadingUpdateVideos.value = false;
       }
@@ -89,7 +87,7 @@ export default defineComponent({
       isLoading.value = false;
 
       const newVideoRows = await Promise.all(
-        Object.entries(snapshot.val()).map(async ([id, body]) => ({
+        Object.entries(snapshot.val() || {}).map(async ([id, body]) => ({
           id,
           ...body,
         }))
