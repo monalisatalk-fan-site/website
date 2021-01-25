@@ -46,7 +46,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref, useContext } from '@nuxtjs/composition-api';
 import type { VideoTableRow } from '@/components/VideoTableRow.vue';
-import { useDatabase } from '@/composables/useDatabase';
+import { useDatabase } from '@/composables';
 
 export default defineComponent({
   name: 'AuthorizedVideosPage',

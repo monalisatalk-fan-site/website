@@ -1,41 +1,70 @@
 import type firebase from 'firebase/app';
 import { onMounted, onUnmounted, ref, useContext } from "@nuxtjs/composition-api";
+import { useDatabase } from './useDatabase';
 
-export const useVideoDetail = (id: string, watch = false) => {
-  const { app } = useContext();
-  const video = ref<any>();
+export type VideoDetail = {
+  id: string;
+  title?: string;
+  publishedAt: number;
+  description?: string;
+  original: {
+    title: string;
+    description: string;
+  };
+  actors: string[];
+  tags: string[];
+  voiceActors: string[];
+};
+
+export const useVideoDetail = (id: string) => {
+  const database = useDatabase();
+  const video = ref<VideoDetail>();
   const isLoading = ref(true);
-  const unsubscribe = ref<firebase.Unsubscribe>();
 
   onMounted(async () => {
-    if (watch) {
-      return;
-    }
+    const [
+      basicSnapshot,
+      additionalSnapshot,
+      originalSnapshot,
+      actorsSnapshot,
+      tagsSnapshot,
+      voiceActorsSnapshot,
+    ] = await Promise.all([
+      database.ref('videos').child('basic').child(id).once('value'),
+      database.ref('videos').child('additional').child(id).once('value'),
+      database.ref('videos').child('original').child(id).once('value'),
+      database.ref('videos').child('actors').child(id).once('value'),
+      database.ref('videos').child('tags').child(id).once('value'),
+      database.ref('videos').child('voiceActors').child(id).once('value'),
+    ]);
 
-    const snapshot = await app.$fire.firestore.collection('videos').doc(id).get();
-    const data = snapshot.data();
+    const basic = basicSnapshot.val();
+    const additional = additionalSnapshot.val();
+    const original = originalSnapshot.val();
+    const actors = actorsSnapshot.val();
+    const tags = tagsSnapshot.val();
+    const voiceActors = voiceActorsSnapshot.val();
 
-    video.value = data;
     isLoading.value = false;
-  });
 
-  onMounted(() => {
-    if (!watch) {
+    if (!basic || !original) {
+      video.value = undefined;
+
       return;
     }
 
-    unsubscribe.value = app.$fire.firestore.collection('videos').doc(id).onSnapshot((snapshot) => {
-      const data = snapshot.data();
+    const { title, publishedAt } = basic;
 
-      video.value = data;
-      isLoading.value = false;
-    });
-  });
-
-  onUnmounted(() => {
-    if (unsubscribe.value) {
-      unsubscribe.value();
-    }
+    video.value = {
+      id,
+      title,
+      description: additional?.description,
+      publishedAt,
+      original,
+      actors: Object.keys(actors || {}),
+      tags: Object.keys(tags || {}),
+      voiceActors: Object.keys(voiceActors || {}),
+    };
   });
 
   return [

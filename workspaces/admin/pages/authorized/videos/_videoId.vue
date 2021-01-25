@@ -1,11 +1,11 @@
 <template>
   <div>
     <SectionHeader title="Video Detail Editor" />
-    <div class="section-body" v-if="video">
-      <h2 class="section-title">{{title}}</h2>
+    <div class="section-body" v-if="videoDetail">
+      <h2 class="section-title">{{videoDetail.title}}</h2>
     </div>
     <div class="alert alert-success">Video detail saved successfully.</div>
-    <div class="row" v-if="video">
+    <div class="row" v-if="videoDetail">
       <div class="col-sm-4">
         <AppCard>
           <template #header>
@@ -15,7 +15,7 @@
             <div class="youtube-player">
               <iframe
                 class="iframe"
-                :src="`https://www.youtube.com/embed/${videoId}`"
+                :src="`https://www.youtube.com/embed/${videoDetail.id}`"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -34,14 +34,14 @@
               <div class="form-group row align-items-center">
                 <label for="title" class="form-control-label col-sm-3 text-md-right">Title</label>
                 <div class="col-sm-6 col-md-9">
-                  <input id="title" class="form-control" v-model="titleValue" />
+                  <input id="title" class="form-control" v-model="title" />
                 </div>
               </div>
               <div class="form-group row align-items-center">
                 <label for="originalTitle" class="form-control-label col-sm-3 text-md-right">Title (Original)</label>
                 <div class="col-sm-6 col-md-9">
                   <div class="input-group">
-                    <input id="originalTitle" class="form-control" v-model="video.original.title" readonly />
+                    <input id="originalTitle" class="form-control" v-model="videoDetail.original.title" readonly />
                     <div class="input-group-append">
                       <button type="button" class="btn btn-light" :disabled="isLoading" @click.prevent="pasteTitle">Paste</button>
                     </div>
@@ -51,14 +51,14 @@
               <div class="form-group row align-items-center">
                 <label for="description" class="form-control-label col-sm-3 text-md-right">Description</label>
                 <div class="col-sm-6 col-md-9">
-                  <textarea id="description" class="form-control h-auto" v-model="descriptionValue" rows="4"></textarea>
+                  <textarea id="description" class="form-control h-auto" v-model="description" rows="4"></textarea>
                 </div>
               </div>
               <div class="form-group row align-items-center">
                 <label for="originalDescription" class="form-control-label col-sm-3 text-md-right">Description (Original)</label>
                 <div class="col-sm-6 col-md-9">
                   <div class="input-group">
-                    <textarea id="originalDescription" class="form-control h-auto" v-model="video.original.description" rows="4" readonly></textarea>
+                    <textarea id="originalDescription" class="form-control h-auto" v-model="videoDetail.original.description" rows="4" readonly></textarea>
                     <div class="input-group-append">
                       <button type="button" class="btn btn-light" :disabled="isLoading" @click.prevent="pasteDescription">Paste</button>
                     </div>
@@ -81,7 +81,7 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref, useContext, watch } from '@nuxtjs/composition-api';
 import type { VideoTableRow } from '@/components/VideoTableRow.vue';
-import { useDatabase } from '@/composables/useDatabase';
+import { useVideoDetail, useDatabase } from '@/composables';
 
 export default defineComponent({
   name: 'VideoDetailPage',
@@ -90,66 +90,42 @@ export default defineComponent({
     AppCard: () => import('@/components/AppCard.vue'),
   },
   setup() {
+    const { route } = useContext();
     const database = useDatabase();
-    const isLoading = ref(true);
-    const videoTableRows = ref<VideoTableRow[]>([]);
+    const title = ref('');
+    const description = ref('');
+    const videoId = computed(() => route.value.params.videoId);
+    const [videoDetail, isLoading] = useVideoDetail(videoId.value);
 
-    onMounted(async () => {
-      const snapshot = await database.ref('videos').child('basic').once('value');
+    const pasteTitle = () => {
+      title.value = videoDetail.value?.original.title || '';
+    };
 
-      isLoading.value = false;
+    const pasteDescription = () => {
+      description.value = videoDetail.value?.original.description || '';
+    };
 
-      videoTableRows.value = Object.entries(snapshot.val()).map(([id, body]) => {
-        return {
-          id,
-          ...body,
-        };
-      });
-    });
+    const saveChanges = async () => {
+      await Promise.all([
+        database.ref('videos').child('basic').child(videoId.value).update({ title: title.value }),
+        database.ref('videos').child('additional').child(videoId.value).update({ description: description.value }),
+      ]);
+    };
+
+    watch(videoDetail, () => {
+      title.value = videoDetail.value?.title || '';
+      description.value = videoDetail.value?.description || '';
+    }, { immediate: true });
 
     return {
+      title,
+      description,
+      videoDetail,
       isLoading,
-      videoTableRows,
+      pasteTitle,
+      pasteDescription,
+      saveChanges,
     };
-    // const { app, route } = useContext();
-    // const titleValue = ref('');
-    // const descriptionValue = ref('');
-    // const videoId = computed(() => route.value.params.videoId);
-    // const title = computed(() => video.value?.details?.title || video.value?.original.title);
-
-    // const pasteTitle = () => {
-    //   titleValue.value = video.value?.original.title || '';
-    // };
-
-    // const pasteDescription = () => {
-    //   descriptionValue.value = video.value?.original.description || '';
-    // };
-
-    // const saveChanges = async () => {
-    //   const videoRef = app.$fire.firestore.collection('videoDetails').doc(videoId.value);
-
-    //   await videoRef.update({
-    //     title: titleValue.value,
-    //     description: descriptionValue.value,
-    //   });
-    // };
-
-    // watch(video, () => {
-    //   titleValue.value = video.value?.details?.title;
-    //   descriptionValue.value = video.value?.details?.description;
-    // }, { immediate: true });
-
-    // return {
-    //   video,
-    //   titleValue,
-    //   descriptionValue,
-    //   videoId,
-    //   isLoading,
-    //   title,
-    //   pasteTitle,
-    //   pasteDescription,
-    //   saveChanges,
-    // };
   },
 });
 </script>

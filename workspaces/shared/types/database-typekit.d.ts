@@ -60,7 +60,7 @@ export type DefineSetterMethod<Value extends unknown> = {
 
 /** 型安全な firebase.database.DataSnapshot 型を定義する */
 export type DefineTypedDataSnapshot<Value extends unknown> = Omit<firebase.database.DataSnapshot, 'val'> & {
-  val(): Value;
+  val(): Value | null;
 };
 
 /** 型が完全に一致するか */
