@@ -31,7 +31,7 @@
             class="dropdown-menu dropdown-menu-right"
             :class="{ show: isDropdownVisible }"
           >
-            <div class="dropdown-title">Logged in 5 min ago</div>
+            <div v-if="sessionTimeMinutes != null" class="dropdown-title">Logged in {{sessionTimeMinutes}} min ago</div>
             <div class="dropdown-divider"></div>
             <n-link to="#" class="dropdown-item has-icon text-danger" @click.native.prevent="logout">
               <AppIcon name="log-out" /> サインアウト
@@ -44,8 +44,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, useContext, watch } from '@nuxtjs/composition-api';
-import { useAuthState } from '@/composables';
+import { computed, defineComponent, ref, useContext, watch } from '@nuxtjs/composition-api';
+import { useAuthState, useUserSessionPeriod } from '@/composables';
 import { outsideDirective } from '@/directives';
 
 export default defineComponent({
@@ -57,9 +57,11 @@ export default defineComponent({
     outside: outsideDirective,
   },
   setup() {
-    const { app, redirect } = useContext();
+    const { app } = useContext();
     const isDropdownVisible = ref(false);
     const { user } = useAuthState();
+    const [sessionTimeSeconds] = useUserSessionPeriod();
+    const sessionTimeMinutes = computed(() => sessionTimeSeconds.value ? Math.ceil(sessionTimeSeconds.value / 60) : null);
 
     const toggleSidebar = () => {
       const { classList } = document.body;
@@ -74,6 +76,7 @@ export default defineComponent({
     return {
       isDropdownVisible,
       user,
+      sessionTimeMinutes,
       toggleSidebar,
       logout,
     };
