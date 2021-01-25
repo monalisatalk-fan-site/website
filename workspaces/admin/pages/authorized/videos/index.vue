@@ -17,19 +17,24 @@
               <h4>Available Videos</h4>
             </template>
             <template #body>
-              <AppTable
-                :headers="{
-                  id: '#',
-                  thumbnail: 'Thumbnail',
-                  title: 'Title',
-                  publishedAt: 'Published'
-                }"
-                :rows="videoIdList"
-              >
-                <template #default="{ item }">
-                  <VideoTableRow :key="item" :id="item" />
-                </template>
-              </AppTable>
+              <template v-if="isLoadingVideoIdList">
+                <p>loading...</p>
+              </template>
+              <template v-else>
+                <AppTable
+                  :headers="{
+                    id: '#',
+                    thumbnail: 'Thumbnail',
+                    title: 'Title',
+                    publishedAt: 'Published'
+                  }"
+                  :rows="videoIdList"
+                >
+                  <template #default="{ item }">
+                    <VideoTableRow :key="item" :id="item" />
+                  </template>
+                </AppTable>
+              </template>
             </template>
           </AppCard>
         </div>
@@ -56,7 +61,7 @@ export default defineComponent({
   },
   setup() {
     const { app } = useContext();
-    const videoIdList = useVideoIdList();
+    const [videoIdList, isLoadingVideoIdList] = useVideoIdList();
     const isLoadingUpdateVideos = ref(false);
 
     const updateVideos = async () => {
@@ -77,6 +82,7 @@ export default defineComponent({
 
     return {
       videoIdList,
+      isLoadingVideoIdList,
       isLoadingUpdateVideos,
       updateVideos,
     }
