@@ -23,7 +23,7 @@
   },
   "references": [
     {
-      "path": "../shared/types.d.ts",
+      "path": "../shared",
       "prepare": true,
     }
   ]

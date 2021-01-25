@@ -10,6 +10,18 @@ export type DefineTypedReference<Structure extends unknown> = Omit<firebase.data
     set: DefineSetterMethod<Structure>;
     update: DefineSetterMethod<Partial<Structure>>;
     ref<Path extends DefineReferencePath<Structure>>(path: Path): DefineTypedReference<PickChunkFromPath<Structure, Path>>;
+    on(
+      eventType: firebase.database.EventType,
+      callback: (snapshot: DefineTypedDataSnapshot<Structure>, b?: string | null) => any,
+      cancelCallbackOrContext?: ((error: Error) => any) | Object | null,
+      context?: Object | null,
+    ): (snapshot: DefineTypedDataSnapshot<Structure>, b?: string | null) => any;
+    once(
+      eventType: firebase.database.EventType,
+      successCallback?: (snapshot: DefineTypedDataSnapshot<Structure>, b?: string | null) => any,
+      cancelCallbackOrContext?: ((error: Error) => any) | Object | null,
+      context?: Object | null,
+    ): Promise<DefineTypedDataSnapshot<Structure>>;
   }
   : {
     child(path: never): never;
@@ -27,7 +39,7 @@ export type DefineTypedReference<Structure extends unknown> = Omit<firebase.data
     ): (snapshot: DefineTypedDataSnapshot<Structure>, b?: string | null) => any;
     once(
       eventType: firebase.database.EventType,
-      callback: (snapshot: DefineTypedDataSnapshot<Structure>, b?: string | null) => any,
+      successCallback?: (snapshot: DefineTypedDataSnapshot<Structure>, b?: string | null) => any,
       cancelCallbackOrContext?: ((error: Error) => any) | Object | null,
       context?: Object | null,
     ): Promise<DefineTypedDataSnapshot<Structure>>;

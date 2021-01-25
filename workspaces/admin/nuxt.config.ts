@@ -34,12 +34,7 @@ const config: NuxtConfig = {
         services: {
           auth: true,
           functions: true,
-          firestore: true,
-        },
-        firestore: {
-          enablePersistence: {
-            synchronizeTabs: true,
-          },
+          database: true,
         },
       }
     ]

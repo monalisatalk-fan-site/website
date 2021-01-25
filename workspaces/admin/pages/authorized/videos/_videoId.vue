@@ -79,11 +79,9 @@
 </template>
 
 <script lang="ts">
-import { useVideoDetail } from '@/composables';
 import { computed, defineComponent, onMounted, ref, useContext, watch } from '@nuxtjs/composition-api';
-import { VideoDetail } from '@shared/types';
-
-const videoDetail: VideoDetail = {};
+import type { VideoTableRow } from '@/components/VideoTableRow.vue';
+import { useDatabase } from '@/composables/useDatabase';
 
 export default defineComponent({
   name: 'VideoDetailPage',
@@ -92,6 +90,27 @@ export default defineComponent({
     AppCard: () => import('@/components/AppCard.vue'),
   },
   setup() {
+    const database = useDatabase();
+    const isLoading = ref(true);
+    const videoTableRows = ref<VideoTableRow[]>([]);
+
+    onMounted(async () => {
+      const snapshot = await database.ref('videos').child('basic').once('value');
+
+      isLoading.value = false;
+
+      videoTableRows.value = Object.entries(snapshot.val()).map(([id, body]) => {
+        return {
+          id,
+          ...body,
+        };
+      });
+    });
+
+    return {
+      isLoading,
+      videoTableRows,
+    };
     // const { app, route } = useContext();
     // const titleValue = ref('');
     // const descriptionValue = ref('');

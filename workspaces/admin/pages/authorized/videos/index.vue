@@ -17,7 +17,7 @@
               <h4>Available Videos</h4>
             </template>
             <template #body>
-              <template v-if="isLoadingVideoIdList">
+              <template v-if="isLoading">
                 <p>loading...</p>
               </template>
               <template v-else>
@@ -28,10 +28,10 @@
                     title: 'Title',
                     publishedAt: 'Published'
                   }"
-                  :rows="videoIdList"
+                  :rows="videoTableRows"
                 >
                   <template #default="{ item }">
-                    <VideoTableRow :key="item.id" :id="item.id" :publishedAt="item.publishedAt" />
+                    <VideoTableRow :key="item.id" v-bind="item" />
                   </template>
                 </AppTable>
               </template>
@@ -44,8 +44,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, useContext } from '@nuxtjs/composition-api';
-import { useVideoIdList } from '@/composables';
+import { defineComponent, onMounted, ref, useContext } from '@nuxtjs/composition-api';
+import type { VideoTableRow } from '@/components/VideoTableRow.vue';
+import { useDatabase } from '@/composables/useDatabase';
 
 export default defineComponent({
   name: 'AuthorizedVideosPage',
@@ -61,7 +62,9 @@ export default defineComponent({
   },
   setup() {
     const { app } = useContext();
-    const [videoIdList, isLoadingVideoIdList] = useVideoIdList();
+    const database = useDatabase();
+    const isLoading = ref(true);
+    const videoTableRows = ref<VideoTableRow[]>([]);
     const isLoadingUpdateVideos = ref(false);
 
     const updateVideos = async () => {
@@ -78,14 +81,29 @@ export default defineComponent({
       } finally {
         isLoadingUpdateVideos.value = false;
       }
-    }
+    };
+
+    onMounted(async () => {
+      const snapshot = await database.ref('videos').child('basic').once('value');
+
+      isLoading.value = false;
+
+      const newVideoRows = await Promise.all(
+        Object.entries(snapshot.val()).map(async ([id, body]) => ({
+          id,
+          ...body,
+        }))
+      );
+
+      videoTableRows.value = newVideoRows.slice().sort((a, b) => b.publishedAt - a.publishedAt);
+    });
 
     return {
-      videoIdList,
-      isLoadingVideoIdList,
+      isLoading,
+      videoTableRows,
       isLoadingUpdateVideos,
       updateVideos,
-    }
+    };
   },
 });
 </script>
