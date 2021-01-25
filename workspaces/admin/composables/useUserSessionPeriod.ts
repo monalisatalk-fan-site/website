@@ -1,4 +1,4 @@
-import { computed, onUnmounted, ref, useContext, watch } from '@nuxtjs/composition-api';
+import { computed, ref, useContext, watch } from '@nuxtjs/composition-api';
 
 export const useUserSessionPeriod = () => {
   const { app } = useContext();
