@@ -7,7 +7,7 @@ export const useVideoIdList = () => {
   const videoIdList = ref<any[]>([]);
 
   onMounted(async () => {
-    const snapshot = await app.$fire.firestore.collection('videos').orderBy('publishedAt', 'desc').get({ source: 'cache' });
+    const snapshot = await app.$fire.firestore.collection('videos').orderBy('publishedAt', 'desc').get();
 
     isLoading.value = false;
 
