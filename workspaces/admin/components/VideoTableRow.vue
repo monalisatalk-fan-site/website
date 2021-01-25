@@ -4,7 +4,7 @@
       <n-link :to="`/authorized/videos/${id}`" class="btn">{{id}}</n-link>
     </td>
     <td>
-      <img :key="id" :src="`//i.ytimg.com/vi/${id}/default.jpg`" alt="" width="120" height="90">
+      <img :key="id" :src="`//i.ytimg.com/vi/${id}/mqdefault.jpg`" alt="" width="160" height="90">
     </td>
     <td>
       <template v-if="isLoading">

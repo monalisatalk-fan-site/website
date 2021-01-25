@@ -3,16 +3,16 @@ import { google, youtube_v3 } from 'googleapis';
 import { flatMap, range } from 'lodash';
 
 /** モナ・リザの戯言チャンネルのID */
-const CHANNEL_ID = 'UCSSkv6tmPpi8d1IrWegypsA';
+export const CHANNEL_ID = 'UCSSkv6tmPpi8d1IrWegypsA';
 /** 最後の動画がアップロードされた月 */
-const OLDEST_VIDEO_YEAR = 2019;
+export const OLDEST_VIDEO_YEAR = 2019;
 /** 最後の動画がアップロードされた月 */
-const OLDEST_VIDEO_MONTH = 6;
-const GCP_API_KEY = functions.config().gcp.api_key;
+export const OLDEST_VIDEO_MONTH = 6;
+export const GCP_API_KEY = functions.config().gcp.api_key;
 
 console.log(`Using API_KEY is ${GCP_API_KEY}`);
 
-const youtube = google.youtube('v3');
+export const youtube = google.youtube('v3');
 
 export const fetchChannelVideos = async (): Promise<youtube_v3.Schema$Video[]> => {
   const d = new Date();

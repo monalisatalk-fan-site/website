@@ -12,7 +12,7 @@ export const useVideoDetail = (id: string, watch = false) => {
       return;
     }
 
-    const snapshot = await app.$fire.firestore.collection('videos').doc(id).get();
+    const snapshot = await app.$fire.firestore.collection('videos').doc(id).get({ source: 'cache' });
     const data = snapshot.data();
 
     video.value = data;

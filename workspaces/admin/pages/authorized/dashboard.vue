@@ -53,7 +53,7 @@ export default defineComponent({
     const videoCount = ref<number>();
 
     onMounted(async () => {
-      const snapshot = await app.$fire.firestore.collection('videos').get();
+      const snapshot = await app.$fire.firestore.collection('videos').get({ source: 'cache' });
 
       videoCount.value = snapshot.size;
     });
