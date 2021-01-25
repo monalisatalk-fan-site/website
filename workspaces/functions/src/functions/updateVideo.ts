@@ -79,10 +79,11 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
     await axios.post(SLACK_CHANNEL_WEBHOOK_URL, {
       icon_emoji: ':alien:',
       username: 'monalisatalk-bot',
+      unfurl_links: true,
       attachments: [
         {
           fallback: `[NEW VIDEO] ${title}`,
-          pretext: 'モナ・リザの戯言チャンネルに動画が投稿されました\nhttps://www.youtube.com/watch?v=${videoId}',
+          pretext: `モナ・リザの戯言チャンネルに動画が投稿されました\nhttps://www.youtube.com/watch?v=${videoId}`,
           color: '#FC0006',
           fields: [
             {

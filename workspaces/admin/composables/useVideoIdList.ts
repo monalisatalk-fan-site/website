@@ -4,18 +4,11 @@ import { onMounted, onUnmounted, ref, useContext } from '@nuxtjs/composition-api
 export const useVideoIdList = () => {
   const { app } = useContext();
   const videoIdList = ref<any[]>([]);
-  const unsubscribe = ref<firebase.Unsubscribe>();
 
-  onMounted(() => {
-    unsubscribe.value = app.$fire.firestore.collection('videos').orderBy('publishedAt', 'desc').onSnapshot((snapshot) => {
-      videoIdList.value = snapshot.docs.map((doc) => doc.id);
-    });
-  });
+  onMounted(async () => {
+    const snapshot = await app.$fire.firestore.collection('videos').orderBy('publishedAt', 'desc').get({ source: 'cache' });
 
-  onUnmounted(() => {
-    if (unsubscribe.value) {
-      unsubscribe.value();
-    }
+    videoIdList.value = snapshot.docs.map((doc) => doc.id);
   });
 
   return videoIdList;
