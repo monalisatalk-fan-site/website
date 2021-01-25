@@ -82,12 +82,12 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
       attachments: [
         {
           fallback: `[NEW VIDEO] ${title}`,
-          pretext: 'モナ・リザの戯言チャンネルに動画が投稿されました',
+          pretext: 'モナ・リザの戯言チャンネルに動画が投稿されました\nhttps://www.youtube.com/watch?v=${videoId}',
           color: '#FC0006',
           fields: [
             {
               title,
-              value: `https://admin-monalisatalk-fan-site.web.app/authorized/videos/${videoId}\n\nhttps://www.youtube.com/watch?v=${videoId}`,
+              value: `<https://admin-monalisatalk-fan-site.web.app/authorized/videos/${videoId}|管理画面で動画情報情報を編集する>`,
               short: false,
             },
           ],
