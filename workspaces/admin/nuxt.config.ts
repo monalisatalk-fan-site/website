@@ -40,7 +40,8 @@ const config: NuxtConfig = {
           database: true,
         },
       }
-    ]
+    ],
+    '@lollipop-onl/vue-typed-reactive/nuxt'
   ],
   css: ['@/assets/bootstrap/bootstrap.scss', '@/assets/stisla/style.scss', '@/assets/stisla/components.scss'],
   vue: {

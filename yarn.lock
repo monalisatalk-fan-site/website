@@ -1318,6 +1318,13 @@
     lodash.camelcase "^4.3.0"
     protobufjs "^6.8.6"
 
+"@lollipop-onl/vue-typed-reactive@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@lollipop-onl/vue-typed-reactive/-/vue-typed-reactive-1.1.0.tgz#3c8d054d5060d1a1c42d2463db13c382ad5987c2"
+  integrity sha512-Jth13pd8wq1uTiA+HUhEyBc30aVj65qE71t5iQDTZ2HF/SBzb/gnEK6M43NiOUCnu554h53o0U3J2xmazt7iNQ==
+  dependencies:
+    vue "^2.6.12"
+
 "@lollipop-onl/vuex-typesafe-helper@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@lollipop-onl/vuex-typesafe-helper/-/vuex-typesafe-helper-1.0.0.tgz#e849fab05ccfbab70ad06680e7f619300b153c6d"

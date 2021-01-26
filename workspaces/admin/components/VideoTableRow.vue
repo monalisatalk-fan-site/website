@@ -7,8 +7,7 @@
       <img :key="id" :src="`//i.ytimg.com/vi/${id}/mqdefault.jpg`" loading="lazy" alt="" width="160" height="90">
     </td>
     <td>
-      <template v-if="isLoading">Loading...</template>
-      <template v-else>{{title}}</template>
+      {{title}}
       <div class="table-links">
         <a :href="`//www.monalisatalk-fan.site/?id=${id}`" target="_blank" rel="noreferrer noopener">View on monalisatalk-fan.site</a>
         <div class="bullet"></div>
@@ -48,11 +47,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const isLoading = ref(true);
     const displayedDate = computed(() => new Intl.DateTimeFormat('ja').format(new Date(props.publishedAt)));
 
     return {
-      isLoading,
       displayedDate,
     };
   },

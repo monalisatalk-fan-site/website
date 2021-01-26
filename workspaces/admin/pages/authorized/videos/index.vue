@@ -44,9 +44,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, useContext } from '@nuxtjs/composition-api';
+import { computed, defineComponent, onMounted, ref, useContext } from '@nuxtjs/composition-api';
 import type { VideoTableRow } from '@/components/VideoTableRow.vue';
-import { useDatabase } from '@/composables';
+import { useBasicVideoList, useDatabase } from '@/composables';
 
 export default defineComponent({
   name: 'AuthorizedVideosPage',
@@ -62,10 +62,9 @@ export default defineComponent({
   },
   setup() {
     const { app } = useContext();
-    const database = useDatabase();
-    const isLoading = ref(true);
-    const videoTableRows = ref<VideoTableRow[]>([]);
     const isLoadingUpdateVideos = ref(false);
+    const [basicVideoList, isLoading, invalidate] = useBasicVideoList();
+    const videoTableRows = computed((): VideoTableRow[] => basicVideoList.value);
 
     const updateVideos = async () => {
       isLoadingUpdateVideos.value = true;
@@ -73,28 +72,13 @@ export default defineComponent({
       try {
         const captureVideosOnTheChannel = app.$fire.functions.httpsCallable('captureVideosOnTheChannel');
 
-        let timer = Date.now();
+        await captureVideosOnTheChannel();
 
-        const result = await captureVideosOnTheChannel();
+        await invalidate();
       } finally {
         isLoadingUpdateVideos.value = false;
       }
     };
-
-    onMounted(async () => {
-      const snapshot = await database.ref('videos').child('basic').once('value');
-
-      isLoading.value = false;
-
-      const newVideoRows = await Promise.all(
-        Object.entries(snapshot.val() || {}).map(async ([id, body]) => ({
-          id,
-          ...body,
-        }))
-      );
-
-      videoTableRows.value = newVideoRows.slice().sort((a, b) => b.publishedAt - a.publishedAt);
-    });
 
     return {
       isLoading,

@@ -14,23 +14,40 @@ export const captureVideosOnTheChannel = authorizedFunctionsHttps(async () => {
     }
 
     const { title, description, publishedAt } = snippet;
+    const optimizedTitle = title?.replace(/^【+[^】]*】+/, '');
+    const optimizedDescription = description
+      ?.replace(/\n+『モナ・リザの戯言』ではスカッと爽快な漫画をたくさん投稿していきますので、是非チャンネル登録をお願いします！(?:.|\n)*/, '')
+      .replace(/^(?:.|\n)*(今回の漫画の主人公)/, '$1');
 
     if (!id) {
       return [];
     }
 
     return [
-      async () => {
-        const basicTitleRef = database.ref('videos').child('basic').child(id).child('title');
-        const basicTitle = await basicTitleRef.once('value');
-
-        if (!basicTitle) {
-          await basicTitleRef.set(title || '');
-        }
-      },
-      database.ref('videos').child('basic').child(id).update({
+      database.ref('videos').child('basic').child(id).set({
+        title: optimizedTitle || '',
         publishedAt: +new Date(publishedAt || ''),
       }),
+      database.ref('videos').child('additional').child(id).set({
+        description: optimizedDescription || '',
+      }),
+      // (async () => {
+      //   const basicTitleRef = database.ref('videos').child('basic').child(id).child('title');
+      //   const snapshot = await basicTitleRef.once('value');
+      //   const basicTitle = snapshot.val();
+
+      //   await database.ref('videos').child('basic').child(id).set({
+      //     title: basicTitle || optimizedTitle || 'untitled',
+      //     publishedAt: +new Date(publishedAt || '')
+      //   });
+      // })(),
+      // (async () => {
+      //   const additionalDescriptionRef = database.ref('videos').child('additional').child(id).child('description');
+      //   const snapshot = await additionalDescriptionRef.once('value');
+      //   const additionalDescription = snapshot.val();
+
+      //   await additionalDescriptionRef.set(additionalDescription || optimizedDescription || '');
+      // })(),
       database.ref('videos').child('original').child(id).set({
         title: title || '',
         description: description || '',

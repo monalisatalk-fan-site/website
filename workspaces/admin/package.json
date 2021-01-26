@@ -2,6 +2,7 @@
   "name": "admin",
   "version": "1.0.0",
   "dependencies": {
+    "@lollipop-onl/vue-typed-reactive": "^1.1.0",
     "@lollipop-onl/vuex-typesafe-helper": "^1.0.0",
     "@nuxt/typescript-runtime": "^2.0.1",
     "@nuxtjs/composition-api": "^0.18.1",

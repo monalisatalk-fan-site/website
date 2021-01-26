@@ -1,12 +1,12 @@
-import type firebase from 'firebase/app';
-import { onMounted, onUnmounted, ref, useContext } from "@nuxtjs/composition-api";
+import Vue from 'vue';
+import { computed, Ref, ref, watch } from "@nuxtjs/composition-api";
 import { useDatabase } from './useDatabase';
 
 export type VideoDetail = {
   id: string;
-  title?: string;
-  publishedAt: number;
+  title: string;
   description?: string;
+  publishedAt: number;
   original: {
     title: string;
     description: string;
@@ -16,56 +16,132 @@ export type VideoDetail = {
   voiceActors: string[];
 };
 
-export const useVideoDetail = (id: string) => {
+export const isVideoDetail = <T extends Partial<VideoDetail>>(value: T): value is Required<T> => {
+  return !!(
+    value.id &&
+    value.title &&
+    value.publishedAt &&
+    value.original &&
+    value.actors &&
+    value.tags &&
+    value.voiceActors
+  );
+};
+
+export const useVideoDetail = (id: Ref<string>) => {
   const database = useDatabase();
-  const video = ref<VideoDetail>();
-  const isLoading = ref(true);
+  const loadingStack = ref<boolean[]>([]);
+  const videoCache = ref<Partial<VideoDetail>>({});
+  const isLoading = computed(() => loadingStack.value.length < 6);
+  const video = computed((): VideoDetail | undefined => {
+    if (isVideoDetail(videoCache.value)) {
+      return videoCache.value;
+    }
+  });
 
-  onMounted(async () => {
-    const [
-      basicSnapshot,
-      additionalSnapshot,
-      originalSnapshot,
-      actorsSnapshot,
-      tagsSnapshot,
-      voiceActorsSnapshot,
-    ] = await Promise.all([
-      database.ref('videos').child('basic').child(id).once('value'),
-      database.ref('videos').child('additional').child(id).once('value'),
-      database.ref('videos').child('original').child(id).once('value'),
-      database.ref('videos').child('actors').child(id).once('value'),
-      database.ref('videos').child('tags').child(id).once('value'),
-      database.ref('videos').child('voiceActors').child(id).once('value'),
-    ]);
+  watch(id, () => {
+    Vue.typedSet(videoCache.value, 'id', id.value);
+  }, { immediate: true });
 
-    const basic = basicSnapshot.val();
-    const additional = additionalSnapshot.val();
-    const original = originalSnapshot.val();
-    const actors = actorsSnapshot.val();
-    const tags = tagsSnapshot.val();
-    const voiceActors = voiceActorsSnapshot.val();
+  watch(id, async (_value, _oldValue, onInvalidate) => {
+    const snapshot = await database.ref('videos').child('basic').child(id.value).once('value');
+    const value = snapshot.val();
 
-    isLoading.value = false;
+    loadingStack.value.push(true);
 
-    if (!basic || !original) {
-      video.value = undefined;
-
-      return;
+    if (value) {
+      Vue.typedSet(videoCache.value, 'title', value.title);
+      Vue.typedSet(videoCache.value, 'publishedAt', value.publishedAt);
     }
 
-    const { title, publishedAt } = basic;
+    onInvalidate(() => {
+      loadingStack.value.pop();
 
-    video.value = {
-      id,
-      title,
-      description: additional?.description,
-      publishedAt,
-      original,
-      actors: Object.keys(actors || {}),
-      tags: Object.keys(tags || {}),
-      voiceActors: Object.keys(voiceActors || {}),
-    };
-  });
+      Vue.typedDelete(videoCache.value, 'title');
+      Vue.typedDelete(videoCache.value, 'publishedAt');
+    });
+  }, { immediate: true });
+
+  watch(id, async (_value, _oldValue, onInvalidate) => {
+    const snapshot = await database.ref('videos').child('additional').child(id.value).once('value');
+    const value = snapshot.val();
+
+    console.log(value);
+
+    loadingStack.value.push(true);
+
+    if (value) {
+      Vue.typedSet(videoCache.value, 'description', value.description);
+    }
+
+    onInvalidate(() => {
+      loadingStack.value.pop();
+
+      Vue.typedDelete(videoCache.value, 'description');
+    });
+  }, { immediate: true });
+
+  watch(id, async (_value, _oldValue, onInvalidate) => {
+    const snapshot = await database.ref('videos').child('original').child(id.value).once('value');
+    const value = snapshot.val();
+
+    loadingStack.value.push(true);
+
+    if (value) {
+      Vue.typedSet(videoCache.value, 'original', value);
+    }
+
+    onInvalidate(() => {
+      loadingStack.value.pop();
+
+      Vue.typedDelete(videoCache.value, 'original');
+    });
+  }, { immediate: true });
+
+  watch(id, async (_value, _oldValue, onInvalidate) => {
+    const snapshot = await database.ref('videos').child('actors').child(id.value).once('value');
+    const value = snapshot.val();
+
+    loadingStack.value.push(true);
+
+    Vue.typedSet(videoCache.value, 'actors', value ? Object.keys(value) : []);
+
+    onInvalidate(() => {
+      loadingStack.value.pop();
+
+      Vue.typedDelete(videoCache.value, 'actors');
+    });
+  }, { immediate: true });
+
+  watch(id, async (_value, _oldValue, onInvalidate) => {
+    const snapshot = await database.ref('videos').child('tags').child(id.value).once('value');
+    const value = snapshot.val();
+
+    loadingStack.value.push(true);
+
+    Vue.typedSet(videoCache.value, 'tags', value ? Object.keys(value) : []);
+
+    onInvalidate(() => {
+      loadingStack.value.pop();
+
+      Vue.typedDelete(videoCache.value, 'tags');
+    });
+  }, { immediate: true });
+
+  watch(id, async (_value, _oldValue, onInvalidate) => {
+    const snapshot = await database.ref('videos').child('voiceActors').child(id.value).once('value');
+    const value = snapshot.val();
+
+    loadingStack.value.push(true);
+
+    Vue.typedSet(videoCache.value, 'voiceActors', value ? Object.keys(value) : []);
+
+    onInvalidate(() => {
+      loadingStack.value.pop();
+
+      Vue.typedDelete(videoCache.value, 'voiceActors');
+    });
+  }, { immediate: true });
 
   return [
     video,

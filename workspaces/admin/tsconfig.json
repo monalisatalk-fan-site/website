@@ -18,7 +18,8 @@
     "types": [
       "node",
       "@nuxt/types",
-      "@nuxtjs/firebase"
+      "@nuxtjs/firebase",
+      "@lollipop-onl/vue-typed-reactive/types/vue"
     ]
   },
   "references": [
