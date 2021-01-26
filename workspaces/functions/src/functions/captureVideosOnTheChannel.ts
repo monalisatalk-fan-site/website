@@ -16,8 +16,9 @@ export const captureVideosOnTheChannel = authorizedFunctionsHttps(async () => {
     const { title, description, publishedAt } = snippet;
     const optimizedTitle = title?.replace(/^【+[^】]*】+/, '');
     const optimizedDescription = description
-      ?.replace(/\n+『モナ・リザの戯言』ではスカッと爽快な漫画をたくさん投稿していきますので、是非チャンネル登録をお願いします！(?:.|\n)*/, '')
-      .replace(/^(?:.|\n)*(今回の漫画の主人公)/, '$1');
+      ?.replace(/\n+『モナ・リザの戯言』では(?:.|\n)*/, '')
+      .replace(/^(?:.|\n)*(今回の漫画)/, '$1')
+      .replace(/\n+※?この漫画はフィクション(?:.|\n)+/, '');
 
     if (!id) {
       return [];
