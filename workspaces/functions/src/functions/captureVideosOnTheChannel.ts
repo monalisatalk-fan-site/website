@@ -4,10 +4,9 @@ import { authorizedFunctionsHttps } from '../helpers/authorizedFunctionsHttps';
 import { fetchChannelVideos } from '../helpers/fetchChannelVideos';
 
 export const captureVideosOnTheChannel = authorizedFunctionsHttps(async () => {
-  const firestore = admin.firestore();
   const videos = await fetchChannelVideos();
 
-  await Promise.all(videos.flatMap((video) => {
+  await Promise.all(videos.flatMap(async (video) => {
     const { id, snippet, statistics } = video;
 
     if (!snippet) {
@@ -21,6 +20,14 @@ export const captureVideosOnTheChannel = authorizedFunctionsHttps(async () => {
     }
 
     return [
+      async () => {
+        const basicTitleRef = database.ref('videos').child('basic').child(id).child('title');
+        const basicTitle = await basicTitleRef.once('value');
+
+        if (!basicTitle) {
+          await basicTitleRef.set(title || '');
+        }
+      },
       database.ref('videos').child('basic').child(id).update({
         publishedAt: +new Date(publishedAt || ''),
       }),

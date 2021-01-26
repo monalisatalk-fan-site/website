@@ -14,12 +14,9 @@ export type DatabaseStructure = {
   };
   /** 動画情報 */
   videos: {
-    activation: {
-      $videoId?: boolean;
-    };
     basic: {
       $videoId: {
-        title?: string;
+        title: string;
         publishedAt: number;
       };
     };

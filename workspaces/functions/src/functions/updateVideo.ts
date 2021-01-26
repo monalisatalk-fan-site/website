@@ -31,19 +31,19 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
     return;
   }
 
-  const videoId = matches[1];
+  const id = matches[1];
 
   const response = await youtube.videos.list({
     key: GCP_API_KEY,
     part: ['snippet', 'statistics'],
-    id: [videoId],
+    id: [id],
     maxResults: 1,
   });
 
   const { data: { items: [video] = [] } } = response;
 
   if (!video) {
-    res.status(400).json({ message: `Video is not found`, data: videoId });
+    res.status(400).json({ message: `Video is not found`, data: id });
 
     return;
   }
@@ -65,14 +65,22 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
   }
 
   await Promise.all([
-    database.ref('videos').child('basic').child(videoId).update({
+    async () => {
+      const basicTitleRef = database.ref('videos').child('basic').child(id).child('title');
+      const basicTitle = await basicTitleRef.once('value');
+
+      if (!basicTitle) {
+        await basicTitleRef.set(title || '');
+      }
+    },
+    database.ref('videos').child('basic').child(id).update({
       publishedAt: +new Date(publishedAt || ''),
     }),
-    database.ref('videos').child('original').child(videoId).set({
+    database.ref('videos').child('original').child(id).set({
       title: title || '',
       description: description || '',
     }),
-    database.ref('videos').child('statistics').child(videoId).set({
+    database.ref('videos').child('statistics').child(id).set({
       viewCount: +(statistics?.viewCount || 0),
       likeCount: +(statistics?.likeCount || 0),
       commentCount: +(statistics?.commentCount || 0),
@@ -88,12 +96,12 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
       attachments: [
         {
           fallback: `[NEW VIDEO] ${title}`,
-          pretext: `モナ・リザの戯言チャンネルに動画が投稿されました\nhttps://www.youtube.com/watch?v=${videoId}`,
+          pretext: `モナ・リザの戯言チャンネルに動画が投稿されました\nhttps://www.youtube.com/watch?v=${id}`,
           color: '#FC0006',
           fields: [
             {
               title,
-              value: `<https://admin-monalisatalk-fan-site.web.app/authorized/videos/${videoId}|管理画面で動画情報情報を編集する>`,
+              value: `<https://admin-monalisatalk-fan-site.web.app/authorized/videos/${id}|管理画面で動画情報情報を編集する>`,
               short: false,
             },
           ],
@@ -107,7 +115,7 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
   res.status(200).json({
     message: 'Video updated',
     data: {
-      id: videoId,
+      id: id,
       title,
       publishedAt
     },

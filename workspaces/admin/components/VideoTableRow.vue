@@ -8,7 +8,7 @@
     </td>
     <td>
       <template v-if="isLoading">Loading...</template>
-      <template v-else>{{displayedTitle}}</template>
+      <template v-else>{{title}}</template>
       <div class="table-links">
         <a :href="`//www.monalisatalk-fan.site/?id=${id}`" target="_blank" rel="noreferrer noopener">View on monalisatalk-fan.site</a>
         <div class="bullet"></div>
@@ -27,7 +27,7 @@ import { useDatabase } from '@/composables/useDatabase';
 
 export type VideoTableRow = {
   id: string;
-  title?: string;
+  title: string;
   publishedAt: number;
 };
 
@@ -40,7 +40,7 @@ export default defineComponent({
     },
     title: {
       type: String,
-      default: null,
+      required: true,
     },
     publishedAt: {
       type: Number,
@@ -48,22 +48,11 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const database = useDatabase();
-    const originalTitle = ref('');
     const isLoading = ref(true);
-    const displayedTitle = computed(() => props.title || originalTitle.value);
     const displayedDate = computed(() => new Intl.DateTimeFormat('ja').format(new Date(props.publishedAt)));
-
-    onMounted(async () => {
-      const snapshot = await database.ref('videos').child('original').child(props.id).child('title').once('value');
-
-      isLoading.value = false;
-      originalTitle.value = snapshot.val() || '';
-    });
 
     return {
       isLoading,
-      displayedTitle,
       displayedDate,
     };
   },

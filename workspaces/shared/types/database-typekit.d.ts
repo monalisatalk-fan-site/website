@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
 /** 型安全な firebase.database.Reference を定義する */
-export type DefineTypedReference<Structure extends unknown> = Omit<firebase.database.Reference, 'child' | 'key' | 'set' | 'update' | 'ref' | 'on' | 'once'> & Structure extends Record<string, unknown>
+export type DefineTypedReference<Structure extends unknown, Root = false> = Omit<firebase.database.Reference, 'child' | 'key' | 'set' | 'update' | 'ref' | 'on' | 'once'> & Structure extends Record<string, unknown>
   ? {
     child<Path extends PickChildKeys<Structure>>(path: Path): DefineTypedReference<PickChunkFromPath<Structure, Path>>;
     key: string;
@@ -9,7 +9,7 @@ export type DefineTypedReference<Structure extends unknown> = Omit<firebase.data
     // parent(): void;
     set: DefineSetterMethod<Structure>;
     update: DefineSetterMethod<Partial<Structure>>;
-    ref<Path extends DefineReferencePath<Structure>>(path: Path): DefineTypedReference<PickChunkFromPath<Structure, Path>>;
+    ref<Path extends DefineReferencePath<Structure>>(path: Root extends true ? Path : never): Root extends true ? DefineTypedReference<PickChunkFromPath<Structure, Path>>: never;
     on(
       eventType: firebase.database.EventType,
       callback: (snapshot: DefineTypedDataSnapshot<Structure>, b?: string | null) => any,
