@@ -38,6 +38,9 @@
                     allowfullscreen
                   ></iframe>
                 </div>
+                <a :href="`https://www.youtube.com/watch?v=${videoDetail.id}`" class="btn btn-icon icon-left mt-2">
+                  <AppIcon name="bland-youtube" /> Open in YouTube
+                </a>
               </template>
             </AppCard>
           </div>
@@ -188,6 +191,7 @@ export default defineComponent({
 .youtube-player {
   position: relative;
   width: calc(100% + 50px);
+  margin-top: -20px;
   margin-left: -25px;
 }
 

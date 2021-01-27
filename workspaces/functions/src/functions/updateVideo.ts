@@ -22,7 +22,7 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
   }
 
   const { url } = req.body;
-  const matches = /youtube\.com\/v\/([^/?#]+)/.exec(url);
+  const matches = /\/watch\?v=([^/?#]+)/.exec(url);
 
   if (!matches) {
 
