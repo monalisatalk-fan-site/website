@@ -136,7 +136,7 @@ export default defineComponent({
     AppTagsInput: () => import('@/components/AppTagsInput.vue'),
   },
   setup() {
-    const { route } = useContext();
+    const { route, redirect } = useContext();
     const database = useDatabase();
     const store = useStore();
     const title = ref('');
@@ -210,6 +210,38 @@ export default defineComponent({
           label: voiceActor.name,
         };
       }).filter(<T>(voiceActor: T): voiceActor is NonNullable<T> => voiceActor != null);
+    }, { immediate: true });
+
+    watch([nextVideo, previousVideo], (_value, _oldValue, onInvalidate) => {
+      // Cmd + [ or ] で前後のビデオに移動する
+      const onKeydown = (event: KeyboardEvent): void => {
+        if (!event.metaKey) {
+          return;
+        }
+
+        switch (event.key) {
+          case '[':
+            redirect({
+              path: `/authorized/videos/${nextVideo.value.id}`,
+              replace: false,
+            });
+
+            break;
+          case ']':
+            redirect({
+              path: `/authorized/videos/${previousVideo.value.id}`,
+              replace: false,
+            });
+
+            break;
+        }
+      };
+
+      window.addEventListener('keydown', onKeydown);
+
+      onInvalidate(() => {
+        window.removeEventListener('keydown', onKeydown);
+      });
     }, { immediate: true });
 
     return {
