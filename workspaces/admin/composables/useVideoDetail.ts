@@ -17,14 +17,14 @@ export type VideoDetail = {
 };
 
 export const isVideoDetail = <T extends Partial<VideoDetail>>(value: T): value is Required<T> => {
-  return !!(
-    value.id &&
-    value.title &&
-    value.publishedAt &&
-    value.original &&
-    value.actors &&
-    value.tags &&
-    value.voiceActors
+  return (
+    value.id != null &&
+    value.title != null &&
+    value.publishedAt != null &&
+    value.original != null &&
+    value.actors != null &&
+    value.tags != null &&
+    value.voiceActors != null
   );
 };
 
@@ -65,8 +65,6 @@ export const useVideoDetail = (id: Ref<string>) => {
   watch(id, async (_value, _oldValue, onInvalidate) => {
     const snapshot = await database.ref('videos').child('additional').child(id.value).once('value');
     const value = snapshot.val();
-
-    console.log(value);
 
     loadingStack.value.push(true);
 

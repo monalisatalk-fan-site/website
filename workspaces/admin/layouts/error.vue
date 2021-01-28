@@ -46,8 +46,6 @@ export default defineComponent({
   setup(props) {
     const { user, isLoading } = useAuthState();
 
-    console.log(props);
-
     return {
       user,
       isLoading,

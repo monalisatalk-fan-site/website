@@ -212,15 +212,17 @@ export default defineComponent({
       }).filter(<T>(voiceActor: T): voiceActor is NonNullable<T> => voiceActor != null);
     }, { immediate: true });
 
-    watch([nextVideo, previousVideo], (_value, _oldValue, onInvalidate) => {
-      // Cmd + [ or ] で前後のビデオに移動する
-      const onKeydown = (event: KeyboardEvent): void => {
+    watch([nextVideo, previousVideo, () => saveChanges], (_value, _oldValue, onInvalidate) => {
+      const onKeydown = async (event: KeyboardEvent): Promise<void> => {
         if (!event.metaKey) {
           return;
         }
 
         switch (event.key) {
+          // Cmd + [ or ] で前後のビデオに移動する
           case '[':
+            event.preventDefault();
+
             redirect({
               path: `/authorized/videos/${nextVideo.value.id}`,
               replace: false,
@@ -228,10 +230,18 @@ export default defineComponent({
 
             break;
           case ']':
+            event.preventDefault();
+
             redirect({
               path: `/authorized/videos/${previousVideo.value.id}`,
               replace: false,
             });
+
+            break;
+          case 'Enter':
+            event.preventDefault();
+
+            await saveChanges();
 
             break;
         }
