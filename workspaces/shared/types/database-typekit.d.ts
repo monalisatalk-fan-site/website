@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
 /** 型安全な firebase.database.Reference を定義する */
-export type DefineTypedReference<Structure extends unknown, Root = false> = Omit<firebase.database.Reference, 'child' | 'key' | 'set' | 'update' | 'ref' | 'on' | 'once'> & Structure extends Record<string, unknown>
+export type DefineTypedReference<Structure extends unknown, Root = false> = Omit<firebase.database.Reference, 'child' | 'key' | 'set' | 'update' | 'ref' | 'on' | 'once' | 'off'> & Structure extends Record<string, unknown>
   ? {
     child<Path extends PickChildKeys<Structure>>(path: Path): DefineTypedReference<PickChunkFromPath<Structure, Path>>;
     key: string;
@@ -22,6 +22,11 @@ export type DefineTypedReference<Structure extends unknown, Root = false> = Omit
       cancelCallbackOrContext?: ((error: Error) => any) | Object | null,
       context?: Object | null,
     ): Promise<DefineTypedDataSnapshot<Structure>>;
+    off(
+      eventType?: firebase.database.EventType,
+      callback?: (a: DefineTypedDataSnapshot<Structure>, b?: string | null) => any,
+      context?: Object | null
+    ): void;
   }
   : {
     child(path: never): never;
@@ -43,12 +48,17 @@ export type DefineTypedReference<Structure extends unknown, Root = false> = Omit
       cancelCallbackOrContext?: ((error: Error) => any) | Object | null,
       context?: Object | null,
     ): Promise<DefineTypedDataSnapshot<Structure>>;
+    off(
+      eventType?: firebase.database.EventType,
+      callback?: (a: DefineTypedDataSnapshot<Structure>, b?: string | null) => any,
+      context?: Object | null
+    ): void;
   };
 
 /** 設定値を実際のデータ型に変換する */
 export type ConvertTypeToActualData<Value extends unknown> = Value extends Record<string, unknown>
   ? {
-    [K in keyof Value as K extends `$${string}` ? string : K]: ConvertTypeToActualData<Value[K]>;
+    [K in keyof Value as K extends `$${string}` ? string | number : K]: ConvertTypeToActualData<Value[K]>;
   }
   : Value;
 

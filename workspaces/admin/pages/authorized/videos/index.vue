@@ -63,7 +63,7 @@ export default defineComponent({
   setup() {
     const { app } = useContext();
     const isLoadingUpdateVideos = ref(false);
-    const [basicVideoList, isLoading, invalidate] = useBasicVideoList();
+    const [basicVideoList, isLoading] = useBasicVideoList();
     const videoTableRows = computed((): VideoTableRow[] => basicVideoList.value);
 
     const updateVideos = async () => {
@@ -73,8 +73,6 @@ export default defineComponent({
         const captureVideosOnTheChannel = app.$fire.functions.httpsCallable('captureVideosOnTheChannel');
 
         await captureVideosOnTheChannel();
-
-        await invalidate();
       } finally {
         isLoadingUpdateVideos.value = false;
       }

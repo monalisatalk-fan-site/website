@@ -69,10 +69,8 @@ export type DatabaseStructure = {
   };
   /** 声優情報 */
   voiceActors: {
-    basic: {
-      $voiceActorId: {
-        name: string;
-      };
+    $voiceActorId: {
+      name: string;
     };
   };
 };

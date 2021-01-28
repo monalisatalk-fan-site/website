@@ -25,9 +25,6 @@
         <div class="row">
           <div class="col-sm-4">
             <AppCard>
-              <template #header>
-                <h4>Player</h4>
-              </template>
               <template #body>
                 <div class="youtube-player">
                   <iframe
@@ -39,8 +36,16 @@
                   ></iframe>
                 </div>
                 <a :href="`https://www.youtube.com/watch?v=${videoDetail.id}`" class="btn btn-icon icon-left mt-2">
-                  <AppIcon name="bland-youtube" /> Open in YouTube
+                  <AppIcon name="open" /> Open in YouTube
                 </a>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Published Date</th>
+                      <td>{{formatDate(videoDetail.publishedAt)}}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </template>
             </AppCard>
           </div>
@@ -91,6 +96,17 @@
                       </div>
                     </div>
                   </div>
+                  <div class="form-group row align-items-center">
+                    <label for="originalDescription" class="form-control-label col-sm-3 text-md-right">Voice Actor</label>
+                    <div class="col-sm-6 col-md-9">
+                      <div class="input-group">
+                        <AppTagsInput
+                          v-model="voiceActors"
+                          :tags="voiceActorTags"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </template>
                 <template #footer>
                   <div class="text-right">
@@ -108,7 +124,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, useContext, watch } from '@nuxtjs/composition-api';
-import { useVideoDetail, useDatabase, useBasicVideoList } from '@/composables';
+import type { TagsInputValue, TagsInputTag } from '@/components/AppTagsInput.vue';
+import { useVideoDetail, useDatabase, useBasicVideoList, useStore } from '@/composables';
 
 export default defineComponent({
   name: 'VideoDetailPage',
@@ -116,16 +133,23 @@ export default defineComponent({
     SectionHeader: () => import('@/components/SectionHeader.vue'),
     AppCard: () => import('@/components/AppCard.vue'),
     AppIcon: () => import('@/components/AppIcon.vue'),
+    AppTagsInput: () => import('@/components/AppTagsInput.vue'),
   },
   setup() {
     const { route } = useContext();
     const database = useDatabase();
+    const store = useStore();
     const title = ref('');
     const description = ref('');
+    const voiceActors = ref<TagsInputValue[]>([]);
     const isUpdating = ref(false);
     const videoId = computed(() => route.value.params.videoId);
     const [videoDetail, isLoading] = useVideoDetail(videoId);
     const [basicVideoList] = useBasicVideoList();
+    const voiceActorTags = computed((): TagsInputTag[] => store.state.video.voiceActorList.map(({ id, name }) => ({
+      id,
+      label: name,
+    })));
     const nextVideo = computed(() => {
       const index = basicVideoList.value.findIndex(({ id }) => id === videoId.value);
 
@@ -145,13 +169,25 @@ export default defineComponent({
       description.value = videoDetail.value?.original.description || ''
     };
 
+    const formatDate = (value: number) => {
+      return new Intl.DateTimeFormat('ja').format(new Date(value));
+    }
+
     const saveChanges = async () => {
       try {
         isUpdating.value = true;
 
+        const addVoiceActors = voiceActors.value.filter(({ label }) => label).map(({ id, label }) => (
+          // @ts-expect-error
+          database.ref('voiceActors').child(id).set({ name: label })
+        ));
+
         await Promise.all([
+          ...addVoiceActors,
           database.ref('videos').child('basic').child(videoId.value).update({ title: title.value }),
           database.ref('videos').child('additional').child(videoId.value).update({ description: description.value }),
+          // @ts-expect-error
+          database.ref('videos').child('voiceActors').child(videoId.value).set(Object.fromEntries(voiceActors.value.map(({ id }) => [id, true])))
         ]);
       } finally {
         isUpdating.value = false;
@@ -161,11 +197,25 @@ export default defineComponent({
     watch(videoDetail, () => {
       title.value = videoDetail.value?.title || '';
       description.value = videoDetail.value?.description || '';
+      voiceActors.value = (videoDetail.value?.voiceActors || []).map((id) => {
+        const { voiceActorList } = store.state.video;
+        const voiceActor = voiceActorList.find((voiceActor) => voiceActor.id === id);
+
+        if (!voiceActor) {
+          return;
+        }
+
+        return {
+          id,
+          label: voiceActor.name,
+        };
+      }).filter(<T>(voiceActor: T): voiceActor is NonNullable<T> => voiceActor != null);
     }, { immediate: true });
 
     return {
       title,
       description,
+      voiceActors,
       isUpdating,
       videoId,
       videoDetail,
@@ -174,6 +224,8 @@ export default defineComponent({
       previousVideo,
       pasteTitle,
       pasteDescription,
+      formatDate,
+      voiceActorTags,
       saveChanges,
     };
   },
