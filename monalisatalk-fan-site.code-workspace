@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "workspaces/www"
+		},
+		{
+			"path": "workspaces/admin"
+		},
+		{
+			"path": "workspaces/shared"
+		},
+		{
+			"path": "workspaces/functions"
+		},
+		{
+			"path": "workspaces/design"
+		}
+	],
+	"settings": {}
+}
