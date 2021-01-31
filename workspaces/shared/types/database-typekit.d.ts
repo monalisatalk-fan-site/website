@@ -68,9 +68,16 @@ export type DefineSetterMethod<Value extends unknown> = {
   (value: ConvertTypeToActualData<Value>, onComplete?: (error: Error | null) => any): Promise<any>;
 };
 
+/** データ構造をデータの型に変換する */
+export type ToData<Value extends unknown> = Value extends Record<string, unknown>
+  ? {
+    [K in keyof Value as (K extends `$${string}` ? string : K)]: ToData<Value[K]>;
+  }
+  : Value;
+
 /** 型安全な firebase.database.DataSnapshot 型を定義する */
 export type DefineTypedDataSnapshot<Value extends unknown> = Omit<firebase.database.DataSnapshot, 'val'> & {
-  val(): Value | null;
+  val(): ToData<Value> | null;
 };
 
 /** 型が完全に一致するか */
