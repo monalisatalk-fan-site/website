@@ -19,5 +19,7 @@
 			"path": "workspaces/design"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"xd.globalEditor": false
+	}
 }

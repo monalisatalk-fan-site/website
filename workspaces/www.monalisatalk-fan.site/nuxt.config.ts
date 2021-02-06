@@ -42,7 +42,14 @@ const config: NuxtConfig = {
       },
     },
   },
-  css: ['@/assets/styles/global.pcss'],
+  css: ['reset-css', '@/assets/styles/global.pcss'],
+  vue: {
+    // @ts-expect-error
+    config: {
+      productionTip: false,
+      ignoredElements: ['ion-icon'],
+    }
+  },
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api'],
   modules: [
     '@nuxtjs/firebase',
