@@ -1,0 +1,23 @@
+{
+  "name": "www.monalisatalk-fan.site",
+  "version": "1.0.0",
+  "dependencies": {
+    "@nuxt/typescript-runtime": "^2.0.1",
+    "@nuxtjs/composition-api": "^0.19.0",
+    "@nuxtjs/firebase": "^7.4.1",
+    "firebase": "^8.2.5",
+    "nuxt": "^2.14.12",
+    "reset-css": "^5.0.1"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.14.12",
+    "@nuxt/typescript-build": "^2.0.4",
+    "@types/mkdirp": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "mkdirp": "^1.0.4"
+  },
+  "scripts": {
+    "dev": "nuxt-ts dev",
+    "build": "nuxt-ts generate"
+  }
+}

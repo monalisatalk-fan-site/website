@@ -4,13 +4,13 @@
 			"path": "."
 		},
 		{
-			"path": "workspaces/www"
-		},
-		{
-			"path": "workspaces/admin"
-		},
-		{
 			"path": "workspaces/shared"
+		},
+		{
+			"path": "workspaces/www.monalisatalk-fan.site"
+		},
+		{
+			"path": "workspaces/admin.monalisatalk-fan.site"
 		},
 		{
 			"path": "workspaces/functions"
@@ -18,8 +18,5 @@
 		{
 			"path": "workspaces/design"
 		}
-	],
-	"settings": {
-		"xd.globalEditor": false
-	}
+	]
 }
