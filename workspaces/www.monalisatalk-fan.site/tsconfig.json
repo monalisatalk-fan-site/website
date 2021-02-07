@@ -3,7 +3,7 @@
     "lib": ["DOM", "ESNext", "WebWorker"],
     "target": "ES2020",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "strict": true,
@@ -16,5 +16,11 @@
     ],
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "static/*"]
+  "exclude": ["node_modules/*", "__sapper__/*", "static/*"],
+  "references": [
+    {
+      "path": "../shared",
+      "prepare": true,
+    }
+  ]
 }

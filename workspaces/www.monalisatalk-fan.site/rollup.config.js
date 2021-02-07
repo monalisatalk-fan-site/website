@@ -7,11 +7,24 @@ import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
+import dotenv from 'dotenv';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 
-const mode = process.env.NODE_ENV;
-const dev = mode === 'development';
+dotenv.config();
+
+const {
+  NODE_ENV,
+  FIREBASE_API_KEY,
+  FIREBASE_AUTH_DOMAIN,
+  FIREBASE_DATABASE_URL,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_STORAGE_BUCKET,
+  FIREBASE_MESSAGING_SENDER_ID,
+  FIREBASE_APP_ID,
+  FIREBASE_MEASUREMENT_ID,
+} = process.env;
+const dev = NODE_ENV === 'development';
 
 const onwarn = (warning, onwarn) =>
 	(warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message)) ||
@@ -26,7 +39,19 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+        process: JSON.stringify({
+          env: {
+            NODE_ENV,
+            FIREBASE_API_KEY,
+            FIREBASE_AUTH_DOMAIN,
+            FIREBASE_DATABASE_URL,
+            FIREBASE_PROJECT_ID,
+            FIREBASE_STORAGE_BUCKET,
+            FIREBASE_MESSAGING_SENDER_ID,
+            FIREBASE_APP_ID,
+            FIREBASE_MEASUREMENT_ID,
+          },
+        }),
 			}),
 			svelte({
 				preprocess: sveltePreprocess({ sourceMap: dev }),
@@ -61,7 +86,7 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': false,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
 			}),
 			svelte({
 				preprocess: sveltePreprocess({ sourceMap: dev }),
@@ -96,7 +121,7 @@ export default {
 			resolve(),
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode)
+				'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
 			}),
 			commonjs(),
 			typescript({ sourceMap: dev }),
