@@ -1,20 +1,20 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "esnext"],
-    "target": "esnext",
-    "module": "esnext",
+    "lib": ["DOM", "ESNext", "WebWorker"],
+    "target": "ES2020",
+    "module": "ESNext",
     "moduleResolution": "node",
-    "experimentalDecorators": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "strict": true,
     "noImplicitAny": true,
     "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["src/*"]
-    }
+    "skipLibCheck": true,
+    "types": [
+      "node",
+      "svelte"
+    ],
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/*", "__sapper__/*", "static/*"]
 }
