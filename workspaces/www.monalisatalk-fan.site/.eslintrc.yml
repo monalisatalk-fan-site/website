@@ -1,0 +1,15 @@
+root: true
+env:
+  browser: true
+  node: true
+extends:
+  - standard
+  - plugin:@typescript-eslint/recommended
+  - plugin:react/recommended
+  - plugin:react-hooks/recommended
+  - prettier
+  - prettier/@typescript-eslint
+  - prettier/react
+  - prettier/prettier
+rules:
+  no-use-before-define: 'off'

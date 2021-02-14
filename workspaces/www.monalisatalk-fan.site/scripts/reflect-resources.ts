@@ -1,13 +1,13 @@
-import firebase from 'firebase';
-import path from 'path';
-import fs from 'fs';
-import dotenv from 'dotenv';
-import { ResourcesJson } from '../src/types';
-import { TypedDatabase } from '../../shared/types/database';
+import firebase from "firebase";
+import path from "path";
+import fs from "fs";
+import dotenv from "dotenv";
+import { ResourcesJson } from "../src/types";
+import { TypedDatabase } from "../../shared/types/database";
 
-dotenv.config({ path: path.join(__dirname, '../.env') });
+dotenv.config({ path: path.join(__dirname, "../.env") });
 
-const DIST_PATH = path.join(__dirname, '../src/constants/resources.ts');
+const DIST_PATH = path.join(__dirname, "../src/constants/resources.ts");
 
 const app = firebase.initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
@@ -22,12 +22,12 @@ const app = firebase.initializeApp({
 
 const database = (app.database() as unknown) as TypedDatabase;
 
-const parseVideos = async (): Promise<ResourcesJson['videos']> => {
-  const snapshot = await database.ref('videos').once('value');
+const parseVideos = async (): Promise<ResourcesJson["videos"]> => {
+  const snapshot = await database.ref("videos").once("value");
   const value = snapshot.val();
 
   if (!value) {
-    throw new Error('videos/ のデータを参照できませんでした');
+    throw new Error("videos/ のデータを参照できませんでした");
   }
 
   return Object.entries(value.basic)
@@ -55,26 +55,22 @@ const parseVideos = async (): Promise<ResourcesJson['videos']> => {
     .sort((a, b) => b.publishedAt - a.publishedAt);
 };
 
-const parseVoiceActors = async (): Promise<ResourcesJson['voiceActors']> => {
-  const snapshot = await database.ref('voiceActors').once('value');
+const parseVoiceActors = async (): Promise<ResourcesJson["voiceActors"]> => {
+  const snapshot = await database.ref("voiceActors").once("value");
   const value = snapshot.val();
 
   if (!value) {
-    throw new Error('voiceActors/ のデータを参照できませんでした');
+    throw new Error("voiceActors/ のデータを参照できませんでした");
   }
 
-  return Object.entries(value)
-    .map(([id, { name }]) => ({
-      id,
-      name
-    }));
+  return Object.entries(value).map(([id, { name }]) => ({
+    id,
+    name,
+  }));
 };
 
 (async () => {
-  const [
-    videos,
-    voiceActors,
-  ] = await Promise.all([
+  const [videos, voiceActors] = await Promise.all([
     parseVideos(),
     parseVoiceActors(),
   ]);
@@ -87,9 +83,19 @@ const parseVoiceActors = async (): Promise<ResourcesJson['voiceActors']> => {
     voiceActors,
   };
 
-  const file = `/**\n * @file このファイルは自動生成されたものです。scripts/reflect-resources.ts を実行して更新してください。\n */\n/* eslint-disable */\nimport { ResourcesJson } from '../types';\n\nexport const resources: ResourcesJson = ${JSON.stringify(json, null, '  ')};`;
+  const file = `/**\n * @file このファイルは自動生成されたものです。scripts/reflect-resources.ts を実行して更新してください。\n */\n/* eslint-disable */\nimport { ResourcesJson } from '../types';\n\nexport const resources: ResourcesJson = ${JSON.stringify(
+    json,
+    null,
+    "  "
+  )};`;
 
-  fs.writeFileSync('algolia-data.json', JSON.stringify(videos.map(({ id, ...video }) => ({ objectID: id, ...video }))), 'utf-8');
+  fs.writeFileSync(
+    "algolia-data.json",
+    JSON.stringify(
+      videos.map(({ id, ...video }) => ({ objectID: id, ...video }))
+    ),
+    "utf-8"
+  );
 
-  fs.writeFileSync(DIST_PATH, file, 'utf-8');
+  fs.writeFileSync(DIST_PATH, file, "utf-8");
 })();
