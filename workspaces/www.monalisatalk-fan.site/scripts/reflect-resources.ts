@@ -2,12 +2,38 @@ import firebase from "firebase";
 import path from "path";
 import fs from "fs";
 import dotenv from "dotenv";
-import { ResourcesJson } from "../src/types";
 import { TypedDatabase } from "../../shared/types/database";
 
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
-const DIST_PATH = path.join(__dirname, "../src/constants/resources.ts");
+type ResourcesJson = {
+  videos: Array<{
+    id: string;
+    title: string;
+    description?: string;
+    publishedAt: number;
+    actors: string[];
+    tags: string[];
+    voiceActors: string[];
+    statistics: {
+      viewCount: number;
+      likeCount: number;
+      updatedAt: number;
+    };
+  }>;
+  actors: Array<{
+    id: string;
+    name: string;
+    color: string;
+    textColor: string;
+  }>;
+  voiceActors: Array<{
+    id: string;
+    name: string;
+  }>;
+};
+
+const DIST_PATH = path.join(__dirname, "../assets/data/resources.json");
 
 const app = firebase.initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
