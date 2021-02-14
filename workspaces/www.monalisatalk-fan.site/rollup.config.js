@@ -23,6 +23,8 @@ const {
   FIREBASE_MESSAGING_SENDER_ID,
   FIREBASE_APP_ID,
   FIREBASE_MEASUREMENT_ID,
+  ALGOLIA_APPLICATION_ID,
+  ALGOLIA_SEARCH_ONLY_API_KEY,
 } = process.env;
 const dev = NODE_ENV === 'development';
 
@@ -50,6 +52,8 @@ export default {
             FIREBASE_MESSAGING_SENDER_ID,
             FIREBASE_APP_ID,
             FIREBASE_MEASUREMENT_ID,
+            ALGOLIA_APPLICATION_ID,
+            ALGOLIA_SEARCH_ONLY_API_KEY,
           },
         }),
 			}),
@@ -66,6 +70,7 @@ export default {
 			}),
 			resolve({
 				browser: true,
+        preferBuiltins: true,
 				dedupe: ['svelte']
 			}),
 			commonjs(),

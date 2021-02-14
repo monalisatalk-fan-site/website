@@ -7,8 +7,7 @@ import { TypedDatabase } from '../../shared/types/database';
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
-const FILE_NAME = 'resources.json';
-const DIST_PATH = path.join(__dirname, '../static', FILE_NAME);
+const DIST_PATH = path.join(__dirname, '../src/constants/resources.ts');
 
 const app = firebase.initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
@@ -52,7 +51,8 @@ const parseVideos = async (): Promise<ResourcesJson['videos']> => {
         voiceActors,
         statistics,
       };
-    });
+    })
+    .sort((a, b) => b.publishedAt - a.publishedAt);
 };
 
 const parseVoiceActors = async (): Promise<ResourcesJson['voiceActors']> => {
@@ -87,5 +87,9 @@ const parseVoiceActors = async (): Promise<ResourcesJson['voiceActors']> => {
     voiceActors,
   };
 
-  fs.writeFileSync(DIST_PATH, JSON.stringify(json), 'utf-8');
+  const file = `/**\n * @file このファイルは自動生成されたものです。scripts/reflect-resources.ts を実行して更新してください。\n */\n/* eslint-disable */\nimport { ResourcesJson } from '../types';\n\nexport const resources: ResourcesJson = ${JSON.stringify(json, null, '  ')};`;
+
+  fs.writeFileSync('algolia-data.json', JSON.stringify(videos.map(({ id, ...video }) => ({ objectID: id, ...video }))), 'utf-8');
+
+  fs.writeFileSync(DIST_PATH, file, 'utf-8');
 })();

@@ -1,3 +1,2 @@
-@mixin red-text {
-  color: #f00;
-}
+@import 'mixins/layout';
+@import 'mixins/media';
