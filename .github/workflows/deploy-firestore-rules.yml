@@ -1,0 +1,23 @@
+name: Deploy Firebase Firestore rules
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - firestore.rules
+env:
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  PROJECT_ID: default
+
+jobs:
+  deploy-functions:
+    name: Deploy Firebase Firestore rules
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only firestore:rules

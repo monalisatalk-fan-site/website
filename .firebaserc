@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "monalisatalk-fan-site"
+  },
+  "targets": {
+    "monalisatalk-fan-site": {
+      "hosting": {
+        "www": [
+          "monalisatalk-fan-site"
+        ],
+        "admin": [
+          "admin-monalisatalk-fan-site"
+        ]
+      }
+    }
+  }
+}

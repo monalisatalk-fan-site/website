@@ -1,0 +1,44 @@
+{
+  "name": "www.monalisatalk-fan.site",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "reflect-resources": "ts-node --project scripts/tsconfig.json scripts/reflect-resources",
+    "dev": "next dev -p 4000",
+    "build": "next build && next export",
+    "lint:js": "run-s lint:js:prettier lint:js:eslint",
+    "lint:js:prettier": "prettier --write \"**/*.{ts,tsx}\"",
+    "lint:js:eslint": "eslint --ext ts,tsx --fix .",
+    "lint:css": "stylelint \"**/*.pcss\""
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "next": "^10.0.6",
+    "react": "^17.0.1",
+    "react-aria": "^3.3.0",
+    "react-dom": "^17.0.1",
+    "react-stately": "^3.2.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.15.0",
+    "@typescript-eslint/parser": "^4.15.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1",
+    "reset-css": "^5.0.1",
+    "stylelint": "^13.10.0",
+    "stylelint-config-recess-order": "^2.3.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-rscss": "^0.4.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5"
+  }
+}

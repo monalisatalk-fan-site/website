@@ -1,0 +1,16 @@
+{
+  "name": "monalisatalk-fan.site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint:css": "stylelint \"**/*.scss\"",
+    "lint:js": "eslint --ext ts,vue .",
+    "wf": "yarn workspace functions",
+    "wa": "yarn workspace admin.monalisatalk-fan.site",
+    "ws": "yarn workspace shared",
+    "ww": "yarn workspace www.monalisatalk-fan.site"
+  },
+  "workspaces": [
+    "workspaces/*"
+  ]
+}
