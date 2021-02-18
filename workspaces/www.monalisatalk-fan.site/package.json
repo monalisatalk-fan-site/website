@@ -5,6 +5,7 @@
   "scripts": {
     "reflect-resources": "ts-node --project scripts/tsconfig.json scripts/reflect-resources",
     "dev": "next dev -p 4000",
+    "build": "next build && next export",
     "lint:js": "run-s lint:js:prettier lint:js:eslint",
     "lint:js:prettier": "prettier --write \"**/*.{ts,tsx}\"",
     "lint:js:eslint": "eslint --ext ts,tsx --fix .",

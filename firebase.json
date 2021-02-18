@@ -11,7 +11,7 @@
   "hosting": [
     {
       "target": "admin",
-      "public": "workspaces/admin/dist",
+      "public": "workspaces/admin.monalisatalk-fan.site/dist",
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -24,7 +24,7 @@
     },
     {
       "target": "www",
-      "public": "workspaces/www/dist",
+      "public": "workspaces/www.monalisatalk-fan.site/out",
       "ignore": [
         "firebase.json",
         "**/.*",
