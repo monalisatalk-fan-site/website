@@ -1,8 +1,6 @@
-name: Deploy Firebase Hosting (www)
+name: Deploy Firebase Hosting (www-preview-channel)
 on:
-  push:
-    branches:
-      - main
+  pull_request:
     paths:
       - workspaces/www.monalisatalk-fan.site/**.tsx
       - workspaces/www.monalisatalk-fan.site/**.ts

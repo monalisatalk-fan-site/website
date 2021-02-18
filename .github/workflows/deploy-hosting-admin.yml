@@ -4,11 +4,11 @@ on:
     branches:
       - develop
     paths:
-      - workspaces/admin/**.vue
-      - workspaces/admin/**.ts
-      - workspaces/admin/**.scss
-      - workspaces/admin/package.json
-      - workspaces/admin/next.config.js
+      - workspaces/admin.monalisatalk-fan.site/**.vue
+      - workspaces/admin.monalisatalk-fan.site/**.ts
+      - workspaces/admin.monalisatalk-fan.site/**.scss
+      - workspaces/admin.monalisatalk-fan.site/package.json
+      - workspaces/admin.monalisatalk-fan.site/next.config.js
       - .github/workflows/deploy-hosting-admin.yml
 env:
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
