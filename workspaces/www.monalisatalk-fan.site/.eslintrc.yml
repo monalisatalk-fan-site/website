@@ -11,5 +11,8 @@ extends:
   - prettier/@typescript-eslint
   - prettier/react
   - prettier/prettier
+settings:
+  react:
+    version: detect
 rules:
   no-use-before-define: 'off'

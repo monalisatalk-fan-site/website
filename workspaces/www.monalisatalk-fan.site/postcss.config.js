@@ -9,6 +9,7 @@ module.exports = {
           'gap-properties': true,
           'matches-pseudo-class': true,
           'media-query-ranges': true,
+          'nesting-rules': true,
           'not-pseudo-class': true,
           'overflow-shorthand-property': true,
         },

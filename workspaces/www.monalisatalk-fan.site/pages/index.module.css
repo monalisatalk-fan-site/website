@@ -1,0 +1,20 @@
+.indexPage {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 16px;
+  background-image: var(--gradient-background);
+
+  & > .logo {
+    width: 240px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  & > .message {
+    margin-top: 32px;
+  }
+}

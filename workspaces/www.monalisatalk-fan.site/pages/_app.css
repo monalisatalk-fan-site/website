@@ -1,0 +1,18 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 1.4rem;
+  color: var(--color-text-basic);
+}
+
+a,
+input,
+textarea,
+button {
+  font: inherit;
+  color: inherit;
+  text-decoration: inherit;
+}
