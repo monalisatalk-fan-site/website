@@ -6,6 +6,7 @@
   padding-top: var(--margin-4x);
 
   & > .heading {
+    display: flex;
     margin-bottom: var(--margin-2x);
   }
 
@@ -17,5 +18,9 @@
       height: 20px;
       margin: 0 auto;
     }
+  }
+
+  & > .heading.Right > .image {
+    margin-left: auto;
   }
 }
