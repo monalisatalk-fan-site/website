@@ -11,10 +11,10 @@
 
   & > .heading > .image {
     display: block;
-    height: 48px;
+    height: 28px;
 
     @media (--small-viewport) {
-      height: 32px;
+      height: 20px;
       margin: 0 auto;
     }
   }
