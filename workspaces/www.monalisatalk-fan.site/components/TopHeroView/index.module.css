@@ -44,7 +44,7 @@
 }
 
 .topHeroViewThumbnails {
-  height: calc(var(--hero-thumbnail-height) * var(--margin-1x) * 2);
+  height: calc(var(--hero-thumbnail-height) * 3 + var(--margin-1x) * 2);
 
   & > .row {
     display: flex;

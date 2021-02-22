@@ -32,7 +32,7 @@
   }
 
   /** YouTube Thumbnail */
-  --thumbnail-aspect-ratio: calc(360 / 480);
+  --thumbnail-aspect-ratio: calc(480 / 270);
 
   /** Top Hero View */
   --hero-band-width: 320px;
@@ -40,7 +40,7 @@
   --hero-count-x-thumbnail: 10;
   --hero-count-thumbnail-y: 3;
   --hero-thumbnail-width: 300px;
-  --hero-thumbnail-height: calc(var(--hero-thumbnail-width) * var(--thumbnail-aspect-ratio));
+  --hero-thumbnail-height: calc(var(--hero-thumbnail-width) / var(--thumbnail-aspect-ratio));
 
   @media (width < 640px) {
     --hero-band-width: calc(32 / 48 * 320px);
