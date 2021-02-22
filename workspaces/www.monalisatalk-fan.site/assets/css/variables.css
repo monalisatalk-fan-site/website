@@ -1,3 +1,5 @@
+@import 'resources';
+
 :root {
   /** Margin sizes */
   --margin-base: 8px;
@@ -18,4 +20,33 @@
   --color-background-primary: #1b1b1b;
   --color-text-primary: #ccc;
   --gradient-background: linear-gradient(to top left, #abbaab, #fff);
+
+  /** Layouts */
+  --container-max-width: 1200px;
+
+  /** Components */
+
+  /** Global Header */
+  --header-height: 80px;
+
+  @media (--header-small-viewport) {
+    --header-height: 64px;
+  }
+
+  /** YouTube Thumbnail */
+  --thumbnail-aspect-ratio: calc(360 / 480);
+
+  /** Top Hero View */
+  --hero-band-width: 320px;
+  --hero-band-height: 48px;
+  --hero-count-x-thumbnail: 10;
+  --hero-count-thumbnail-y: 3;
+  --hero-thumbnail-width: 300px;
+  --hero-thumbnail-height: calc(var(--hero-thumbnail-width) * var(--thumbnail-aspect-ratio));
+
+  @media (--header-small-viewport) {
+    --hero-band-width: calc(32 / 48 * 320px);
+    --hero-band-height: 32px;
+    --hero-thumbnail-width: 240px;
+  }
 }

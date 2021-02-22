@@ -1,15 +1,9 @@
 .globalHeader {
-  --breakpoint-header: 860px;
   --color-header-background: #1e1f22;
-  --height-header: 80px;
-
-  @media (--header-small-viewport) {
-    --height-header: 64px;
-  }
 
   position: relative;
   z-index: 1;
-  height: var(--height-header);
+  height: var(--header-height);
 
   & > .header {
     position: fixed;
@@ -17,7 +11,7 @@
     left: 0;
     box-sizing: border-box;
     width: 100%;
-    height: var(--height-header);
+    height: var(--header-height);
     padding: 0 var(--margin-2x);
     background: var(--color-header-background);
   }

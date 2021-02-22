@@ -4,7 +4,7 @@
   }
 
   100% {
-    background-position: -320px center;
+    background-position: var(--hero-band-width) center;
   }
 }
 
@@ -14,19 +14,17 @@
   }
 
   100% {
-    transform: translate3d(-3160px, 0, 0);
+    transform: translate3d(calc((var(--hero-thumbnail-width) + var(--margin-1x) * 2) * 10 * -1), 0, 0);
   }
 }
 
 .topHeroView {
-  --height-band: 48px;
-
   overflow: hidden;
   background: var(--color-black);
 
   & > .band {
     width: 100%;
-    height: var(--height-band);
+    height: var(--hero-band-height);
     background: url(/images/top/hero/band.svg) center/contain repeat-x;
     transform: translate3d(0, 0, 0);
     animation: slide-band 5s linear infinite;
@@ -46,7 +44,7 @@
 }
 
 .topHeroViewThumbnails {
-  height: 522.25px;
+  height: calc(var(--hero-thumbnail-height) * var(--margin-1x) * 2);
 
   & > .row {
     display: flex;
@@ -63,7 +61,7 @@
 
   & > .row > .item {
     flex-shrink: 0;
-    width: 300px;
+    width: var(--hero-thumbnail-width);
     padding: 0 var(--margin-1x);
   }
 }

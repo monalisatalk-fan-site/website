@@ -42,7 +42,7 @@ export const TopHeroView: React.VFC = () => {
 
   return (
     <div className={styles.topHeroView}>
-      <div className={clsx(styles.band, styles.Red)}></div>
+      <div className={clsx(styles.band, styles.Reverse, styles.Red)}></div>
       <div className={styles.topHeroViewThumbnails}>
         {videos.map((videoIdList, i) => (
           <div key={i} className={styles.row}>
@@ -59,7 +59,7 @@ export const TopHeroView: React.VFC = () => {
           </div>
         ))}
       </div>
-      <div className={clsx(styles.band, styles.Reverse, styles.Blue)}></div>
+      <div className={clsx(styles.band, styles.Blue)}></div>
     </div>
   );
 };

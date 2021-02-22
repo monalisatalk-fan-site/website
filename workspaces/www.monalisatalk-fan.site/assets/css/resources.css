@@ -1,2 +1,2 @@
 /** Custom media queries */
-@custom-media --header-small-viewport (width < 640px);
+@custom-media --header-small-viewport (width < 800px);
