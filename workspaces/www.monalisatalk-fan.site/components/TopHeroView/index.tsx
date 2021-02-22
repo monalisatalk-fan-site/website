@@ -24,7 +24,10 @@ export const TopHeroView: React.VFC = () => {
 
           const { id } = video;
 
-          if (result.includes(id) || results.some((videoIdList) => videoIdList.includes(id))) {
+          if (
+            result.includes(id) ||
+            results.some((videoIdList) => videoIdList.includes(id))
+          ) {
             j -= 1;
 
             continue;
@@ -46,16 +49,16 @@ export const TopHeroView: React.VFC = () => {
       <div className={styles.topHeroViewThumbnails}>
         {videos.map((videoIdList, i) => (
           <div key={i} className={styles.row}>
-            { videoIdList.map((videoId) => (
+            {videoIdList.map((videoId) => (
               <div key={videoId} className={styles.item}>
                 <YouTubeThumbnail videoId={videoId} />
               </div>
-            )) }
-            { videoIdList.map((videoId) => (
+            ))}
+            {videoIdList.map((videoId) => (
               <div key={videoId} className={styles.item}>
                 <YouTubeThumbnail videoId={videoId} />
               </div>
-            )) }
+            ))}
           </div>
         ))}
       </div>

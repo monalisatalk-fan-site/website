@@ -1,14 +1,14 @@
-name: Check stylelint
+name: Check ESLint (www)
 on:
   push:
     paths:
-      - '**.scss'
-      - '.stylelintrc.yml'
-      - '.github/workflows/lint-css.yml'
+      - workspaces/www.monalisatalk-fan.site/**.tsx
+      - workspaces/www.monalisatalk-fan.site/**.ts
+      - workspaces/www.monalisatalk-fan.site/**.js
 
 jobs:
   build:
-    name: Stylelint
+    name: ESLint
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -20,8 +20,8 @@ jobs:
           node-version: 14.x
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Run stylelint
-        run: yarn lint:css --fix
+      - name: Run ESLint
+        run: yarn ww lint:js
       - name: Push auto-fixed files
         run: |
           git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
@@ -29,7 +29,7 @@ jobs:
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           if (git diff --shortstat | grep '[0-9]'); then \
             git add .; \
-            git commit -m "👕 Fixed auto-fixable Stylelint errors by github-actions"; \
+            git commit -m "👕 Fixed auto-fixable ESLint errors by github-actions"; \
             git push origin HEAD:${GITHUB_REF}; \
           fi
         env:

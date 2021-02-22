@@ -8,8 +8,6 @@ export type Props = {
 
 export const LayoutContainer: React.FC<Props> = ({ children, className }) => {
   return (
-    <div className={clsx(styles.layoutContainer, className)}>
-      {children}
-    </div>
+    <div className={clsx(styles.layoutContainer, className)}>{children}</div>
   );
 };

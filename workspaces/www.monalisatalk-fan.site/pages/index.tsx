@@ -11,11 +11,19 @@ export const IndexPage: React.VFC = () => {
       <LayoutContainer>
         <div className={styles.pageContainer}>
           <h2 className={clsx(styles.heading, styles.Right)}>
-            <img className={styles.image} src="/images/top/headings/latest-videos.png" alt="最新動画のタイトル" />
+            <img
+              className={styles.image}
+              src="/images/top/headings/latest-videos.png"
+              alt="最新動画のタイトル"
+            />
           </h2>
           <p>lorem ipsum</p>
           <h2 className={styles.heading}>
-            <img className={styles.image} src="/images/top/headings/about.png" alt="このウェブサイトについて" />
+            <img
+              className={styles.image}
+              src="/images/top/headings/about.png"
+              alt="このウェブサイトについて"
+            />
           </h2>
           <p>lorem ipsum</p>
         </div>

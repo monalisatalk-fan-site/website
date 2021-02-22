@@ -8,7 +8,7 @@
     "lint:js": "run-s lint:js:prettier lint:js:eslint",
     "lint:js:prettier": "prettier --write \"**/*.{ts,tsx}\"",
     "lint:js:eslint": "eslint --ext ts,tsx --fix .",
-    "lint:css": "stylelint \"**/*.pcss\"",
+    "lint:css": "stylelint \"**/*.css\" --fix",
     "reflect-resources": "ts-node --project scripts/tsconfig.json scripts/reflect-resources",
     "changelog:new": "ts-node --project scripts/tsconfig.json scripts/new-changelog"
   },
