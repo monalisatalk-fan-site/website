@@ -46,6 +46,8 @@
 }
 
 .topHeroViewThumbnails {
+  height: 522.25px;
+
   & > .row {
     display: flex;
     animation: slide-thumbnails 180s linear infinite;
