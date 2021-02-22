@@ -7,7 +7,7 @@
 
   & > .heading {
     display: flex;
-    margin-bottom: var(--margin-2x);
+    margin-bottom: var(--margin-4x);
   }
 
   & > .heading > .image {

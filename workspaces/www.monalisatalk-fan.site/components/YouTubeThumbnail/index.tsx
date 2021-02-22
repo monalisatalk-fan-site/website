@@ -48,8 +48,6 @@ export const YouTubeThumbnail: React.VFC<Props> = ({ videoId }) => {
       ctx.drawImage(img, 0, 0);
     };
 
-    console.log(cachedImage);
-
     if (cachedImage) {
       setLoadingStatus(false);
 
