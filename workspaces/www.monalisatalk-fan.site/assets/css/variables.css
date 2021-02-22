@@ -1,4 +1,21 @@
 :root {
-  --color-text-basic: #191919;
+  /** Margin sizes */
+  --margin-base: 8px;
+  --margin-half: calc(var(--margin-base) * 1);
+  --margin-1x: calc(var(--margin-base) * 1);
+  --margin-2x: calc(var(--margin-base) * 2);
+  --margin-3x: calc(var(--margin-base) * 3);
+  --margin-4x: calc(var(--margin-base) * 4);
+
+  /** Color Palette */
+  --color-white: #fff;
+  --color-black: #000;
+  --color-red: #db2b42;
+  --color-blue: #4598ca;
+  --color-yellow: #fbf103;
+
+  /* Colors */
+  --color-background-primary: #1b1b1b;
+  --color-text-primary: #ccc;
   --gradient-background: linear-gradient(to top left, #abbaab, #fff);
 }

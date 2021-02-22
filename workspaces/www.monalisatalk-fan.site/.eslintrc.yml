@@ -16,3 +16,4 @@ settings:
     version: detect
 rules:
   no-use-before-define: 'off'
+  react/prop-types: 'off'

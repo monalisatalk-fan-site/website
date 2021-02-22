@@ -58,9 +58,11 @@ const parseVideos = async (): Promise<ResourcesJson['videos']> => {
 
   return Object.entries(value.basic)
     .map(([id, { title, publishedAt }]) => {
-      const { description } = value.additional[id];
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const { description } = value.additional[id]!;
       const voiceActors = Object.keys(value.voiceActors[id] || {});
-      const { viewCount, likeCount, updatedAt } = value.statistics[id];
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const { viewCount, likeCount, updatedAt } = value.statistics[id]!;
       const statistics = {
         viewCount,
         likeCount,

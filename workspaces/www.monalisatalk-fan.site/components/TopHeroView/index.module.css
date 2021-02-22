@@ -1,0 +1,67 @@
+@keyframes slide-band {
+  0% {
+    background-position: 0 center;
+  }
+
+  100% {
+    background-position: -320px center;
+  }
+}
+
+@keyframes slide-thumbnails {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-3160px, 0, 0);
+  }
+}
+
+.topHeroView {
+  --height-band: 48px;
+
+  overflow: hidden;
+  background: var(--color-black);
+
+  & > .band {
+    width: 100%;
+    height: var(--height-band);
+    background: url(/images/top/hero/band.svg) center/contain repeat-x;
+    transform: translate3d(0, 0, 0);
+    animation: slide-band 5s linear infinite;
+  }
+
+  & > .band.Reverse {
+    animation-direction: reverse;
+  }
+
+  & > .band.Red {
+    filter: invert(22%) sepia(60%) saturate(3684%) hue-rotate(337deg) brightness(92%) contrast(88%);
+  }
+
+  & > .band.Blue {
+    filter: invert(78%) sepia(49%) saturate(5184%) hue-rotate(174deg) brightness(86%) contrast(81%);
+  }
+}
+
+.topHeroViewThumbnails {
+  & > .row {
+    display: flex;
+    animation: slide-thumbnails 180s linear infinite;
+  }
+
+  & > .row:not(:first-child) {
+    padding-top: var(--margin-1x);
+  }
+
+  & > .row:nth-child(2n) {
+    animation-direction: reverse;
+  }
+
+  & > .row > .item {
+    flex-shrink: 0;
+    width: 300px;
+    padding: 0 var(--margin-1x);
+  }
+}
