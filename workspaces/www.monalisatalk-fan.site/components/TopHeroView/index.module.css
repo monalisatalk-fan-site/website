@@ -25,7 +25,7 @@
   & > .band {
     width: 100%;
     height: var(--hero-band-height);
-    background: url(/images/top/hero/band.svg) center/contain repeat-x;
+    background: center/contain repeat-x;
     transform: translate3d(0, 0, 0);
     animation: slide-band 5s linear infinite;
   }
@@ -35,11 +35,11 @@
   }
 
   & > .band.Red {
-    filter: invert(22%) sepia(60%) saturate(3684%) hue-rotate(337deg) brightness(92%) contrast(88%);
+    background-image: url(/images/top/hero/band-red.svg);
   }
 
   & > .band.Blue {
-    filter: invert(78%) sepia(49%) saturate(5184%) hue-rotate(174deg) brightness(86%) contrast(81%);
+    background-image: url(/images/top/hero/band-blue.svg);
   }
 }
 

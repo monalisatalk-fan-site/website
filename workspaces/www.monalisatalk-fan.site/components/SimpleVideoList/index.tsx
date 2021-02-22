@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { YouTubeThumbnail } from '~/components/YouTubeThumbnail';
+import { formatDate } from '~/helpers/format-date';
 import { Video } from '~/types';
 import styles from './index.module.css';
 
@@ -15,7 +16,7 @@ export const SimpleVideoList: React.VFC<Props> = ({ videos }) => {
       {videos.map((video) => {
         const d = new Date(video.publishedAt);
         const iosDateTime = d.toISOString();
-        const date = new Intl.DateTimeFormat('ja').format(d);
+        const date = formatDate(d);
 
         return (
           <li key={video.id} className={styles.item}>
