@@ -6,7 +6,15 @@ module.exports = {
         features: {
           'alpha-hex-colors': true,
           'custom-properties': false,
-          'custom-media-queries': true,
+          'custom-media-queries': {
+            preserve: false,
+            importFrom: {
+              customMedia: {
+                '--small-viewport': 'screen and (width < 640px)',
+                '--header-small-viewport': 'screen and (width < 800px)',
+              },
+            },
+          },
           'gap-properties': true,
           'matches-pseudo-class': true,
           'media-query-ranges': true,
