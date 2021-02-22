@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { LayoutContainer } from '~/components/LayoutContainer';
 import { TopHeroView } from '~/components/TopHeroView';
 import { SimpleVideoList } from '~/components/SimpleVideoList';
-import { Video } from  '~/types';
+import { Video } from '~/types';
 import styles from './index.module.css';
 
 export type StaticProps = {

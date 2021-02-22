@@ -12,22 +12,24 @@ export type Props = {
 export const SimpleVideoList: React.VFC<Props> = ({ videos }) => {
   return (
     <ul className={styles.simpleVideoList}>
-      { videos.map((video) => {
+      {videos.map((video) => {
         const d = new Date(video.publishedAt);
         const iosDateTime = d.toISOString();
         const date = new Intl.DateTimeFormat('ja').format(d);
 
         return (
-          <li
-            key={video.id}
-            className={styles.item}
-          >
+          <li key={video.id} className={styles.item}>
             <Link href={`/v/${video.id}`}>
               <a className={styles.link}>
                 <div className={styles.thumbnail}>
                   <YouTubeThumbnail videoId={video.id} />
                 </div>
-                <div className={clsx(styles.details, styles.simpleVideoListDetails)}>
+                <div
+                  className={clsx(
+                    styles.details,
+                    styles.simpleVideoListDetails
+                  )}
+                >
                   <time className={styles.date} dateTime={iosDateTime}>
                     {date}
                   </time>
@@ -37,7 +39,7 @@ export const SimpleVideoList: React.VFC<Props> = ({ videos }) => {
             </Link>
           </li>
         );
-      }) }
+      })}
     </ul>
-  )
+  );
 };
