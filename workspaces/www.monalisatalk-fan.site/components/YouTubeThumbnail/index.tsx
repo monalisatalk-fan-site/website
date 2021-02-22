@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { useReactiveState } from '@lollipop-onl/react-reactive-state';
 import styles from './index.module.css';
@@ -12,18 +12,20 @@ const cache: Map<string, HTMLImageElement> = new Map();
 
 export const YouTubeThumbnail: React.VFC<Props> = ({ videoId }) => {
   const fallbackImageUrl = useReactiveState<string>();
-  const isLoading = useReactiveState(true);
+  const imageUrl = useMemo(() => `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`, [videoId]);
+  const [isLoading, setLoadingStatus] = useState(() => {
+    return !cache.has(imageUrl);
+  });
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const { isContentVisible } = useContentVisibility(containerRef);
 
   useEffect(() => {
-    const imageUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
     const cachedImage = cache.get(imageUrl);
 
     const drawThumbnail = (img: HTMLImageElement) => {
       if (!canvasRef.current) {
-        isLoading.value = false;
+        setLoadingStatus(false);
 
         fallbackImageUrl.value = imageUrl;
 
@@ -33,7 +35,7 @@ export const YouTubeThumbnail: React.VFC<Props> = ({ videoId }) => {
       const ctx = canvasRef.current.getContext('2d');
 
       if (!ctx) {
-        isLoading.value = false;
+        setLoadingStatus(false);
 
         fallbackImageUrl.value = imageUrl;
 
@@ -46,13 +48,17 @@ export const YouTubeThumbnail: React.VFC<Props> = ({ videoId }) => {
       ctx.drawImage(img, 0, 0);
     };
 
+    console.log(cachedImage);
+
     if (cachedImage) {
-      isLoading.value = false;
+      setLoadingStatus(false);
 
       drawThumbnail(cachedImage);
 
       return;
     }
+
+    setLoadingStatus(true);
 
     if (!isContentVisible) {
       return;
@@ -61,7 +67,7 @@ export const YouTubeThumbnail: React.VFC<Props> = ({ videoId }) => {
     const img = new Image();
 
     img.onload = () => {
-      isLoading.value = false;
+      setLoadingStatus(false);
 
       drawThumbnail(img);
 
@@ -69,13 +75,13 @@ export const YouTubeThumbnail: React.VFC<Props> = ({ videoId }) => {
     };
 
     img.onerror = () => {
-      isLoading.value = false;
+      setLoadingStatus(false);
 
       fallbackImageUrl.value = imageUrl;
     };
 
     img.src = imageUrl;
-  }, [canvasRef, fallbackImageUrl, isLoading, isContentVisible, videoId]);
+  }, [canvasRef, fallbackImageUrl, isLoading, isContentVisible, videoId, imageUrl]);
 
   return (
     <div className={styles.youtubeThumbnail} ref={containerRef}>
@@ -84,7 +90,7 @@ export const YouTubeThumbnail: React.VFC<Props> = ({ videoId }) => {
       ) : (
         <canvas className={styles.image} ref={canvasRef} />
       )}
-      <p className={clsx(styles.loading, isLoading.value && styles.Active)}>
+      <p className={clsx(styles.loading, isLoading && styles.Active)}>
         loading...
       </p>
     </div>
