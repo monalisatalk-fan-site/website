@@ -12,7 +12,10 @@ const cache: Map<string, HTMLImageElement> = new Map();
 
 export const YouTubeThumbnail: React.VFC<Props> = ({ videoId }) => {
   const fallbackImageUrl = useReactiveState<string>();
-  const imageUrl = useMemo(() => `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`, [videoId]);
+  const imageUrl = useMemo(
+    () => `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+    [videoId]
+  );
   const [isLoading, setLoadingStatus] = useState(() => {
     return !cache.has(imageUrl);
   });
@@ -81,7 +84,14 @@ export const YouTubeThumbnail: React.VFC<Props> = ({ videoId }) => {
     };
 
     img.src = imageUrl;
-  }, [canvasRef, fallbackImageUrl, isLoading, isContentVisible, videoId, imageUrl]);
+  }, [
+    canvasRef,
+    fallbackImageUrl,
+    isLoading,
+    isContentVisible,
+    videoId,
+    imageUrl,
+  ]);
 
   return (
     <div className={styles.youtubeThumbnail} ref={containerRef}>
