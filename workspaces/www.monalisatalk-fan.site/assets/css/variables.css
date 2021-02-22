@@ -44,7 +44,7 @@
   --hero-thumbnail-width: 300px;
   --hero-thumbnail-height: calc(var(--hero-thumbnail-width) * var(--thumbnail-aspect-ratio));
 
-  @media (--header-small-viewport) {
+  @media (--small-viewport) {
     --hero-band-width: calc(32 / 48 * 320px);
     --hero-band-height: 32px;
     --hero-thumbnail-width: 240px;
