@@ -1,0 +1,6 @@
+.layoutContainer {
+  box-sizing: border-box;
+  width: calc(var(--container-width) + var(--margin-2x) * 2);
+  max-width: 100%;
+  padding: 0 var(--margin-2x);
+}

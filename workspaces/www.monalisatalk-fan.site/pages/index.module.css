@@ -1,3 +1,21 @@
 .indexPage {
   width: 100%;
 }
+
+.pageContainer {
+  padding-top: var(--margin-4x);
+
+  & > .heading {
+    margin-bottom: var(--margin-2x);
+  }
+
+  & > .heading > .image {
+    display: block;
+    height: 48px;
+
+    @media (--small-viewport) {
+      height: 32px;
+      margin: 0 auto;
+    }
+  }
+}
