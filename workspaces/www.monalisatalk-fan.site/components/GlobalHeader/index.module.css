@@ -25,6 +25,14 @@
     margin: 0 auto;
   }
 
+  & > .header > .container > .logo {
+    margin-right: auto;
+
+    @media (--header-small-viewport) {
+      margin-left: auto;
+    }
+  }
+
   & > .header > .container > .menu {
     margin-left: auto;
 
@@ -41,6 +49,10 @@
     width: auto;
     height: 32px;
     filter: invert(99%) sepia(1%) saturate(691%) hue-rotate(197deg) brightness(116%) contrast(87%);
+
+    @media (--header-small-viewport) {
+      height: 24px;
+    }
   }
 }
 

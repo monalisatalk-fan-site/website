@@ -5,14 +5,18 @@
 .pageContainer {
   padding-top: var(--margin-4x);
 
-  & > .heading {
+  & > .section:not(:first-child) {
+    margin-top: var(--margin-6x);
+  }
+
+  & > .section > .heading {
     display: flex;
     margin-bottom: var(--margin-4x);
   }
 
-  & > .heading > .image {
+  & > .section > .heading > .image {
     display: block;
-    height: 28px;
+    height: 40px;
 
     @media (--small-viewport) {
       height: 20px;
@@ -20,7 +24,18 @@
     }
   }
 
-  & > .heading.Right > .image {
+  & > .section > .heading.Right > .image {
     margin-left: auto;
+  }
+
+  & > .section > .morebutton {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: var(--margin-3x);
+
+    @media (--small-viewport) {
+      justify-content: center;
+    }
   }
 }

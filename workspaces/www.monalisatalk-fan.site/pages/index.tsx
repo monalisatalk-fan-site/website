@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { LayoutContainer } from '~/components/LayoutContainer';
 import { TopHeroView } from '~/components/TopHeroView';
 import { SimpleVideoList } from '~/components/SimpleVideoList';
+import { UILinkButton } from '~/components/UILinkButton';
 import { Video } from '~/types';
 import styles from './index.module.css';
 
@@ -28,22 +29,31 @@ export const IndexPage: React.VFC<StaticProps> = ({ latestVideos }) => {
       <TopHeroView />
       <LayoutContainer>
         <div className={styles.pageContainer}>
-          <h2 className={clsx(styles.heading, styles.Right)}>
-            <img
-              className={styles.image}
-              src="/images/top/headings/latest-videos.png"
-              alt="最新動画のタイトル"
-            />
-          </h2>
-          <SimpleVideoList videos={latestVideos} />
-          <h2 className={styles.heading}>
-            <img
-              className={styles.image}
-              src="/images/top/headings/about.png"
-              alt="このウェブサイトについてのタイトル"
-            />
-          </h2>
-          <p>lorem ipsum</p>
+          <section className={styles.section}>
+            <h1 className={clsx(styles.heading, styles.Right)}>
+              <img
+                className={styles.image}
+                src="/images/top/headings/latest-videos.png"
+                alt="最新動画のタイトル"
+              />
+            </h1>
+            <SimpleVideoList videos={latestVideos} />
+            <div className={styles.morebutton}>
+              <UILinkButton href="/videos">
+                新着順にすべての動画をみる
+              </UILinkButton>
+            </div>
+          </section>
+          <section className={styles.section}>
+            <h2 className={styles.heading}>
+              <img
+                className={styles.image}
+                src="/images/top/headings/about.png"
+                alt="このウェブサイトについてのタイトル"
+              />
+            </h2>
+            <p>lorem ipsum</p>
+          </section>
         </div>
       </LayoutContainer>
     </div>

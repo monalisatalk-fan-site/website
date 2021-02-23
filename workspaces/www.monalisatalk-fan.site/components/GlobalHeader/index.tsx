@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import clsx from 'clsx';
 import styles from './index.module.css';
 
 export const GlobalHeader: React.VFC = () => {
@@ -8,7 +9,7 @@ export const GlobalHeader: React.VFC = () => {
       <header className={styles.header}>
         <div className={styles.container}>
           <Link href="/">
-            <a className={styles.globalHeaderLogo}>
+            <a className={clsx(styles.globalHeaderLogo, styles.logo)}>
               <img src="/images/logo.svg" className={styles.image} />
             </a>
           </Link>

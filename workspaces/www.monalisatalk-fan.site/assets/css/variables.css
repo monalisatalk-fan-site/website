@@ -6,6 +6,11 @@
   --margin-2x: calc(var(--margin-base) * 2);
   --margin-3x: calc(var(--margin-base) * 3);
   --margin-4x: calc(var(--margin-base) * 4);
+  --margin-5x: calc(var(--margin-base) * 5);
+  --margin-6x: calc(var(--margin-base) * 6);
+  --margin-7x: calc(var(--margin-base) * 7);
+  --margin-8x: calc(var(--margin-base) * 8);
+  --margin-9x: calc(var(--margin-base) * 9);
 
   /** Color Palette */
   --color-white: #fff;
@@ -28,7 +33,7 @@
   --header-height: 80px;
 
   @media (width < 800px) {
-    --header-height: 64px;
+    --header-height: 48px;
   }
 
   /** YouTube Thumbnail */
