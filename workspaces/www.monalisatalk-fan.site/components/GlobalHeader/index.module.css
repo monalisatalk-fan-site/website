@@ -7,6 +7,7 @@
   width: calc(100% + env(safe-area-inset-right) + env(safe-area-inset-left));
   height: var(--header-height);
   padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+  margin-left: calc(env(safe-area-inset-left) * -1);
   background: var(--color-header-background);
 
   & > .header {
