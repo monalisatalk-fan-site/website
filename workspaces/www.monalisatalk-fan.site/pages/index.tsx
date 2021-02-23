@@ -76,7 +76,9 @@ export const IndexPage: React.VFC<StaticProps> = ({
         <div className={styles.pageContainer}>
           <div className={styles.pickup}>
             <Link href={pickupPlaylistLink}>
-              <a className={styles.link}>＞ ピックアッププレイリスト</a>
+              <a className={styles.link}>
+                ＞ <span className={styles.text}>ピックアッププレイリスト</span>
+              </a>
             </Link>
           </div>
           <section className={styles.section}>

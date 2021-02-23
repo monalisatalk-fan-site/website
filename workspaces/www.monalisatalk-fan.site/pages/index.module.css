@@ -12,13 +12,18 @@
   }
 
   & > .pickup > .link {
-    position: relative;
     color: var(--color-text-secondary);
+  }
+
+  & > .pickup > .link > .text {
     text-decoration: underline;
   }
 
   & > .pickup > .link:hover {
     color: var(--color-blue);
+  }
+
+  & > .pickup > .link:hover > .text {
     text-decoration: none;
   }
 
