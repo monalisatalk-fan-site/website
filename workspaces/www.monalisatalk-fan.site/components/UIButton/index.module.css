@@ -2,6 +2,7 @@
   position: relative;
   display: inline-block;
   padding: var(--margin-1x) var(--margin-2x);
+  overflow: hidden;
   line-height: 1.5;
   color: var(--color-blue);
   background: transparent;
