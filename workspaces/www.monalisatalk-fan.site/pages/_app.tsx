@@ -12,7 +12,10 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
   return (
     <>
       <Head>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width, viewport-fit=cover" />
+        <meta
+          name="viewport"
+          content="initial-scale=1.0, width=device-width, viewport-fit=cover"
+        />
       </Head>
       <GlobalHeader />
       <Component {...pageProps} />
