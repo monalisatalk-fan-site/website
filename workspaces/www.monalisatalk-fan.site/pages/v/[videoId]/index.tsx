@@ -1,8 +1,12 @@
 import React from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
+import clsx from 'clsx';
 import { YouTubeThumbnail } from '~/components/YouTubeThumbnail';
+import { LayoutContainer } from '~/components/LayoutContainer';
+import { formatDate } from '~/helpers/format-date';
 import type Resources from '~/assets/data/resources.json';
+import styles from './index.module.css';
 
 export type StaticProps = {
   video: typeof Resources.videos[number];
@@ -53,24 +57,40 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
   nextVideo,
   previousVideo,
 }) => {
+  const d = new Date(video.publishedAt);
+
   return (
-    <div>
-      this is a video page.
-      <YouTubeThumbnail videoId={video.id} />
-      <p>{video.title}</p>
-      <p>{new Date(video.publishedAt).toLocaleDateString()}</p>
-      {previousVideo ? (
-        <Link href={`/v/${previousVideo.id}`}>
-          <a>Previous: {previousVideo.title}</a>
-        </Link>
-      ) : null}
-      <br />
-      {nextVideo ? (
-        <Link href={`/v/${nextVideo.id}`}>
-          <a>Next: {nextVideo.title}</a>
-        </Link>
-      ) : null}
-    </div>
+    <article className={styles.videoDetailPage}>
+      <LayoutContainer className={styles.container}>
+        <div className={clsx(styles.thumbnail, styles.videoDetailThumbnail)}>
+          <div className={styles.image}>
+            <YouTubeThumbnail videoId={video.id} />
+          </div>
+        </div>
+        <div className={clsx(styles.body, styles.videoDetailBody)}>
+          <h1 className={styles.title}>{video.title}</h1>
+          <div className={styles.date}>
+            <time dateTime={d.toISOString()}>{formatDate(d)}</time>
+          </div>
+          <div className={styles.description}>
+            { video.description.split('\n').map((line, i) => (
+              <p key={i} className={styles.paragraph}>{line}</p>
+            )) }
+          </div>
+          {previousVideo ? (
+            <Link href={`/v/${previousVideo.id}`}>
+              <a>Previous: {previousVideo.title}</a>
+            </Link>
+          ) : null}
+          <br />
+          {nextVideo ? (
+            <Link href={`/v/${nextVideo.id}`}>
+              <a>Next: {nextVideo.title}</a>
+            </Link>
+          ) : null}
+        </div>
+      </LayoutContainer>
+    </article>
   );
 };
 

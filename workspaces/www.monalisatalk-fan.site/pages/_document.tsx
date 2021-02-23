@@ -20,12 +20,7 @@ class MyDocument extends Document {
   render(): React.ReactElement {
     return (
       <Html>
-        <Head>
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
-        </Head>
+        <Head />
         <body>
           <Main />
           <script src="//platform.twitter.com/widgets.js" async />
