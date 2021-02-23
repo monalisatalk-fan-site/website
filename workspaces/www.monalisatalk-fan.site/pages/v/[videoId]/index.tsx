@@ -73,9 +73,11 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
             <time dateTime={d.toISOString()}>{formatDate(d)}</time>
           </div>
           <div className={styles.description}>
-            { video.description.split('\n').map((line, i) => (
-              <p key={i} className={styles.paragraph}>{line}</p>
-            )) }
+            {video.description.split('\n').map((line, i) => (
+              <p key={i} className={styles.paragraph}>
+                {line}
+              </p>
+            ))}
           </div>
           {previousVideo ? (
             <Link href={`/v/${previousVideo.id}`}>
