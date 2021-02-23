@@ -3,7 +3,23 @@
 }
 
 .pageContainer {
-  padding-top: var(--margin-4x);
+  padding-top: var(--margin-2x);
+
+  & > .pickup {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--margin-4x);
+  }
+
+  & > .pickup > .link {
+    position: relative;
+    text-decoration: underline;
+  }
+
+  & > .pickup > .link:hover {
+    color: var(--color-blue);
+    text-decoration: none;
+  }
 
   & > .section:not(:first-child) {
     margin-top: var(--margin-6x);

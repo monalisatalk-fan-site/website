@@ -1,0 +1,9 @@
+.playlistPage {
+  & > .container {
+    padding-top: var(--margin-5x);
+  }
+
+  & > .container > .playlist {
+    margin-top: var(--margin-3x);
+  }
+}

@@ -1,0 +1,10 @@
+.uiHeading {
+  & > .title {
+    font-size: 2.4rem;
+  }
+
+  & > .description {
+    margin-top: var(--margin-1x);
+    font-size: 1.4rem;
+  }
+}
