@@ -1,6 +1,7 @@
 .globalFooter {
   --color-footer-background: #1e1f22;
 
+  box-sizing: border-box;
   width: calc(100% + env(safe-area-inset-right) + env(safe-area-inset-left));
   padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   margin-left: calc(env(safe-area-inset-left) * -1);
