@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
-import { YouTubeThumbnail } from '~/components/YouTubeThumbnail';
+import { SimpleVideoList } from '~/components/SimpleVideoList';
+import { LayoutContainer } from '~/components/LayoutContainer';
 import type resources from '~/assets/data/resources.json';
 
 export type StaticProps = {
@@ -20,16 +20,10 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 
 export const VideosPage: React.VFC<StaticProps> = ({ videos }) => {
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-      {videos.map(({ id }) => (
-        <div key={id} style={{ width: 100 }}>
-          <Link href={`/v/${id}`}>
-            <a>
-              <YouTubeThumbnail videoId={id} />
-            </a>
-          </Link>
-        </div>
-      ))}
+    <div>
+      <LayoutContainer>
+        <SimpleVideoList videos={videos} />
+      </LayoutContainer>
     </div>
   );
 };
