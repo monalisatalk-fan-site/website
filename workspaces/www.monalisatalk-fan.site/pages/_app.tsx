@@ -2,6 +2,7 @@ import React from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { GlobalHeader } from '~/components/GlobalHeader';
+import { GlobalFooter } from '~/components/GlobalFooter';
 
 import 'reset-css/reset.css';
 import '../assets/css/variables.css';
@@ -15,6 +16,7 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
       </Head>
       <GlobalHeader />
       <Component {...pageProps} />
+      <GlobalFooter />
     </>
   );
 }
