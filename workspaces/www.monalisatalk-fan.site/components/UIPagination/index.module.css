@@ -1,0 +1,11 @@
+.uiPagination {
+  display: flex;
+
+  & > .list {
+    display: flex;
+  }
+
+  & > .list > .item:not(:first-child) {
+    margin-left: var(--margin-1x);
+  }
+}
