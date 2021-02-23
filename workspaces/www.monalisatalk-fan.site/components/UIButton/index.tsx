@@ -18,9 +18,7 @@ export const UIButton: React.FC<Props> = ({ className, ...props }) => {
       ref={ref}
       className={clsx(styles.uiButton, className)}
     >
-      <span className={styles.text}>
-        {props.children}
-      </span>
+      <span className={styles.text}>{props.children}</span>
     </button>
   );
 };

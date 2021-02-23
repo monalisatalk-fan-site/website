@@ -22,9 +22,7 @@ export const UILinkButton: React.FC<Props> = ({ className, ...props }) => {
         className={clsx(styles.uiButton, className)}
         target={props.target}
       >
-        <span className={styles.text}>
-          {props.children}
-        </span>
+        <span className={styles.text}>{props.children}</span>
       </a>
     </Link>
   );
