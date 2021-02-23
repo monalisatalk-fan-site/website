@@ -4,11 +4,12 @@
   position: relative;
   z-index: 1;
   height: var(--header-height);
+  padding-top: env(safe-area-inset-top);
   background: var(--color-header-background);
 
   & > .header {
     position: fixed;
-    top: 0;
+    top: env(safe-area-inset-top, 0);
     left: 0;
     box-sizing: border-box;
     width: 100%;

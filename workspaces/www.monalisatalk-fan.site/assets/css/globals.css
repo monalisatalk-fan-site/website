@@ -3,6 +3,8 @@ html {
 }
 
 body {
+  padding-right: env(safe-area-inset-right);
+  padding-left: env(safe-area-inset-right);
   font-family: sans-serif;
   font-size: 1.4rem;
   color: var(--color-text-primary);
