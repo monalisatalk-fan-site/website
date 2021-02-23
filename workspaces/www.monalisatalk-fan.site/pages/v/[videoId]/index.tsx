@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
 import clsx from 'clsx';
@@ -57,6 +57,7 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
   nextVideo,
   previousVideo,
 }) => {
+  const youtubeLink = useMemo(() => `https://www.youtube.com/watch?v=${video.id}`, [video.id]);
   const d = new Date(video.publishedAt);
 
   return (
@@ -66,17 +67,13 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
           <div className={styles.image}>
             <YouTubeThumbnail videoId={video.id} />
           </div>
+          <a className={styles.link} href={youtubeLink} target="_blank" rel="noreferrer">
+            <span className={styles.text}>
+              YouTube で動画をみる
+            </span>
+          </a>
         </div>
-        <div className={clsx(styles.body, styles.videoDetailBody)}>
-          <h1 className={styles.title}>{video.title}</h1>
-          <div className={styles.date}>
-            <time dateTime={d.toISOString()}>{formatDate(d)}</time>
-          </div>
-          <div className={styles.description}>
-            { video.description.split('\n').map((line, i) => (
-              <p key={i} className={styles.paragraph}>{line}</p>
-            )) }
-          </div>
+        <div className={clsx(styles.related)}>
           {previousVideo ? (
             <Link href={`/v/${previousVideo.id}`}>
               <a>Previous: {previousVideo.title}</a>
@@ -88,6 +85,17 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
               <a>Next: {nextVideo.title}</a>
             </Link>
           ) : null}
+        </div>
+        <div className={clsx(styles.body, styles.videoDetailBody)}>
+          <h1 className={styles.title}>{video.title}</h1>
+          <div className={styles.date}>
+            <time dateTime={d.toISOString()}>{formatDate(d)}</time>
+          </div>
+          <div className={styles.description}>
+            { video.description.split('\n').map((line, i) => (
+              <p key={i} className={styles.paragraph}>{line}</p>
+            )) }
+          </div>
         </div>
       </LayoutContainer>
     </article>
