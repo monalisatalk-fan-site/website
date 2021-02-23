@@ -30,10 +30,10 @@ export const IndexPage: React.VFC<StaticProps> = ({ latestVideos }) => {
       <LayoutContainer>
         <div className={styles.pageContainer}>
           <section className={styles.section}>
-            <h1 className={clsx(styles.heading, styles.Right)}>
+            <h1 className={styles.heading}>
               <img
                 className={styles.image}
-                src="/images/top/headings/latest-videos.png"
+                src="/images/top/headings/latest-videos.svg"
                 alt="最新動画のタイトル"
               />
             </h1>
@@ -48,7 +48,7 @@ export const IndexPage: React.VFC<StaticProps> = ({ latestVideos }) => {
             <h2 className={styles.heading}>
               <img
                 className={styles.image}
-                src="/images/top/headings/about.png"
+                src="/images/top/headings/about.svg"
                 alt="このウェブサイトについてのタイトル"
               />
             </h2>

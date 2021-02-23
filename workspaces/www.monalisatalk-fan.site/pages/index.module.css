@@ -11,17 +11,15 @@
 
   & > .section > .heading {
     display: flex;
+    justify-content: center;
     margin-bottom: var(--margin-4x);
   }
 
   & > .section > .heading > .image {
     display: block;
-    height: 40px;
-
-    @media (--small-viewport) {
-      height: 20px;
-      margin: 0 auto;
-    }
+    padding: var(--margin-1x) var(--margin-2x);
+    background: var(--color-yellow);
+    border: 3px solid var(--color-black);
   }
 
   & > .section > .heading.Right > .image {
