@@ -23,6 +23,7 @@
   /* Colors */
   --color-background-primary: #1b1b1b;
   --color-text-primary: #ccc;
+  --color-text-secondary: #888;
   --gradient-background: linear-gradient(to top left, #abbaab, #fff);
 
   /** Layouts */

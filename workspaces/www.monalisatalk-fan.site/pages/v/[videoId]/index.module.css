@@ -143,7 +143,6 @@
   & > .description > .paragraph {
     margin-top: var(--margin-1x);
     line-height: 1.8;
-    color: #ccc;
     white-space: pre-wrap;
   }
 }
@@ -159,13 +158,13 @@
   }
 
   & > .item.Disabled {
-    color: #888;
+    color: var(--color-text-secondary);
   }
 
   & > .item > .label {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #888;
+    color: var(--color-text-secondary);
   }
 
   & > .item > .title {
@@ -173,6 +172,10 @@
     margin-top: var(--margin-1x);
     font-size: 1.4rem;
     line-height: 1.5;
+  }
+
+  & > .item.Disabled > .title {
+    text-align: center;
   }
 
   & > .item:not(.Disabled):hover > .title {

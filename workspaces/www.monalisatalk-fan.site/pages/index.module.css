@@ -13,7 +13,7 @@
 
   & > .pickup > .link {
     position: relative;
-    color: #999;
+    color: var(--color-text-secondary);
     text-decoration: underline;
   }
 
