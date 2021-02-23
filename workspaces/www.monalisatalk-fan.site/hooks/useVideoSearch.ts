@@ -77,7 +77,10 @@ export const filterKeyword = (keyword: string | undefined) => (
   return title.includes(keyword) || description.includes(keyword);
 };
 
-export const useVideoSearch = (videos: Video[], perPage = DEFAULT_VIDEOS_PER_PAGE): UseVideoSearchResult => {
+export const useVideoSearch = (
+  videos: Video[],
+  perPage = DEFAULT_VIDEOS_PER_PAGE
+): UseVideoSearchResult => {
   const { query } = useRouter();
   const page = useMemo(() => pickPage(query), [query]);
   const order = useMemo(() => pickOrder(query), [query]);
@@ -87,15 +90,12 @@ export const useVideoSearch = (videos: Video[], perPage = DEFAULT_VIDEOS_PER_PAG
     [videos, order, keyword]
   );
   const totalVideos = useMemo(() => filteredVideos.length, [filteredVideos]);
-  const totalPages = useMemo(
-    () => Math.ceil(filteredVideos.length / perPage),
-    [filteredVideos, perPage]
-  );
+  const totalPages = useMemo(() => Math.ceil(filteredVideos.length / perPage), [
+    filteredVideos,
+    perPage,
+  ]);
   const videosPerPage = useMemo(
-    () =>
-      filteredVideos
-        .slice()
-        .splice(perPage * (page - 1), perPage),
+    () => filteredVideos.slice().splice(perPage * (page - 1), perPage),
     [filteredVideos, page, perPage]
   );
 

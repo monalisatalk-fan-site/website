@@ -30,13 +30,13 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
 
             return (
               <li key={i} className={styles.item}>
-                { page === pageNumber ? (
+                {page === pageNumber ? (
                   <span>{pageNumber}</span>
                 ) : (
                   <Link href={href}>
                     <a>{pageNumber}</a>
                   </Link>
-                ) }
+                )}
               </li>
             );
           })}
