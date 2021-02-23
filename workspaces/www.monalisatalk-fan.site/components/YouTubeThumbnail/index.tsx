@@ -16,14 +16,21 @@ export const YouTubeThumbnail: React.VFC<Props> = ({ videoId }) => {
     () => `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
     [videoId]
   );
-  const [isLoading, setLoadingStatus] = useState(() => {
-    return !cache.has(imageUrl);
+  const [isLoading, setLoadingStatus] = useState<boolean>(() => {
+    return !cache.has(imageUrl) && false;
   });
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const { isContentVisible } = useContentVisibility(containerRef);
 
   useEffect(() => {
+    // FIXME: 暫定的に画像でサムネイルを表示する
+    if (Math.random() >= 0) {
+      fallbackImageUrl.value = imageUrl;
+
+      return;
+    }
+
     const cachedImage = cache.get(imageUrl);
 
     const drawThumbnail = (img: HTMLImageElement) => {
