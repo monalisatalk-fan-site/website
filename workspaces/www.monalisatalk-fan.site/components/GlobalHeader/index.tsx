@@ -22,12 +22,12 @@ export const GlobalHeader: React.VFC = () => {
                   </Link>
                 </li>
                 <li className={styles.item}>
-                  <Link href="/">
+                  <Link href="/videos">
                     <a className={styles.link}>VIDEOS</a>
                   </Link>
                 </li>
                 <li className={styles.item}>
-                  <Link href="/">
+                  <Link href="/#goods">
                     <a className={styles.link}>GOODS</a>
                   </Link>
                 </li>

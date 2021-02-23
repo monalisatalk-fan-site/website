@@ -79,16 +79,26 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
             <span className={styles.text}>YouTube で動画をみる</span>
           </a>
         </div>
-        <div className={clsx(styles.related)}>
-          {previousVideo ? (
-            <Link href={`/v/${previousVideo.id}`}>
-              <a>Previous: {previousVideo.title}</a>
-            </Link>
-          ) : null}
-          <br />
+        <div className={clsx(styles.related, styles.videoDetailRelated)}>
           {nextVideo ? (
             <Link href={`/v/${nextVideo.id}`}>
-              <a>Next: {nextVideo.title}</a>
+              <a className={styles.item}>
+                <span className={styles.label}>次の動画</span>
+                <span className={styles.title}>{nextVideo.title}</span>
+              </a>
+            </Link>
+          ) : (
+            <span className={clsx(styles.item, styles.Disabled)}>
+              <span className={styles.label}>次の動画</span>
+              <span className={styles.title}>この動画が最新です</span>
+            </span>
+          )}
+          {previousVideo ? (
+            <Link href={`/v/${previousVideo.id}`}>
+              <a className={styles.item}>
+                <span className={styles.label}>前の動画</span>
+                <span className={styles.title}>{previousVideo.title}</span>
+              </a>
             </Link>
           ) : null}
         </div>

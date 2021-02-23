@@ -3,7 +3,7 @@
 }
 
 .pageContainer {
-  padding-top: var(--margin-2x);
+  padding-top: var(--margin-1x);
 
   & > .pickup {
     display: flex;
@@ -13,6 +13,7 @@
 
   & > .pickup > .link {
     position: relative;
+    color: #999;
     text-decoration: underline;
   }
 
