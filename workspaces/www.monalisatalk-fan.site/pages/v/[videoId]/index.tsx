@@ -57,7 +57,10 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
   nextVideo,
   previousVideo,
 }) => {
-  const youtubeLink = useMemo(() => `https://www.youtube.com/watch?v=${video.id}`, [video.id]);
+  const youtubeLink = useMemo(
+    () => `https://www.youtube.com/watch?v=${video.id}`,
+    [video.id]
+  );
   const d = new Date(video.publishedAt);
 
   return (
@@ -67,10 +70,13 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
           <div className={styles.image}>
             <YouTubeThumbnail videoId={video.id} />
           </div>
-          <a className={styles.link} href={youtubeLink} target="_blank" rel="noreferrer">
-            <span className={styles.text}>
-              YouTube で動画をみる
-            </span>
+          <a
+            className={styles.link}
+            href={youtubeLink}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className={styles.text}>YouTube で動画をみる</span>
           </a>
         </div>
         <div className={clsx(styles.related)}>
@@ -105,9 +111,11 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
             <time dateTime={d.toISOString()}>{formatDate(d)}</time>
           </div>
           <div className={styles.description}>
-            { video.description.split('\n').map((line, i) => (
-              <p key={i} className={styles.paragraph}>{line}</p>
-            )) }
+            {video.description.split('\n').map((line, i) => (
+              <p key={i} className={styles.paragraph}>
+                {line}
+              </p>
+            ))}
           </div>
         </div>
       </LayoutContainer>
