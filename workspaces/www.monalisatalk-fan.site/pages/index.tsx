@@ -56,8 +56,18 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   };
 };
 
-export const IndexPage: React.VFC<StaticProps> = ({ latestVideos, pickupVideos }) => {
-  const pickupPlaylistLink = useMemo(() => `/playlist?${qs.stringify({ v: pickupVideos.flatMap((videos) => videos) }, { arrayFormat: 'repeat' })}`, [pickupVideos]);
+export const IndexPage: React.VFC<StaticProps> = ({
+  latestVideos,
+  pickupVideos,
+}) => {
+  const pickupPlaylistLink = useMemo(
+    () =>
+      `/playlist?${qs.stringify(
+        { v: pickupVideos.flatMap((videos) => videos) },
+        { arrayFormat: 'repeat' }
+      )}`,
+    [pickupVideos]
+  );
 
   return (
     <div className={styles.indexPage}>
