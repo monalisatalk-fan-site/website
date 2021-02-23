@@ -6,5 +6,5 @@ export const GlobalFooter: React.VFC = () => {
     <footer className={styles.globalFooter}>
       <p>&copy; 2021 モナ・リザの戯言 ファンサイト</p>
     </footer>
-  )
+  );
 };
