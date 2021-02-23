@@ -2,7 +2,7 @@
   --color-header-background: #1e1f22;
 
   position: relative;
-  z-index: 1;
+  z-index: 2;
   height: var(--header-height);
   padding-top: env(safe-area-inset-top);
   background: var(--color-header-background);
@@ -16,7 +16,7 @@
     height: var(--header-height);
     padding-right: calc(var(--margin-2x) + env(safe-area-inset-right));
     padding-left: calc(var(--margin-2x) + env(safe-area-inset-left));
-    background: rgb(30, 31, 34, 0.95);
+    background: rgb(30, 31, 34, 0.9);
     backdrop-filter: blur(10px);
   }
 
