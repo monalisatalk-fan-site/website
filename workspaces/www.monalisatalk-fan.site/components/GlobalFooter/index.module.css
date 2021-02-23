@@ -1,6 +1,8 @@
 .globalFooter {
   --color-footer-background: #1e1f22;
 
+  width: calc(100% + env(safe-area-inset-right) + env(safe-area-inset-left));
   padding-bottom: env(safe-area-inset-bottom);
+  margin-left: calc(env(safe-area-inset-left) * -1);
   background: var(--color-footer-background);
 }
