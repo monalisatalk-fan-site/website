@@ -4,7 +4,7 @@ import styles from './index.module.css';
 export const GlobalDrawerMenu: React.VFC = () => {
   return (
     <>
-      <div className={styles.hambargerMenu}>M</div>
+      <button className={styles.hambargerMenu}>M</button>
       <div className={styles.drawerMenu}>Drawer menu</div>
     </>
   );
