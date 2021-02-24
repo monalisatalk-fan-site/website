@@ -15,9 +15,9 @@ export const VideoSearchForm: React.VFC = () => {
       return;
     }
 
-    const {
-      [SEARCH_QUERY_KEYWORD]: currentKeyword,
-    } = qs.parse(window.location.search.replace(/^\?/, ''));
+    const { [SEARCH_QUERY_KEYWORD]: currentKeyword } = qs.parse(
+      window.location.search.replace(/^\?/, '')
+    );
 
     if (typeof currentKeyword === 'string') {
       keyword.value = currentKeyword;
