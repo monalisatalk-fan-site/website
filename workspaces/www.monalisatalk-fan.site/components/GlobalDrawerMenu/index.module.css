@@ -1,4 +1,6 @@
 .hambargerMenu {
+  --color-bars: #ccc;
+
   position: fixed;
   right: var(--global-hambarger-menu-position-x);
   bottom: calc(var(--global-hambarger-menu-position-y) + env(safe-area-inset-bottom));
@@ -19,7 +21,7 @@
   & > .bars::before,
   & > .bars::after {
     height: 2px;
-    background: var(--color-white);
+    background: var(--color-bars);
   }
 
   & > .bars {
