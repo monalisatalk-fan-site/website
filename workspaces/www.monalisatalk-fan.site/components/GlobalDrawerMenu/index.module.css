@@ -6,8 +6,8 @@
   display: none;
   width: var(--global-hambarger-menu-size);
   height: var(--global-hambarger-menu-size);
-  background: #1e1f22;
-  border: 2px solid var(--color-background-primary);
+  background: var(--color-background-primary);
+  border: 1px solid #aaa;
   border-radius: 50%;
 
   @media (--small-viewport) {

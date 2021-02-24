@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: calc(var(--vh, 1vh) * 100);
+  height: calc(var(--vh, 1vh) * 100);
+  overflow-y: var(--body-scroll, auto);
 
   & > .footer {
     padding-top: var(--margin-4x);

@@ -4,10 +4,24 @@ import styles from './index.module.css';
 
 export const GlobalDrawerMenu: React.VFC = () => {
   const [isMenuVisible, setMenuVisibility] = useState(false);
-  const openMenu = useCallback(() => setMenuVisibility(true), [
+  const openMenu = useCallback(() => {
+    const { documentElement } = document;
+
+    if (documentElement instanceof HTMLElement) {
+      documentElement.style.setProperty('--body-scroll', 'hidden');
+    }
+
+    setMenuVisibility(true);}, [
     setMenuVisibility,
   ]);
-  const closeMenu = useCallback(() => setMenuVisibility(false), [
+  const closeMenu = useCallback(() => {
+    const { documentElement } = document;
+
+    if (documentElement instanceof HTMLElement) {
+      documentElement.style.removeProperty('--body-scroll');
+    }
+
+    setMenuVisibility(false);}, [
     setMenuVisibility,
   ]);
 
@@ -16,7 +30,6 @@ export const GlobalDrawerMenu: React.VFC = () => {
       <button
         className={styles.hambargerMenu}
         onClick={openMenu}
-        onTouchStart={openMenu}
       >
         M
       </button>
