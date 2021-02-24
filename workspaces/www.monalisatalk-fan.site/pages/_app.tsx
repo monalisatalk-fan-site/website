@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { GlobalHeader } from '~/components/GlobalHeader';
@@ -7,10 +7,30 @@ import { GlobalFooter } from '~/components/GlobalFooter';
 import 'reset-css/reset.css';
 import '../assets/css/variables.css';
 import '../assets/css/globals.css';
+import styles from './_app.module.css';
 
 function App({ Component, pageProps }: AppProps): React.ReactElement {
+  useEffect(() => {
+    const onResize = () => {
+      const vh = window.innerHeight * 0.01;
+      const { documentElement } = document;
+
+      if (documentElement instanceof HTMLElement) {
+        documentElement.style.setProperty('--vh', `${vh}px`);
+      }
+    };
+
+    onResize();
+
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      window.removeEventListener('resize', onResize);
+    }
+  }, []);
+
   return (
-    <>
+    <div className={styles.appLayout}>
       <Head>
         <meta
           name="viewport"
@@ -19,8 +39,10 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
       </Head>
       <GlobalHeader />
       <Component {...pageProps} />
-      <GlobalFooter />
-    </>
+      <div className={styles.footer}>
+        <GlobalFooter />
+      </div>
+    </div>
   );
 }
 

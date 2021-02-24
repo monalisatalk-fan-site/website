@@ -3,12 +3,6 @@ import type { ParsedUrlQuery } from 'querystring';
 import { useMemo } from 'react';
 import { Video } from '~/types';
 
-/** page は 1 始まりの想定 */
-export const SEARCH_QUERY_PAGE = 'page';
-export const SEARCH_QUERY_ORDER = 'order';
-export const SEARCH_QUERY_KEYWORD = 'keyword';
-export const DEFAULT_VIDEOS_PER_PAGE = 24;
-
 export type VideoSearchOrder = 'latest' | 'oldest' | 'views';
 
 export type UseVideoSearchResult = {
@@ -17,6 +11,12 @@ export type UseVideoSearchResult = {
   page: number;
   totalPages: number;
 };
+
+/** page は 1 始まりの想定 */
+export const SEARCH_QUERY_PAGE = 'page';
+export const SEARCH_QUERY_ORDER = 'order';
+export const SEARCH_QUERY_KEYWORD = 'keyword';
+export const DEFAULT_VIDEOS_PER_PAGE = 24;
 
 export const pickPage = (query: ParsedUrlQuery): number => {
   const page = Number(query[SEARCH_QUERY_PAGE]);
