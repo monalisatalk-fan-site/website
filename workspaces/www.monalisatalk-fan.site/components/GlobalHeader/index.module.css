@@ -2,7 +2,7 @@
   --color-header-background: #1e1f22;
 
   position: relative;
-  z-index: 2;
+  z-index: var(--z-index-global-header);
   box-sizing: border-box;
   width: calc(100% + env(safe-area-inset-right) + env(safe-area-inset-left));
   height: var(--header-height);

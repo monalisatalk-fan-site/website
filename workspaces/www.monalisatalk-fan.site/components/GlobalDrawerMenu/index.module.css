@@ -1,0 +1,28 @@
+.hambargerMenu {
+  position: fixed;
+  right: var(--global-hambarger-menu-position-x);
+  bottom: var(--global-hambarger-menu-position-y);
+  z-index: var(--z-index-global-hambarger-menu);
+  display: none;
+  width: var(--global-hambarger-menu-size);
+  height: var(--global-hambarger-menu-size);
+  background: #fff;
+
+  @media (--small-viewport) {
+    display: block;
+  }
+}
+
+.drawerMenu {
+  position: fixed;
+  z-index: var(--z-index-global-drawer-menu);
+  display: none;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  visibility: hidden;
+  background: var(--color-red);
+
+  @media (--small-viewport) {
+    display: block;
+  }
+}

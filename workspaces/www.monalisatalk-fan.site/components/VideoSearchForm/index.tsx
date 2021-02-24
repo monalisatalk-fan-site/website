@@ -6,13 +6,13 @@ import { UIReactiveInput } from '~/components/UIReactiveInput';
 import { VideoSearchOrder, SEARCH_QUERY_KEYWORD, SEARCH_QUERY_ORDER, SEARCH_QUERY_PAGE } from '~/hooks/useVideoSearch';
 
 export const VideoSearchForm: React.VFC = () => {
-  const { replace, query } = useRouter();
+  const router = useRouter();
   const isInitialized = useReactiveState(false);
   const keyword = useReactiveState('');
   const order = useReactiveState<VideoSearchOrder>('latest');
 
   useEffect(() => {
-    if (isInitialized.value) {
+    if (isInitialized.value || !router.isReady) {
       return;
     }
 
@@ -34,49 +34,49 @@ export const VideoSearchForm: React.VFC = () => {
     }
 
     isInitialized.value = true;
-  }, [isInitialized, keyword, order]);
+  }, [isInitialized, keyword, order, router]);
 
   useEffect(() => {
     if (!isInitialized.value) {
       return;
     }
 
-    const { [SEARCH_QUERY_KEYWORD]: currentKeyword = '' } = query;
+    const { [SEARCH_QUERY_KEYWORD]: currentKeyword = '' } = router.query;
     const nextKeyword = keyword.value;
 
     if (currentKeyword === nextKeyword) {
       return;
     }
 
-    replace({
+    router.replace({
       query: {
-        ...query,
+        ...router.query,
         [SEARCH_QUERY_PAGE]: 1,
         [SEARCH_QUERY_KEYWORD]: nextKeyword,
       },
     });
-  }, [isInitialized, keyword, replace, query]);
+  }, [isInitialized, keyword, router]);
 
   useEffect(() => {
     if (!isInitialized.value) {
       return;
     }
 
-    const { [SEARCH_QUERY_ORDER]: currentOrder = '' } = query;
+    const { [SEARCH_QUERY_ORDER]: currentOrder = '' } = router.query;
     const nextOrder = order.value;
 
     if (currentOrder === nextOrder) {
       return;
     }
 
-    replace({
+    router.replace({
       query: {
-        ...query,
+        ...router.query,
         [SEARCH_QUERY_PAGE]: 1,
         [SEARCH_QUERY_ORDER]: nextOrder,
       },
     });
-  }, [isInitialized, order, replace, query]);
+  }, [isInitialized, order, router]);
 
   return (
     <div>

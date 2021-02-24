@@ -12,6 +12,13 @@
   --margin-8x: calc(var(--margin-base) * 8);
   --margin-9x: calc(var(--margin-base) * 9);
 
+  /** Managed z-index */
+  --z-index-global-header: 3;
+  --z-index-global-hambarger-menu: 4;
+  --z-index-global-drawer-menu: 5;
+  --z-index-positive: 1;
+  --z-index-negative: -1;
+
   /** Color Palette */
   --color-white: #fff;
   --color-black: #000;
@@ -37,6 +44,11 @@
   @media (width < 800px) {
     --header-height: 48px;
   }
+
+  /** Global Menu */
+  --global-hambarger-menu-size: 48px;
+  --global-hambarger-menu-position-x: 8px;
+  --global-hambarger-menu-position-y: 8px;
 
   /** YouTube Thumbnail */
   --thumbnail-aspect-ratio: calc(480 / 270);

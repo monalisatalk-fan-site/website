@@ -3,6 +3,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { GlobalHeader } from '~/components/GlobalHeader';
 import { GlobalFooter } from '~/components/GlobalFooter';
+import { GlobalDrawerMenu } from '~/components/GlobalDrawerMenu';
 
 import 'reset-css/reset.css';
 import '../assets/css/variables.css';
@@ -42,6 +43,7 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
       <div className={styles.footer}>
         <GlobalFooter />
       </div>
+      <GlobalDrawerMenu />
     </div>
   );
 }
