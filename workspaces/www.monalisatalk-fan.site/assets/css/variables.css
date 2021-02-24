@@ -49,6 +49,8 @@
   --global-hambarger-menu-size: 48px;
   --global-hambarger-menu-position-x: 12px;
   --global-hambarger-menu-position-y: 12px;
+  --global-drawer-menu-background: #1e1f22;
+  --global-drawer-menu-background-transparency: rgb(30, 31, 34, 0.95);
 
   /** YouTube Thumbnail */
   --thumbnail-aspect-ratio: calc(480 / 270);

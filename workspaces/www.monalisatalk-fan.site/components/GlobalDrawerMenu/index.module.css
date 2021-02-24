@@ -69,8 +69,13 @@
   width: 100%;
   height: calc(var(--vh, 1vh) * 100);
   visibility: hidden;
-  background: var(--color-red);
+  background: var(--global-drawer-menu-background);
   opacity: 0;
+
+  @supports (backdrop-filter: blur(10px)) {
+    background: var(--global-drawer-menu-background-transparency);
+    backdrop-filter: blur(10px);
+  }
 
   @media (--small-viewport) {
     display: block;
@@ -79,6 +84,6 @@
   &.Visible {
     visibility: visible;
     opacity: 1;
-    transition: opacity 0.12s ease-out-quart;
+    transition: opacity 0.2s ease-out-quart;
   }
 }
