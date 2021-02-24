@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import qs from 'qs';
 import { useReactiveState } from '@lollipop-onl/react-reactive-state';
 import { UIReactiveInput } from '~/components/UIReactiveInput';
 import { SEARCH_QUERY_KEYWORD } from '~/hooks/useVideoSearch';
@@ -14,18 +15,16 @@ export const VideoSearchForm: React.VFC = () => {
       return;
     }
 
-    const { [SEARCH_QUERY_KEYWORD]: currentKeyword } = query;
+    const {
+      [SEARCH_QUERY_KEYWORD]: currentKeyword,
+    } = qs.parse(window.location.search.replace(/^\?/, ''));
 
-    if (typeof currentKeyword !== 'string') {
-      return;
+    if (typeof currentKeyword === 'string') {
+      keyword.value = currentKeyword;
     }
 
-    keyword.value = currentKeyword;
-
-    return () => {
-      isInitialized.value = true;
-    }
-  }, [isInitialized, keyword, query]);
+    isInitialized.value = true;
+  }, [isInitialized, keyword]);
 
   useEffect(() => {
     if (!isInitialized.value) {
