@@ -5,6 +5,7 @@ extends:
 rules:
   string-quotes: single
   no-empty-source: null
+  no-descending-specificity: null
   rscss/class-format:
     - true
     - component: ^[a-z0-9]+[A-Z][a-zA-Z0-9]+$

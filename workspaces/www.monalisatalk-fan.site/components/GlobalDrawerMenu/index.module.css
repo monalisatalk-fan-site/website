@@ -1,5 +1,5 @@
 .hambargerMenu {
-  --color-bars: #ccc;
+  --color-bars: #aaa;
 
   position: fixed;
   right: var(--global-hambarger-menu-position-x);
@@ -22,6 +22,13 @@
   & > .bars::after {
     height: 2px;
     background: var(--color-bars);
+    transition: background 0.12s ease;
+  }
+
+  &:hover > .bars,
+  &:hover > .bars::before,
+  &:hover > .bars::after {
+    background: var(--color-white);
   }
 
   & > .bars {
@@ -43,10 +50,14 @@
 
   & > .bars::before {
     top: -8px;
+    border-top-left-radius: 100vw;
+    border-top-right-radius: 100vw;
   }
 
   & > .bars::after {
     bottom: -10px;
+    border-bottom-right-radius: 100vw;
+    border-bottom-left-radius: 100vw;
   }
 }
 

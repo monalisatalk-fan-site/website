@@ -80,7 +80,6 @@
     border-radius: 100vw;
   }
 
-  /* stylelint-disable-next-line no-descending-specificity */
   & > .title {
     margin-top: var(--margin-1x);
     font-size: 1.4rem;
