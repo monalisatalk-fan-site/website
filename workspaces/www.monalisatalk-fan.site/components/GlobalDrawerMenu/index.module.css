@@ -8,6 +8,7 @@
   display: none;
   width: var(--global-hambarger-menu-size);
   height: var(--global-hambarger-menu-size);
+  cursor: pointer;
   background: var(--color-background-primary);
   border: 1px solid #595959;
   border-radius: 50%;
