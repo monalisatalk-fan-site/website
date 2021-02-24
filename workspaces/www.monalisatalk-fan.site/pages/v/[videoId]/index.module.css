@@ -67,7 +67,7 @@
     position: absolute;
     top: 50%;
     left: var(--margin-2x);
-    z-index: --z-index-positive;
+    z-index: var(--z-index-positive);
     display: block;
     width: 0;
     height: 0;
@@ -112,7 +112,7 @@
 
   & > .link > .text {
     position: relative;
-    z-index: --z-index-positive;
+    z-index: var(--z-index-positive);
   }
 }
 
