@@ -47,8 +47,8 @@
 
   /** Global Menu */
   --global-hambarger-menu-size: 48px;
-  --global-hambarger-menu-position-x: 8px;
-  --global-hambarger-menu-position-y: 8px;
+  --global-hambarger-menu-position-x: 12px;
+  --global-hambarger-menu-position-y: 12px;
 
   /** YouTube Thumbnail */
   --thumbnail-aspect-ratio: calc(480 / 270);

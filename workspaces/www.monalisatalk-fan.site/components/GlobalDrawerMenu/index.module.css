@@ -1,7 +1,7 @@
 .hambargerMenu {
   position: fixed;
   right: var(--global-hambarger-menu-position-x);
-  bottom: var(--global-hambarger-menu-position-y);
+  bottom: calc(var(--global-hambarger-menu-position-y) + env(safe-area-inset-bottom));
   z-index: var(--z-index-global-hambarger-menu);
   display: none;
   width: var(--global-hambarger-menu-size);
