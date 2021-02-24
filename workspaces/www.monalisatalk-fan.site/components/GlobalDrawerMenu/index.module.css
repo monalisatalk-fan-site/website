@@ -14,6 +14,38 @@
     display: grid;
     place-items: center;
   }
+
+  & > .bars,
+  & > .bars::before,
+  & > .bars::after {
+    height: 2px;
+    background: var(--color-white);
+  }
+
+  & > .bars {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    transform: translate(-50%, -50%);
+  }
+
+  & > .bars::before,
+  & > .bars::after {
+    position: absolute;
+    left: 50%;
+    width: 70%;
+    content: '';
+    transform: translate(-50%, -50%);
+  }
+
+  & > .bars::before {
+    top: -8px;
+  }
+
+  & > .bars::after {
+    bottom: -10px;
+  }
 }
 
 .drawerMenu {
