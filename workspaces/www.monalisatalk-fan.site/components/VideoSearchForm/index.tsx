@@ -24,7 +24,7 @@ export const VideoSearchForm: React.VFC = () => {
 
     return () => {
       isInitialized.value = true;
-    }
+    };
   }, [isInitialized, keyword, query]);
 
   useEffect(() => {
