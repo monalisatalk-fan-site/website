@@ -13,7 +13,11 @@ export const GlobalDrawerMenu: React.VFC = () => {
 
   return (
     <>
-      <button className={styles.hambargerMenu} onClick={openMenu} onTouchStart={openMenu}>
+      <button
+        className={styles.hambargerMenu}
+        onClick={openMenu}
+        onTouchStart={openMenu}
+      >
         M
       </button>
       <div className={clsx(styles.drawerMenu, isMenuVisible && styles.Visible)}>
