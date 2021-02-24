@@ -13,7 +13,7 @@ export const GlobalDrawerMenu: React.VFC = () => {
 
   return (
     <>
-      <button className={styles.hambargerMenu} onClick={openMenu}>
+      <button className={styles.hambargerMenu} aria-label="ウェブサイトのメニューを開く" onClick={openMenu}>
         <span className={styles.bars} />
       </button>
       <div className={clsx(styles.drawerMenu, isMenuVisible && styles.Visible)}>
