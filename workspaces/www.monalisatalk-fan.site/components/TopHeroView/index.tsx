@@ -8,7 +8,13 @@ export type Props = {
 };
 
 export const TopHeroView: React.VFC<Props> = ({ videos }) => {
-  const shuffledVideos = useMemo(() => videos.map((videoItems) => videoItems.slice().sort(() => Math.random() - 0.5)), [videos]);
+  const shuffledVideos = useMemo(
+    () =>
+      videos.map((videoItems) =>
+        videoItems.slice().sort(() => Math.random() - 0.5)
+      ),
+    [videos]
+  );
 
   return (
     <div className={styles.topHeroView}>
