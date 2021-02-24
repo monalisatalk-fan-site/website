@@ -24,8 +24,15 @@
   height: calc(var(--vh, 1vh) * 100);
   visibility: hidden;
   background: var(--color-red);
+  opacity: 0;
 
   @media (--small-viewport) {
     display: block;
+  }
+
+  &.Visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.12s ease-out-quart;
   }
 }
