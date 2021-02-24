@@ -26,7 +26,7 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
 
     return () => {
       window.removeEventListener('resize', onResize);
-    }
+    };
   }, []);
 
   return (

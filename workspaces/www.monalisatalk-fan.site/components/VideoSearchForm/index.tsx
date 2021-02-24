@@ -3,7 +3,12 @@ import { useRouter } from 'next/router';
 import qs from 'qs';
 import { useReactiveState } from '@lollipop-onl/react-reactive-state';
 import { UIReactiveInput } from '~/components/UIReactiveInput';
-import { VideoSearchOrder, SEARCH_QUERY_KEYWORD, SEARCH_QUERY_ORDER, SEARCH_QUERY_PAGE } from '~/hooks/useVideoSearch';
+import {
+  VideoSearchOrder,
+  SEARCH_QUERY_KEYWORD,
+  SEARCH_QUERY_ORDER,
+  SEARCH_QUERY_PAGE,
+} from '~/hooks/useVideoSearch';
 
 export const VideoSearchForm: React.VFC = () => {
   const { replace, query } = useRouter();
@@ -16,9 +21,10 @@ export const VideoSearchForm: React.VFC = () => {
       return;
     }
 
-    const { [SEARCH_QUERY_KEYWORD]: currentKeyword, [SEARCH_QUERY_ORDER]: currentOrder } = qs.parse(
-      window.location.search.replace(/^\?/, '')
-    );
+    const {
+      [SEARCH_QUERY_KEYWORD]: currentKeyword,
+      [SEARCH_QUERY_ORDER]: currentOrder,
+    } = qs.parse(window.location.search.replace(/^\?/, ''));
 
     if (typeof currentKeyword === 'string') {
       keyword.value = currentKeyword;
