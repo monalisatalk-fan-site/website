@@ -5,11 +5,9 @@ import styles from './index.module.css';
 export const GlobalDrawerMenu: React.VFC = () => {
   const [isMenuVisible, setMenuVisibility] = useState(false);
   const openMenu = useCallback(() => {
-
     setMenuVisibility(true);
   }, [setMenuVisibility]);
   const closeMenu = useCallback(() => {
-
     setMenuVisibility(false);
   }, [setMenuVisibility]);
 
