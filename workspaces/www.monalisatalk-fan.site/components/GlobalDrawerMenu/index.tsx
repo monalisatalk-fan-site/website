@@ -4,12 +4,18 @@ import styles from './index.module.css';
 
 export const GlobalDrawerMenu: React.VFC = () => {
   const [isMenuVisible, setMenuVisibility] = useState(false);
-  const openMenu = useCallback(() => setMenuVisibility(true), [setMenuVisibility]);
-  const closeMenu = useCallback(() => setMenuVisibility(false), [setMenuVisibility]);
+  const openMenu = useCallback(() => setMenuVisibility(true), [
+    setMenuVisibility,
+  ]);
+  const closeMenu = useCallback(() => setMenuVisibility(false), [
+    setMenuVisibility,
+  ]);
 
   return (
     <>
-      <button className={styles.hambargerMenu} onClick={openMenu} onTouchStart={openMenu}>M</button>
+      <button className={styles.hambargerMenu} onClick={openMenu} onTouchStart={openMenu}>
+        M
+      </button>
       <div className={clsx(styles.drawerMenu, isMenuVisible && styles.Visible)}>
         Drawer menu
         <button onClick={closeMenu}>Close menu</button>
