@@ -11,9 +11,8 @@ export const GlobalDrawerMenu: React.VFC = () => {
       documentElement.style.setProperty('--body-scroll', 'hidden');
     }
 
-    setMenuVisibility(true);}, [
-    setMenuVisibility,
-  ]);
+    setMenuVisibility(true);
+  }, [setMenuVisibility]);
   const closeMenu = useCallback(() => {
     const { documentElement } = document;
 
@@ -21,16 +20,12 @@ export const GlobalDrawerMenu: React.VFC = () => {
       documentElement.style.removeProperty('--body-scroll');
     }
 
-    setMenuVisibility(false);}, [
-    setMenuVisibility,
-  ]);
+    setMenuVisibility(false);
+  }, [setMenuVisibility]);
 
   return (
     <>
-      <button
-        className={styles.hambargerMenu}
-        onClick={openMenu}
-      >
+      <button className={styles.hambargerMenu} onClick={openMenu}>
         M
       </button>
       <div className={clsx(styles.drawerMenu, isMenuVisible && styles.Visible)}>
