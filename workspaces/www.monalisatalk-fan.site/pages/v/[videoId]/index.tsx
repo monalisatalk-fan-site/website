@@ -71,7 +71,7 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
             <YouTubeThumbnail videoId={video.id} />
           </div>
           <a
-            className={styles.link}
+            className={clsx(styles.link, styles.videoDetailYouTubeLink)}
             href={youtubeLink}
             target="_blank"
             rel="noreferrer"
@@ -127,6 +127,14 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
               </p>
             ))}
           </div>
+          <a
+            className={clsx(styles.link, styles.videoDetailYouTubeLink)}
+            href={youtubeLink}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className={styles.text}>YouTube で動画をみる</span>
+          </a>
         </div>
       </LayoutContainer>
     </article>
