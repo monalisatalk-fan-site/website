@@ -41,13 +41,21 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
     return pages;
   }, [beginPage, finishPage]);
 
-  const isFirstPageVisible = useMemo((): boolean => !pages.includes(1), [pages]);
+  const isFirstPageVisible = useMemo((): boolean => !pages.includes(1), [
+    pages,
+  ]);
 
-  const isFinalPageVisible = useMemo((): boolean => !pages.includes(totalPages), [totalPages, pages]);
+  const isFinalPageVisible = useMemo(
+    (): boolean => !pages.includes(totalPages),
+    [totalPages, pages]
+  );
 
   const isPreviousButtonVisible = useMemo((): boolean => page !== 1, [page]);
 
-  const isNextButtonVisible = useMemo((): boolean => page !== totalPages, [page, totalPages]);
+  const isNextButtonVisible = useMemo((): boolean => page !== totalPages, [
+    page,
+    totalPages,
+  ]);
 
   const getPageLink = useCallback(
     (pageNumber: number): string =>
@@ -63,10 +71,17 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
 
   return (
     <div className={styles.uiPagination}>
+      {isPreviousButtonVisible ? (
+        <Link href={getPageLink(page - 1)}>
+          <a className={styles.button}>＜</a>
+        </Link>
+      ) : null}
       <ol className={styles.list}>
-        { isFirstPageVisible ? (
+        {isFirstPageVisible ? (
           <li className={styles.item}>
-            <Link href={getPageLink(1)}><a className={clsx(styles.page, styles.Link)}>1</a></Link>
+            <Link href={getPageLink(1)}>
+              <a className={clsx(styles.page, styles.Link)}>1</a>
+            </Link>
             <span className={styles.dots}>...</span>
           </li>
         ) : null}
@@ -78,31 +93,33 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
           </li>
         ) : null }
         {pages.map((p) => {
-            return (
-              <li key={p} className={styles.item}>
-                {page === p ? (
-                  <span className={styles.page}>{p}</span>
-                ) : (
-                  <Link href={getPageLink(p)}>
-                    <a className={clsx(styles.page, styles.Link)}>{p}</a>
-                  </Link>
-                )}
-              </li>
-            );
-          })}
-          { isNextButtonVisible ? (
-            <li className={styles.item}>
-              <Link href={getPageLink(page + 1)}>
-                <a className={styles.button}>＞</a>
-              </Link>
+          return (
+            <li key={p} className={styles.item}>
+              {page === p ? (
+                <span className={styles.page}>{p}</span>
+              ) : (
+                <Link href={getPageLink(p)}>
+                  <a className={clsx(styles.page, styles.Link)}>{p}</a>
+                </Link>
+              )}
             </li>
-          ) : null }
-          { isFinalPageVisible ? (
-            <li className={styles.item}>
-              <span className={styles.dots}>...</span>
-              <Link href={getPageLink(totalPages)}><a className={clsx(styles.page, styles.Link)}>{totalPages}</a></Link>
-            </li>
-          ) : null }
+          );
+        })}
+        { isNextButtonVisible ? (
+          <li className={styles.item}>
+            <Link href={getPageLink(page + 1)}>
+              <a className={styles.button}>＞</a>
+            </Link>
+          </li>
+        ) : null }
+        {isFinalPageVisible ? (
+          <li className={styles.item}>
+            <span className={styles.dots}>...</span>
+            <Link href={getPageLink(totalPages)}>
+              <a className={clsx(styles.page, styles.Link)}>{totalPages}</a>
+            </Link>
+          </li>
+        ) : null}
       </ol>
     </div>
   );
