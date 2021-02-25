@@ -7,6 +7,7 @@ import { VideoSearchForm } from '~/components/VideoSearchForm';
 import { LayoutContainer } from '~/components/LayoutContainer';
 import type resources from '~/assets/data/resources.json';
 import { useVideoSearch } from '~/hooks/useVideoSearch';
+import styles from './index.module.css';
 
 export type StaticProps = {
   videos: typeof resources.videos;
@@ -28,14 +29,16 @@ export const VideosPage: React.VFC<StaticProps> = ({ videos }) => {
   );
 
   return (
-    <div>
-      <LayoutContainer>
+    <div className={styles.videosPage}>
+      <LayoutContainer className={styles.container}>
         <UIHeading title="漫画動画" description={`${totalVideos}件の動画`} />
         <VideoSearchForm />
         {videosPerPage.length > 0 ? (
           <>
             <SimpleVideoList videos={videosPerPage} />
-            <UIPagination page={page} totalPages={totalPages} />
+            <div className={styles.pagination}>
+              <UIPagination page={page} totalPages={totalPages} />
+            </div>
           </>
         ) : (
           <p>videos not found.</p>

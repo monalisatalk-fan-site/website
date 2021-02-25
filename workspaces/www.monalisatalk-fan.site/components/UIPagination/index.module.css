@@ -1,11 +1,51 @@
 .uiPagination {
-  display: flex;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--margin-1x);
+  border: 1px solid #595959;
+  border-radius: 4px;
 
   & > .list {
     display: flex;
   }
 
-  & > .list > .item:not(:first-child) {
-    margin-left: var(--margin-1x);
+  & > .list > .item > .page {
+    padding: var(--margin-1x);
+    font-size: 1.4rem;
+  }
+
+  & > .list > .item > .page:not(.Link) {
+    font-weight: bold;
+    color: var(--color-white);
+  }
+
+  & > .list > .item > .page.Link {
+    color: #aaa;
+  }
+
+  & > .list > .item > .page.Link:hover {
+    color: var(--color-white);
+  }
+
+  & > .list > .item > .dots {
+    padding: 0 var(--margin-1x);
+    color: #595959;
+
+    @media (--small-viewport) {
+      padding: 0;
+    }
+  }
+
+  & > .button {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    font-weight: bold;
+    color: #aaa;
+  }
+
+  & > .button:hover {
+    color: var(--color-white);
   }
 }
