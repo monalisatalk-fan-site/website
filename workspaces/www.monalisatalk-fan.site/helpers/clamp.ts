@@ -1,5 +1,8 @@
-export const clamp = (value: number, options: { min?: number; max?: number }): number => {
-  const {min = -Infinity, max = Infinity} = options;
+export const clamp = (
+  value: number,
+  options: { min?: number; max?: number }
+): number => {
+  const { min = -Infinity, max = Infinity } = options;
 
   if (value < min) {
     return min;
@@ -10,4 +13,4 @@ export const clamp = (value: number, options: { min?: number; max?: number }): n
   }
 
   return value;
-}
+};
