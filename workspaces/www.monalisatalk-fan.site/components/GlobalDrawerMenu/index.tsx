@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import Link from 'next/link';
 import clsx from 'clsx';
 import styles from './index.module.css';
 
@@ -23,9 +24,27 @@ export const GlobalDrawerMenu: React.VFC = () => {
       <div className={clsx(styles.drawerMenu, isMenuVisible && styles.Visible)}>
         <div className={styles.header}>
           <img className={styles.logo} src="/images/logo.svg" alt="" />
+          <button className={styles.close} onClick={closeMenu} aria-label="メニューを閉じる" />
         </div>
-        Drawer menu
-        <button onClick={closeMenu}>Close menu</button>
+        <nav className={styles.navigation}>
+          <ul className={styles.drawerMenuNavigation}>
+            <li className={styles.item}>
+              <Link href="/">
+                <a className={styles.link}>HOME</a>
+              </Link>
+            </li>
+            <li className={styles.item}>
+              <Link href="/videos">
+                <a className={styles.link}>VIDEOS</a>
+              </Link>
+            </li>
+            <li className={styles.item}>
+              <Link href="/goods">
+                <a className={styles.link}>GOODS</a>
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </>
   );
