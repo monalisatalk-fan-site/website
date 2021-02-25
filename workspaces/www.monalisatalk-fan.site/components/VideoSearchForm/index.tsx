@@ -79,7 +79,6 @@ export const VideoSearchForm: React.VFC = () => {
     router.replace({
       query: {
         ...router.query,
-        [SEARCH_QUERY_PAGE]: 1,
         [SEARCH_QUERY_ORDER]: nextOrder,
       },
     });

@@ -7,8 +7,8 @@ import { SelectOption, BaseSelect } from '~/components/BaseSelect';
 import { VideoSearchOrder } from '~/hooks/useVideoSearch';
 
 export const OPTIONS: SelectOption<VideoSearchOrder>[] = [
-  { value: 'latest', label: '最新' },
-  { value: 'oldest', label: '最古' },
+  { value: 'latest', label: '新しい順' },
+  { value: 'oldest', label: '古い順' },
   { value: 'views', label: '再生回数' },
 ];
 

@@ -4,6 +4,8 @@ import { flatMap, range } from 'lodash';
 
 /** モナ・リザの戯言チャンネルのID */
 export const CHANNEL_ID = 'UCSSkv6tmPpi8d1IrWegypsA';
+/** モナ・リザの戯言おすすめ動画プレイリストのID */
+export const RECOMMENDED_VIDEOS_CHANNEL_ID = 'PLDiYkQqys3WY83qMHE5TcIp-mK4-NPmF4';
 /** 最後の動画がアップロードされた月 */
 export const OLDEST_VIDEO_YEAR = 2019;
 /** 最後の動画がアップロードされた月 */

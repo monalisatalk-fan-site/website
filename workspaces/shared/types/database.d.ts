@@ -73,6 +73,10 @@ export type DatabaseStructure = {
       name: string;
     };
   };
+  /** おすすめ動画 */
+  recommendedVideos: {
+    $videoId: boolean;
+  };
 };
 
 export type TypedDatabase = DefineTypedDatabase<DatabaseStructure>;
