@@ -1,3 +1,5 @@
+const bundleAnalyzer = require('@next/bundle-analyzer');
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
@@ -12,9 +14,12 @@ const {
   FIREBASE_MEASUREMENT_ID,
   ALGOLIA_APPLICATION_ID,
   ALGOLIA_SEARCH_ONLY_API_KEY,
+  ANALYZE = 'false',
 } = process.env;
 
-module.exports = {
+const withBundleAnalyzer = bundleAnalyzer({ enabled: ANALYZE === 'true' });
+
+module.exports = withBundleAnalyzer({
   env: {
     FIREBASE_API_KEY,
     FIREBASE_AUTH_DOMAIN,
@@ -28,4 +33,4 @@ module.exports = {
     ALGOLIA_SEARCH_ONLY_API_KEY,
   },
   trailingSlash: true,
-};
+});

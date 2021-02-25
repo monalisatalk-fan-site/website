@@ -4,11 +4,9 @@ env:
   node: true
 extends:
   - standard
-  - plugin:@typescript-eslint/recommended
   - plugin:react/recommended
   - plugin:react-hooks/recommended
   - prettier
-  - prettier/@typescript-eslint
   - prettier/react
   - prettier/prettier
 settings:
@@ -17,3 +15,10 @@ settings:
 rules:
   no-use-before-define: 'off'
   react/prop-types: 'off'
+overrides:
+  - files:
+      - '*.ts'
+      - '*.tsx'
+    extends:
+      - plugin:@typescript-eslint/recommended
+      - prettier/@typescript-eslint
