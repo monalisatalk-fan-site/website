@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import qs from 'qs';
 import { useReactiveState } from '@lollipop-onl/react-reactive-state';
 import { UIReactiveInput } from '~/components/UIReactiveInput';
+import { VideoSearchFormOrderSelect } from '~/components/VideoSearchFormOrderSelect';
 import {
   VideoSearchOrder,
   SEARCH_QUERY_KEYWORD,
@@ -86,6 +87,7 @@ export const VideoSearchForm: React.VFC = () => {
 
   return (
     <div>
+      <VideoSearchFormOrderSelect model={order} />
       <UIReactiveInput model={order} />
       <UIReactiveInput model={keyword} />
     </div>
