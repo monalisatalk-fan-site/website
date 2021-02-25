@@ -6,21 +6,23 @@ import { TypedDatabase } from '../../shared/types/database';
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
+type Video = {
+  id: string;
+  title: string;
+  description?: string;
+  publishedAt: number;
+  actors: string[];
+  tags: string[];
+  voiceActors: string[];
+  statistics: {
+    viewCount: number;
+    likeCount: number;
+    updatedAt: number;
+  };
+};
+
 type ResourcesJson = {
-  videos: Array<{
-    id: string;
-    title: string;
-    description?: string;
-    publishedAt: number;
-    actors: string[];
-    tags: string[];
-    voiceActors: string[];
-    statistics: {
-      viewCount: number;
-      likeCount: number;
-      updatedAt: number;
-    };
-  }>;
+  videos: Video[];
   actors: Array<{
     id: string;
     name: string;
@@ -31,6 +33,7 @@ type ResourcesJson = {
     id: string;
     name: string;
   }>;
+  recommendedVideos: Video[];
 };
 
 const DIST_PATH = path.join(__dirname, '../assets/data/resources.json');
@@ -97,11 +100,24 @@ const parseVoiceActors = async (): Promise<ResourcesJson['voiceActors']> => {
   }));
 };
 
+const parseRecommendedVideoIdList = async (): Promise<string[]> => {
+  const snapshot = await database.ref('recommendedVideos').once('value');
+  const value = snapshot.val();
+
+  if (!value) {
+    throw new Error('voiceActors/ のデータを参照できませんでした');
+  }
+
+  return Object.keys(value).map((videoId) => videoId);
+};
+
 (async () => {
-  const [videos, voiceActors] = await Promise.all([
+  const [videos, voiceActors, recommendedVideoIdList] = await Promise.all([
     parseVideos(),
     parseVoiceActors(),
+    parseRecommendedVideoIdList(),
   ]);
+  const recommendedVideos = recommendedVideoIdList.map((videoId) => videos.find(({ id }) => id === videoId)).filter((video): video is NonNullable<typeof video> => video != null);
 
   database.goOffline();
 
@@ -109,6 +125,7 @@ const parseVoiceActors = async (): Promise<ResourcesJson['voiceActors']> => {
     videos,
     actors: [],
     voiceActors,
+    recommendedVideos,
   };
 
   await fs.promises.writeFile(DIST_PATH, JSON.stringify(json), 'utf-8');

@@ -12,11 +12,12 @@ import styles from './index.module.css';
 
 export type StaticProps = {
   latestVideos: Video[];
+  recommendedVideos: Video[];
   pickupVideos: string[][];
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-  const { videos } = await import('~/assets/data/resources.json');
+  const { videos, recommendedVideos } = await import('~/assets/data/resources.json');
   const latestVideos = videos.slice().splice(0, 4);
   const pickupVideos: string[][] = [];
 
@@ -52,6 +53,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   return {
     props: {
       latestVideos,
+      recommendedVideos: recommendedVideos.slice().splice(0, 4),
       pickupVideos,
     },
   };
@@ -59,6 +61,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 
 export const IndexPage: React.VFC<StaticProps> = ({
   latestVideos,
+  recommendedVideos,
   pickupVideos,
 }) => {
   const pickupPlaylistLink = useMemo(
@@ -103,7 +106,7 @@ export const IndexPage: React.VFC<StaticProps> = ({
                 alt="モナ・リザの戯言チャンネルおすすめ漫画動画のタイトル"
               />
             </h1>
-            <SimpleVideoList videos={latestVideos} />
+            <SimpleVideoList videos={recommendedVideos} />
             <div className={styles.morebutton}>
               <UILinkButton href="/recommended">もっとみる</UILinkButton>
             </div>
