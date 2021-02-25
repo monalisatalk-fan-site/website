@@ -6,4 +6,10 @@
   & > .container > .playlist {
     margin-top: var(--margin-3x);
   }
+
+  & > .container > .footer {
+    display: grid;
+    place-items: center;
+    width: 100%;
+  }
 }

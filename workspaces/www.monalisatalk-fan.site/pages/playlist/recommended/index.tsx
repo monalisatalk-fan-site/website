@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { LayoutContainer } from '~/components/LayoutContainer';
 import { SimpleVideoList } from '~/components/SimpleVideoList';
 import { UIHeading } from '~/components/UIHeading';
@@ -31,6 +31,11 @@ const PlaylistRecommendedPage: React.VFC<StaticProps> = ({ videos }) => {
         />
         <div className={styles.playlist}>
           <SimpleVideoList videos={videos} />
+        </div>
+        <div className={styles.footer}>
+          <Link href="https://www.youtube.com/playlist?list=PLDiYkQqys3WY83qMHE5TcIp-mK4-NPmF4">
+            <a target="_blank" rel="noreferrer">YouTubeでプレイリストを開く</a>
+          </Link>
         </div>
       </LayoutContainer>
     </article>
