@@ -108,7 +108,7 @@ const parseRecommendedVideoIdList = async (): Promise<string[]> => {
     throw new Error('voiceActors/ のデータを参照できませんでした');
   }
 
-  return Object.keys(value).map((videoId) => videoId);
+  return value;
 };
 
 (async () => {

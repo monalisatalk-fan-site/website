@@ -108,7 +108,7 @@ export const IndexPage: React.VFC<StaticProps> = ({
             </h1>
             <SimpleVideoList videos={recommendedVideos} />
             <div className={styles.morebutton}>
-              <UILinkButton href="/recommended">もっとみる</UILinkButton>
+              <UILinkButton href="/playlist/recommended">もっとみる</UILinkButton>
             </div>
           </section>
           <section className={styles.section}>

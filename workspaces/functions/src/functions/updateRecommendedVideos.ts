@@ -18,13 +18,13 @@ export const updateRecommendedVideos = functions.https.onRequest(async (req, res
 
   const { data: { items = [] } } = response;
   const videoIdList = items.map(({ contentDetails }) => contentDetails?.videoId).filter((videoId): videoId is NonNullable<typeof videoId> => videoId != null);
-  const values = videoIdList.reduce<Record<string, boolean>>((values, videoId) => {
-    values[videoId] = true;
+  // const values = videoIdList.reduce<Record<string, boolean>>((values, videoId) => {
+  //   values[videoId] = true;
 
-    return values;
-  }, {});
+  //   return values;
+  // }, {});
 
-  await database.ref('recommendedVideos').set(values);
+  await database.ref('recommendedVideos').set(videoIdList);
 
   res.status(200).json({
     message: 'Recommended videos updated',
