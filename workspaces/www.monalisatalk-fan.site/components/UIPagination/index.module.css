@@ -1,12 +1,12 @@
 .uiPagination {
   display: inline-flex;
-  align-items: center;
   padding: var(--margin-1x);
   border: 1px solid #595959;
   border-radius: 4px;
 
   & > .list {
     display: flex;
+    align-items: center;
   }
 
   & > .list > .item > .page {
@@ -36,7 +36,7 @@
     }
   }
 
-  & > .button {
+  & > .list > .item > .button {
     display: grid;
     place-items: center;
     width: 24px;
@@ -45,7 +45,7 @@
     color: #aaa;
   }
 
-  & > .button:hover {
+  & > .list > .item > .button:hover {
     color: var(--color-white);
   }
 }

@@ -15,9 +15,23 @@ export type Props = {
 export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
   const { query, pathname } = useRouter();
 
+  const beginPage = useMemo((): number => {
+    if (totalPages - page < 3) {
+      return totalPages - 4;
+    }
+
+    return clamp(page - 2, { min: 1 });
+  }, [page, totalPages]);
+
+  const finishPage = useMemo((): number => {
+    if (page <= 3) {
+      return 5;
+    }
+
+    return clamp(page + 2, { max: totalPages });
+  }, [page, totalPages]);
+
   const pages = useMemo((): number[] => {
-    const beginPage = clamp(page - 2, { min: 1 });
-    const finishPage = clamp(beginPage + 4, { max: totalPages });
     const pages: number[] = [];
 
     for (let p = beginPage; p <= finishPage; p += 1) {
@@ -25,7 +39,7 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
     }
 
     return pages;
-  }, [page, totalPages]);
+  }, [beginPage, finishPage]);
 
   const isFirstPageVisible = useMemo((): boolean => !pages.includes(1), [pages]);
 
@@ -49,11 +63,6 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
 
   return (
     <div className={styles.uiPagination}>
-      { isPreviousButtonVisible ? (
-        <Link href={getPageLink(page - 1)}>
-          <a className={styles.button}>＜</a>
-        </Link>
-      ) : null }
       <ol className={styles.list}>
         { isFirstPageVisible ? (
           <li className={styles.item}>
@@ -61,6 +70,13 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
             <span className={styles.dots}>...</span>
           </li>
         ) : null}
+        { isPreviousButtonVisible ? (
+          <li className={styles.item}>
+            <Link href={getPageLink(page - 1)}>
+              <a className={styles.button}>＜</a>
+            </Link>
+          </li>
+        ) : null }
         {pages.map((p) => {
             return (
               <li key={p} className={styles.item}>
@@ -74,6 +90,13 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
               </li>
             );
           })}
+          { isNextButtonVisible ? (
+            <li className={styles.item}>
+              <Link href={getPageLink(page + 1)}>
+                <a className={styles.button}>＞</a>
+              </Link>
+            </li>
+          ) : null }
           { isFinalPageVisible ? (
             <li className={styles.item}>
               <span className={styles.dots}>...</span>
@@ -81,11 +104,6 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
             </li>
           ) : null }
       </ol>
-      { isNextButtonVisible ? (
-        <Link href={getPageLink(page + 1)}>
-          <a className={styles.button}>＞</a>
-        </Link>
-      ) : null }
     </div>
   );
 };
