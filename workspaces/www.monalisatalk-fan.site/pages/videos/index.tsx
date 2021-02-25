@@ -31,7 +31,10 @@ export const VideosPage: React.VFC<StaticProps> = ({ videos }) => {
   return (
     <div className={styles.videosPage}>
       <LayoutContainer className={styles.container}>
-        <UIHeading title="漫画動画" description={`${totalVideos}件の動画 (${page}/${totalPages})`} />
+        <UIHeading
+          title="漫画動画"
+          description={`${totalVideos}件の動画 (${page}/${totalPages})`}
+        />
         <VideoSearchForm />
         {videosPerPage.length > 0 ? (
           <>
