@@ -117,7 +117,9 @@ const parseRecommendedVideoIdList = async (): Promise<string[]> => {
     parseVoiceActors(),
     parseRecommendedVideoIdList(),
   ]);
-  const recommendedVideos = recommendedVideoIdList.map((videoId) => videos.find(({ id }) => id === videoId)).filter((video): video is NonNullable<typeof video> => video != null);
+  const recommendedVideos = recommendedVideoIdList
+    .map((videoId) => videos.find(({ id }) => id === videoId))
+    .filter((video): video is NonNullable<typeof video> => video != null);
 
   database.goOffline();
 
