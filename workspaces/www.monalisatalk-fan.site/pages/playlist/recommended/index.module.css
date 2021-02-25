@@ -12,4 +12,29 @@
     place-items: center;
     width: 100%;
   }
+
+  & > .container > .footer > .link {
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    padding: var(--margin-1x) var(--margin-3x);
+    margin-top: var(--margin-3x);
+    font-weight: bold;
+    line-height: 1.5;
+    color: var(--color-youtube);
+    background: transparent;
+    border: 2px solid var(--color-youtube);
+    transition: background 0.1s ease, color 0.1s ease;
+
+    @media (--small-viewport) {
+      width: 100%;
+    }
+  }
+
+  & > .container > .footer > .link:hover {
+    padding-right: 0;
+    padding-left: 0;
+    color: var(--color-white);
+    background: var(--color-youtube);
+  }
 }
