@@ -3,7 +3,7 @@ import type { ParsedUrlQuery } from 'querystring';
 import { useMemo } from 'react';
 import { Video } from '~/types';
 
-export type VideoSearchOrder = 'latest' | 'oldest' | 'views';
+export type VideoSearchOrder = 'latest' | 'oldest' | 'views' | 'likes';
 
 export type UseVideoSearchResult = {
   videosPerPage: Video[];
@@ -34,6 +34,7 @@ export const pickOrder = (query: ParsedUrlQuery): VideoSearchOrder => {
   switch (order) {
     case 'oldest':
     case 'views':
+    case 'likes':
       return order;
     default:
       return 'latest';
@@ -60,6 +61,9 @@ export const sortVideoOrder = (
       : order === 'views'
       ? (a: Video, b: Video): number =>
           b.statistics.viewCount - a.statistics.viewCount
+      : order === 'likes'
+      ? (a: Video, b: Video): number =>
+      b.statistics.likeCount - a.statistics.likeCount
       : (a: Video, b: Video): number => b.publishedAt - a.publishedAt;
 
   return videos.slice().sort(compare);

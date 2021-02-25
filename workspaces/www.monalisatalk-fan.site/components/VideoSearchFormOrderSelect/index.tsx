@@ -10,6 +10,7 @@ export const OPTIONS: SelectOption<VideoSearchOrder>[] = [
   { value: 'latest', label: '新しい順' },
   { value: 'oldest', label: '古い順' },
   { value: 'views', label: '再生回数' },
+  { value: 'likes', label: '高評価数' },
 ];
 
 export type Props = {
