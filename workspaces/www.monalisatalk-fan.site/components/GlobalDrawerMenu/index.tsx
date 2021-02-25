@@ -21,6 +21,9 @@ export const GlobalDrawerMenu: React.VFC = () => {
         <span className={styles.bars} />
       </button>
       <div className={clsx(styles.drawerMenu, isMenuVisible && styles.Visible)}>
+        <div className={styles.header}>
+          <img className={styles.logo} src="/images/logo.svg" alt="" />
+        </div>
         Drawer menu
         <button onClick={closeMenu}>Close menu</button>
       </div>
