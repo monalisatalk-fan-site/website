@@ -80,13 +80,13 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
             <span className={styles.dots}>...</span>
           </li>
         ) : null}
-        { isPreviousButtonVisible ? (
+        {isPreviousButtonVisible ? (
           <li className={styles.item}>
             <Link href={getPageLink(page - 1)}>
               <a className={styles.button}>＜</a>
             </Link>
           </li>
-        ) : null }
+        ) : null}
         {pages.map((p) => {
           return (
             <li key={p} className={styles.item}>
@@ -100,13 +100,13 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
             </li>
           );
         })}
-        { isNextButtonVisible ? (
+        {isNextButtonVisible ? (
           <li className={styles.item}>
             <Link href={getPageLink(page + 1)}>
               <a className={styles.button}>＞</a>
             </Link>
           </li>
-        ) : null }
+        ) : null}
         {isFinalPageVisible ? (
           <li className={styles.item}>
             <span className={styles.dots}>...</span>
