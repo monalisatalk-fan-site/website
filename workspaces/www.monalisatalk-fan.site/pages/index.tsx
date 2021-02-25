@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
+import clsx from 'clsx';
 import qs from 'qs';
 import { LayoutContainer } from '~/components/LayoutContainer';
 import { TopHeroView } from '~/components/TopHeroView';
@@ -86,13 +87,28 @@ export const IndexPage: React.VFC<StaticProps> = ({
               <img
                 className={styles.image}
                 src="/images/top/headings/latest-videos.svg"
-                alt="最新動画のタイトル"
+                alt="最新漫画動画のタイトル"
               />
             </h1>
             <SimpleVideoList videos={latestVideos} />
             <div className={styles.morebutton}>
               <UILinkButton href="/videos">
-                新着順にすべての動画をみる
+                もっとみる
+              </UILinkButton>
+            </div>
+          </section>
+          <section className={styles.section}>
+            <h1 className={clsx(styles.heading, styles.Left)}>
+              <img
+                className={styles.image}
+                src="/images/top/headings/recommended-videos.svg"
+                alt="モナ・リザの戯言チャンネルおすすめ漫画動画のタイトル"
+              />
+            </h1>
+            <SimpleVideoList videos={latestVideos} />
+            <div className={styles.morebutton}>
+              <UILinkButton href="/recommended">
+                もっとみる
               </UILinkButton>
             </div>
           </section>

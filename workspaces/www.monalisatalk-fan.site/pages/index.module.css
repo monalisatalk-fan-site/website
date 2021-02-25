@@ -39,6 +39,7 @@
 
   & > .section > .heading > .image {
     display: block;
+    max-width: 100%;
     padding: var(--margin-1x) var(--margin-2x);
     background: var(--color-yellow);
     border: 3px solid var(--color-black);
@@ -46,6 +47,10 @@
 
   & > .section > .heading.Right > .image {
     margin-left: auto;
+  }
+
+  & > .section > .heading.Left > .image {
+    margin-right: auto;
   }
 
   & > .section > .morebutton {
