@@ -88,7 +88,6 @@ export const VideoSearchForm: React.VFC = () => {
   return (
     <div>
       <VideoSearchFormOrderSelect model={order} />
-      <UIReactiveInput model={order} />
       <UIReactiveInput model={keyword} />
     </div>
   );
