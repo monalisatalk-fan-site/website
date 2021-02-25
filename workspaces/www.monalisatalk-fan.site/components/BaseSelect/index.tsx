@@ -9,28 +9,45 @@ export type SelectOption<T = unknown> = {
   disabled?: boolean;
 };
 
-export type Props = React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> & {
+export type Props = React.DetailedHTMLProps<
+  React.SelectHTMLAttributes<HTMLSelectElement>,
+  HTMLSelectElement
+> & {
   model: ReactiveState<unknown>;
   options: SelectOption[];
   label: ReactiveState<string | number | boolean>;
   placeholder?: string;
 };
 
-export const BaseSelect: React.FC<Props> = ({ children, model, options, label, placeholder = 'placeholder value', onChange = noop, ...props }) => {
-  const activeIndex = useMemo(() => options.findIndex(({ value }) => model.value === value), [options, model]);
+export const BaseSelect: React.FC<Props> = ({
+  children,
+  model,
+  options,
+  label,
+  placeholder = 'placeholder value',
+  onChange = noop,
+  ...props
+}) => {
+  const activeIndex = useMemo(
+    () => options.findIndex(({ value }) => model.value === value),
+    [options, model]
+  );
 
-  const onChangeValue = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    const index = +e.target.value;
-    const option = options[index];
+  const onChangeValue = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const index = +e.target.value;
+      const option = options[index];
 
-    if (option) {
-      model.value = option.value;
-    } else {
-      model.value = null;
-    }
+      if (option) {
+        model.value = option.value;
+      } else {
+        model.value = null;
+      }
 
-    onChange(e);
-  }, [options, model, onChange]);
+      onChange(e);
+    },
+    [options, model, onChange]
+  );
 
   useEffect(() => {
     const option = options[activeIndex];
@@ -44,16 +61,22 @@ export const BaseSelect: React.FC<Props> = ({ children, model, options, label, p
 
   return (
     <div className={styles.baseSelect}>
-      <select {...props} value={activeIndex} className={styles.field} onChange={onChangeValue}>
-        <option value={-1} style={{ display: 'none' }} disabled>{placeholder}</option>
-        { options.map(({ label, disabled }, index) => (
-          <option key={index} value={index} disabled={disabled}>{label}</option>
+      <select
+        {...props}
+        value={activeIndex}
+        className={styles.field}
+        onChange={onChangeValue}
+      >
+        <option value={-1} style={{ display: 'none' }} disabled>
+          {placeholder}
+        </option>
+        {options.map(({ label, disabled }, index) => (
+          <option key={index} value={index} disabled={disabled}>
+            {label}
+          </option>
         ))}
       </select>
-      <div className={styles.select}>
-        {children}
-      </div>
+      <div className={styles.select}>{children}</div>
     </div>
   );
 };
-

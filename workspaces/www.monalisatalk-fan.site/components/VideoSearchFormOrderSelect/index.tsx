@@ -1,5 +1,8 @@
 import React from 'react';
-import { ReactiveState, useReactiveState } from '@lollipop-onl/react-reactive-state';
+import {
+  ReactiveState,
+  useReactiveState,
+} from '@lollipop-onl/react-reactive-state';
 import { SelectOption, BaseSelect } from '~/components/BaseSelect';
 import { VideoSearchOrder } from '~/hooks/useVideoSearch';
 
@@ -20,5 +23,5 @@ export const VideoSearchFormOrderSelect: React.VFC<Props> = ({ model }) => {
     <BaseSelect model={model} options={OPTIONS} label={label}>
       <p>{label.value}</p>
     </BaseSelect>
-  )
+  );
 };
