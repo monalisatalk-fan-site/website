@@ -17,7 +17,9 @@ export type StaticProps = {
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-  const { videos, recommendedVideos } = await import('~/assets/data/resources.json');
+  const { videos, recommendedVideos } = await import(
+    '~/assets/data/resources.json'
+  );
   const latestVideos = videos.slice().splice(0, 4);
   const pickupVideos: string[][] = [];
 
