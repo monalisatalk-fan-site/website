@@ -71,11 +71,6 @@ export const UIPagination: React.VFC<Props> = ({ page, totalPages }) => {
 
   return (
     <div className={styles.uiPagination}>
-      {isPreviousButtonVisible ? (
-        <Link href={getPageLink(page - 1)}>
-          <a className={styles.button}>＜</a>
-        </Link>
-      ) : null}
       <ol className={styles.list}>
         {isFirstPageVisible ? (
           <li className={styles.item}>
