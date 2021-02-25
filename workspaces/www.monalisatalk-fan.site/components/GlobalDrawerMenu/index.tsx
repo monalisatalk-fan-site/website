@@ -23,7 +23,7 @@ export const GlobalDrawerMenu: React.VFC = () => {
       </button>
       <div className={clsx(styles.drawerMenu, isMenuVisible && styles.Visible)}>
         <div className={styles.header}>
-          <img className={styles.logo} src="/images/logo.svg" alt="" />
+          <img className={clsx(styles.logo, isMenuVisible && styles.Visible)} src="/images/logo.svg" alt="" />
           <button className={styles.close} onClick={closeMenu} aria-label="メニューを閉じる" />
         </div>
         <nav className={styles.navigation}>

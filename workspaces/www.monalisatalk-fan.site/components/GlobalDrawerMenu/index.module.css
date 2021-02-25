@@ -1,13 +1,3 @@
-@keyframes logo-slide-in {
-  0% {
-    transform: translate3d(0, -8px, 0);
-  }
-
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
 .hambargerMenu {
   --color-bars: #aaa;
 
@@ -87,12 +77,12 @@
     env(safe-area-inset-bottom, 0)
     env(safe-area-inset-left, 0);
   visibility: hidden;
-  /* background: var(--global-drawer-menu-background); */
+  background: var(--global-drawer-menu-background);
   opacity: 0;
 
   @supports (backdrop-filter: blur(10px)) {
-    /* background: var(--global-drawer-menu-background-transparency);
-    backdrop-filter: blur(10px); */
+    background: var(--global-drawer-menu-background-transparency);
+    backdrop-filter: blur(10px);
   }
 
   @media (--small-viewport) {
@@ -115,7 +105,12 @@
 
   & > .header > .logo {
     height: 24px;
-    animation: logo-slide-in 3s ease forwards;
+    transform: translate3d(0, -8px, 0);
+  }
+
+  & > .header > .logo.Visible {
+    transition: transform 0.2s ease-out-quart;
+    transform: translate3d(0, 0, 0);
   }
 
   & > .header > .close {
