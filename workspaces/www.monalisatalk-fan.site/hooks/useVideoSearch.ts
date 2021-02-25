@@ -63,7 +63,7 @@ export const sortVideoOrder = (
           b.statistics.viewCount - a.statistics.viewCount
       : order === 'likes'
       ? (a: Video, b: Video): number =>
-      b.statistics.likeCount - a.statistics.likeCount
+          b.statistics.likeCount - a.statistics.likeCount
       : (a: Video, b: Video): number => b.publishedAt - a.publishedAt;
 
   return videos.slice().sort(compare);
