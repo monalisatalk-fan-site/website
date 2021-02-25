@@ -15,6 +15,6 @@ export const formatDateTime = (date: Date): string => {
 
   return [
     [y, `${m}`.padStart(2, '0'), `${d}`.padStart(2, '0')].join('/'),
-    [h, `${min}`.padStart(2, '0')].join(':')
+    [h, `${min}`.padStart(2, '0')].join(':'),
   ].join(' ');
 };

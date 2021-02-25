@@ -139,11 +139,19 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
             <div className={styles.videoDetailStatistics}>
               <dl className={styles.data}>
                 <dt className={styles.title}>再生回数</dt>
-                <dd className={styles.value}>{new Intl.NumberFormat().format(video.statistics.viewCount)}</dd>
+                <dd className={styles.value}>
+                  {new Intl.NumberFormat().format(video.statistics.viewCount)}
+                </dd>
                 <dt className={styles.title}>高評価の数</dt>
-                <dd className={styles.value}>{new Intl.NumberFormat().format(video.statistics.likeCount)}</dd>
+                <dd className={styles.value}>
+                  {new Intl.NumberFormat().format(video.statistics.likeCount)}
+                </dd>
               </dl>
-              <p className={styles.note}>※この情報は {formatDateTime(new Date(video.statistics.updatedAt))} 頃のデータを元に表示しています</p>
+              <p className={styles.note}>
+                ※この情報は{' '}
+                {formatDateTime(new Date(video.statistics.updatedAt))}{' '}
+                頃のデータを元に表示しています
+              </p>
             </div>
           </div>
         </div>
