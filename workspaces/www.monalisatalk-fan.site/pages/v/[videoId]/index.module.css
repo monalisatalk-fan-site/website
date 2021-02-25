@@ -33,7 +33,7 @@
     padding-top: var(--margin-5x);
     margin-right: var(--margin-3x);
 
-    @media (--small-viewport) {
+    @media (--header-small-viewport) {
       padding-top: var(--margin-3x);
       margin-right: 0;
     }
@@ -42,7 +42,7 @@
 
 .videoDetailThumbnail {
   & > .image {
-    @media (--small-viewport) {
+    @media (--header-small-viewport) {
       width: calc(100% + var(--margin-2x) * 2);
       margin-left: calc(var(--margin-2x) * -1);
     }
@@ -72,7 +72,7 @@
   & > .description {
     margin-top: var(--margin-4x);
 
-    @media (--small-viewport) {
+    @media (--header-small-viewport) {
       margin-top: var(--margin-3x);
     }
   }
@@ -87,8 +87,17 @@
     display: none;
     margin-top: var(--margin-3x);
 
-    @media (--small-viewport) {
+    @media (--header-small-viewport) {
       display: flex;
+    }
+  }
+
+  & > .statistics {
+    padding: 0 var(--margin-2x);
+    margin-top: var(--margin-5x);
+
+    @media (--header-small-viewport) {
+      margin-top: var(--margin-3x);
     }
   }
 }
@@ -192,5 +201,34 @@
   & > .text {
     position: relative;
     z-index: var(--z-index-positive);
+  }
+}
+
+.videoDetailStatistics {
+  & > .data > .title {
+    float: left;
+    width: 7em;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 2.8rem;
+    color: var(--color-text-secondary);
+  }
+
+  & > .data > .value {
+    font-size: 1.2rem;
+    line-height: 2.8rem;
+  }
+
+  & > .data > .value::after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+
+  & > .note {
+    margin-top: var(--margin-1x);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
   }
 }

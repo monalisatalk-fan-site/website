@@ -4,7 +4,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { YouTubeThumbnail } from '~/components/YouTubeThumbnail';
 import { LayoutContainer } from '~/components/LayoutContainer';
-import { formatDate } from '~/helpers/format-date';
+import { formatDate, formatDateTime } from '~/helpers/format-date';
 import type Resources from '~/assets/data/resources.json';
 import styles from './index.module.css';
 
@@ -135,6 +135,17 @@ export const VideoDetailPage: React.VFC<StaticProps> = ({
           >
             <span className={styles.text}>YouTube で動画をみる</span>
           </a>
+          <div className={styles.statistics}>
+            <div className={styles.videoDetailStatistics}>
+              <dl className={styles.data}>
+                <dt className={styles.title}>再生回数</dt>
+                <dd className={styles.value}>{new Intl.NumberFormat().format(video.statistics.viewCount)}</dd>
+                <dt className={styles.title}>高評価の数</dt>
+                <dd className={styles.value}>{new Intl.NumberFormat().format(video.statistics.likeCount)}</dd>
+              </dl>
+              <p className={styles.note}>※この情報は {formatDateTime(new Date(video.statistics.updatedAt))} 頃のデータを元に表示しています</p>
+            </div>
+          </div>
         </div>
       </LayoutContainer>
     </article>
