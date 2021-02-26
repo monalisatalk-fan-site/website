@@ -67,7 +67,10 @@ export const GlobalDrawerMenu: React.VFC = () => {
               <img className={styles.image} src="/images/menu/left-handed.svg" />
             </button>
             <button className={clsx(styles.button, styles.Right)}>
-              <img className={styles.image} src="/images/menu/right-handed.svg" />
+              <img
+                className={styles.image}
+                src="/images/menu/right-handed.svg"
+              />
             </button>
           </div>
         </div>
