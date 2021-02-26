@@ -183,5 +183,11 @@
     display: block;
     width: 100%;
     height: 100%;
+    opacity: 0.5;
+    transition: opacity 0.12s ease;
+  }
+
+  & > .button:hover > .image {
+    opacity: 1;
   }
 }

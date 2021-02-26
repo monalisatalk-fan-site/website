@@ -63,7 +63,9 @@ export const GlobalDrawerMenu: React.VFC = () => {
         </nav>
         <div className={styles.footer}>
           <div className={styles.drawerMenuFooter}>
-            <button className={clsx(styles.button, styles.Left)}>左利き</button>
+            <button className={clsx(styles.button, styles.Left)}>
+              <img className={styles.image} src="/images/menu/left-handed.svg" />
+            </button>
             <button className={clsx(styles.button, styles.Right)}>
               <img className={styles.image} src="/images/menu/right-handed.svg" />
             </button>
