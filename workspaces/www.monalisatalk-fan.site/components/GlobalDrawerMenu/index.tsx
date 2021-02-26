@@ -43,7 +43,12 @@ export const GlobalDrawerMenu: React.VFC = () => {
           />
         </div>
         <nav className={styles.navigation}>
-          <ul className={clsx(styles.drawerMenuNavigation, isMenuVisible && styles.Visible)}>
+          <ul
+            className={clsx(
+              styles.drawerMenuNavigation,
+              isMenuVisible && styles.Visible
+            )}
+          >
             <li className={styles.item}>
               <Link href="/">
                 <a className={styles.link}>HOME</a>
