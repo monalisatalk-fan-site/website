@@ -10,6 +10,8 @@ import '../assets/css/variables.css';
 import '../assets/css/globals.css';
 import styles from './_app.module.css';
 
+export const reportWebVitals = (metric: unknown): void => console.log(metric);
+
 function App({ Component, pageProps }: AppProps): React.ReactElement {
   useEffect(() => {
     const onResize = () => {
@@ -37,6 +39,7 @@ function App({ Component, pageProps }: AppProps): React.ReactElement {
           name="viewport"
           content="initial-scale=1.0, width=device-width, viewport-fit=cover"
         />
+        <link rel="stylesheet" href="/css/icons/icons.css" />
       </Head>
       <GlobalHeader />
       <Component {...pageProps} />

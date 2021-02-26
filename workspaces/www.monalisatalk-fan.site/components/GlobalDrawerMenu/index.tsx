@@ -6,7 +6,7 @@ import styles from './index.module.css';
 
 export const GlobalDrawerMenu: React.VFC = () => {
   const [isMenuVisible, setMenuVisibility] = useState(false);
-  const { route } = useRouter();
+  const { asPath } = useRouter();
 
   const openMenu = useCallback(() => {
     setMenuVisibility(true);
@@ -18,7 +18,7 @@ export const GlobalDrawerMenu: React.VFC = () => {
 
   useEffect(() => {
     closeMenu();
-  }, [closeMenu, route]);
+  }, [closeMenu, asPath]);
 
   return (
     <>
