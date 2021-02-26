@@ -164,7 +164,7 @@
 }
 
 .drawerMenuNavigation {
-  --margin-menu-link: var(--margin-2x);
+  --margin-menu-link: var(--margin-1x);
 
   display: flex;
   flex-direction: column;
@@ -194,10 +194,18 @@
     transition-delay: 0.2s;
   }
 
+  &.Visible > .item:nth-child(4) {
+    transition-delay: 0.25s;
+  }
+
+  &.Visible > .item:nth-child(5) {
+    transition-delay: 0.3s;
+  }
+
   & > .item > .link {
     display: block;
     padding: var(--margin-menu-link);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-indent: -0.2em;
     letter-spacing: 0.2em;

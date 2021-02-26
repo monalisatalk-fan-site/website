@@ -27,8 +27,18 @@ export const GlobalHeader: React.VFC = () => {
                   </Link>
                 </li>
                 <li className={styles.item}>
+                  <Link href="/playlist/recommended">
+                    <a className={styles.link}>RECOMMENDED</a>
+                  </Link>
+                </li>
+                <li className={styles.item}>
                   <Link href="/#goods">
                     <a className={styles.link}>GOODS</a>
+                  </Link>
+                </li>
+                <li className={styles.item}>
+                  <Link href="/#about">
+                    <a className={styles.link}>ABOUT</a>
                   </Link>
                 </li>
               </ul>
