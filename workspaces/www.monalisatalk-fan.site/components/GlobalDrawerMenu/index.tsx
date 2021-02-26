@@ -1,16 +1,24 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import styles from './index.module.css';
 
 export const GlobalDrawerMenu: React.VFC = () => {
   const [isMenuVisible, setMenuVisibility] = useState(false);
+  const { route } = useRouter();
+
   const openMenu = useCallback(() => {
     setMenuVisibility(true);
   }, [setMenuVisibility]);
+
   const closeMenu = useCallback(() => {
     setMenuVisibility(false);
   }, [setMenuVisibility]);
+
+  useEffect(() => {
+    closeMenu();
+  }, [closeMenu, route]);
 
   return (
     <>
@@ -45,6 +53,14 @@ export const GlobalDrawerMenu: React.VFC = () => {
             </li>
           </ul>
         </nav>
+        <div className={styles.footer}>
+          <div className={styles.drawerMenuFooter}>
+            <button className={clsx(styles.button, styles.Left)}>左利き</button>
+            <button className={clsx(styles.button, styles.Right)}>
+              <img className={styles.image} src="/images/menu/right-handed.svg" />
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );
