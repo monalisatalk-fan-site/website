@@ -2,7 +2,7 @@
   "functions": {
     "source": "workspaces/functions",
     "predeploy": "yarn --cwd \"$RESOURCE_DIR\" build",
-    "runtime": "nodejs12"
+    "runtime": "nodejs14"
   },
   "firestore": {
     "rules": "firestore.rules",

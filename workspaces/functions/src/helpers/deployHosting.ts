@@ -1,6 +1,7 @@
+import * as functions from 'firebase-functions';
 import axios from 'axios';
 
-const GITHUB_ACCESS_TOKEN = '';
+export const GITHUB_ACCESS_TOKEN = functions.config().github.access_token;
 
 export const deployHosting = async (): Promise<void> => {
   console.log('Deploy to hosting (live-channel)');

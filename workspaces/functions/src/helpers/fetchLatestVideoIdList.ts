@@ -16,7 +16,8 @@ export const fetchLatestVideoIdList = async (
     channelId: CHANNEL_ID,
     maxResults: limit,
   });
-  const videoIdList = videoIdListResponse.data.items
+  const { items = [] } = videoIdListResponse.data;
+  const videoIdList = items
     .map(({ id }) => id?.videoId)
     .filter(<T>(id: T): id is NonNullable<T> => id != null);
 
