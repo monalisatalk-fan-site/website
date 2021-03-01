@@ -1,0 +1,15 @@
+root: true
+env:
+  node: true
+extends:
+  - standard
+  - prettier
+rules:
+  no-use-before-define: 'off'
+  camelcase: 'off'
+overrides:
+  - files:
+      - '*.ts'
+      - '*.tsx'
+    extends:
+      - plugin:@typescript-eslint/recommended

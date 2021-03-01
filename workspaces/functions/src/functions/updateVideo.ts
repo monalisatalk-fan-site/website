@@ -1,14 +1,15 @@
-import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import axios from 'axios';
 import { database } from '../helpers/database';
-import { youtube, CHANNEL_ID, GCP_API_KEY } from '../helpers/fetchChannelVideos';
+import {
+  youtube,
+  CHANNEL_ID,
+  GCP_API_KEY,
+} from '../helpers/fetchChannelVideos';
 
 export const SLACK_CHANNEL_WEBHOOK_URL = functions.config().slack.webhook_url;
 
 export const updateVideo = functions.https.onRequest(async (req, res) => {
-  const firestore = admin.firestore();
-
   if (req.method !== 'POST') {
     res.sendStatus(404);
 
@@ -25,7 +26,6 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
   const matches = /\/watch\?v=([^/?#]+)/.exec(url);
 
   if (!matches) {
-
     res.status(400).send({ message: `Invalid url`, data: url });
 
     return;
@@ -40,7 +40,9 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
     maxResults: 1,
   });
 
-  const { data: { items: [video] = [] } } = response;
+  const {
+    data: { items: [video] = [] },
+  } = response;
 
   if (!video) {
     res.status(400).json({ message: `Video is not found`, data: id });
@@ -51,7 +53,9 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
   const { snippet, statistics } = video;
 
   if (!snippet) {
-    res.status(400).json({ message: 'Receive a invalid video resource', data: video });
+    res
+      .status(400)
+      .json({ message: 'Receive a invalid video resource', data: video });
 
     return;
   }
@@ -70,13 +74,21 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
   }
 
   await Promise.all([
-    database.ref('videos').child('basic').child(id).set({
-      title: optimizedTitle || '',
-      publishedAt: +new Date(publishedAt || ''),
-    }),
-    database.ref('videos').child('additional').child(id).set({
-      description: optimizedDescription || '',
-    }),
+    database
+      .ref('videos')
+      .child('basic')
+      .child(id)
+      .set({
+        title: optimizedTitle || '',
+        publishedAt: +new Date(publishedAt || ''),
+      }),
+    database
+      .ref('videos')
+      .child('additional')
+      .child(id)
+      .set({
+        description: optimizedDescription || '',
+      }),
     // (async () => {
     //   const basicTitleRef = database.ref('videos').child('basic').child(id).child('title');
     //   const snapshot = await basicTitleRef.once('value');
@@ -94,16 +106,24 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
 
     //   await additionalDescriptionRef.set(additionalDescription || optimizedDescription || '');
     // })(),
-    database.ref('videos').child('original').child(id).set({
-      title: title || '',
-      description: description || '',
-    }),
-    database.ref('videos').child('statistics').child(id).set({
-      viewCount: +(statistics?.viewCount || 0),
-      likeCount: +(statistics?.likeCount || 0),
-      commentCount: +(statistics?.commentCount || 0),
-      updatedAt: Date.now(),
-    }),
+    database
+      .ref('videos')
+      .child('original')
+      .child(id)
+      .set({
+        title: title || '',
+        description: description || '',
+      }),
+    database
+      .ref('videos')
+      .child('statistics')
+      .child(id)
+      .set({
+        viewCount: +(statistics?.viewCount || 0),
+        likeCount: +(statistics?.likeCount || 0),
+        commentCount: +(statistics?.commentCount || 0),
+        updatedAt: Date.now(),
+      }),
   ]);
 
   try {
@@ -135,7 +155,7 @@ export const updateVideo = functions.https.onRequest(async (req, res) => {
     data: {
       id: id,
       title,
-      publishedAt
+      publishedAt,
     },
   });
 });
