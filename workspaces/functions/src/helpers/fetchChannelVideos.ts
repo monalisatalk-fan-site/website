@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import { google, youtube_v3 } from 'googleapis';
-import { flatMap, range } from 'lodash';
+import { flatMap } from 'lodash';
+import { fetchVideosFromId } from './fetchVideosFromId';
 
 /** モナ・リザの戯言チャンネルのID */
 export const CHANNEL_ID = 'UCSSkv6tmPpi8d1IrWegypsA';
@@ -74,24 +75,7 @@ export const fetchChannelVideos = async (): Promise<
 
     console.log(`Found ${videoIdList.length} videos in channel ${CHANNEL_ID}`);
 
-    const pages = Math.ceil(videoIdList.length / 50);
-    const videoListResponse = await Promise.all(
-      range(0, pages).map((index) => {
-        const baseIndex = index * 50;
-        const id = videoIdList.slice().splice(baseIndex, 50);
-
-        return youtube.videos.list({
-          key: GCP_API_KEY,
-          part: ['snippet', 'statistics'],
-          id,
-          maxResults: 50,
-        });
-      })
-    );
-    const videos = flatMap(
-      videoListResponse,
-      ({ data: { items = [] } }) => items
-    );
+    const videos = await fetchVideosFromId(videoIdList);
 
     return videos;
   } catch (err) {
