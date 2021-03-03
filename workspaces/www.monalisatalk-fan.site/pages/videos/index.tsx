@@ -31,29 +31,26 @@ export const VideosPage: React.VFC<StaticProps> = ({ videos }) => {
 
   return (
     <>
-    <HeadMeta
-    title="モナ・リザの戯言 漫画動画"
-    pathname="/videos"
-     />
-    <div className={styles.videosPage}>
-      <LayoutContainer className={styles.container}>
-        <UIHeading
-          title="漫画動画"
-          description={`${totalVideos}件の動画 (${page}/${totalPages})`}
-        />
-        <VideoSearchForm />
-        {videosPerPage.length > 0 ? (
-          <>
-            <SimpleVideoList videos={videosPerPage} />
-            <div className={styles.pagination}>
-              <UIPagination page={page} totalPages={totalPages} />
-            </div>
-          </>
-        ) : (
-          <p>videos not found.</p>
-        )}
-      </LayoutContainer>
-    </div>
+      <HeadMeta title="モナ・リザの戯言 漫画動画" pathname="/videos" />
+      <div className={styles.videosPage}>
+        <LayoutContainer className={styles.container}>
+          <UIHeading
+            title="漫画動画"
+            description={`${totalVideos}件の動画 (${page}/${totalPages})`}
+          />
+          <VideoSearchForm />
+          {videosPerPage.length > 0 ? (
+            <>
+              <SimpleVideoList videos={videosPerPage} />
+              <div className={styles.pagination}>
+                <UIPagination page={page} totalPages={totalPages} />
+              </div>
+            </>
+          ) : (
+            <p>videos not found.</p>
+          )}
+        </LayoutContainer>
+      </div>
     </>
   );
 };

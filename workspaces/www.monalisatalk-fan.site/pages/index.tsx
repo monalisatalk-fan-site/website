@@ -89,68 +89,72 @@ export const IndexPage: React.VFC<StaticProps> = ({
         withoutTitleTemplate
         pathname="/"
       />
-    <div className={styles.indexPage}>
-      <TopHeroView videos={pickupVideos} />
-      <LayoutContainer>
-        <div className={styles.pageContainer}>
-          <div className={styles.pickup}>
-            <Link href={pickupPlaylistLink}>
-              <a className={styles.link}>
-                ＞ <span className={styles.text}>ピックアッププレイリスト</span>
-              </a>
-            </Link>
+      <div className={styles.indexPage}>
+        <TopHeroView videos={pickupVideos} />
+        <LayoutContainer>
+          <div className={styles.pageContainer}>
+            <div className={styles.pickup}>
+              <Link href={pickupPlaylistLink}>
+                <a className={styles.link}>
+                  ＞{' '}
+                  <span className={styles.text}>ピックアッププレイリスト</span>
+                </a>
+              </Link>
+            </div>
+            <section className={styles.section}>
+              <h1 id="latest" className={styles.heading}>
+                <img
+                  className={styles.image}
+                  src="/images/top/headings/latest-videos.svg"
+                  alt="最新漫画動画のタイトル"
+                />
+              </h1>
+              <SimpleVideoList videos={latestVideos} />
+              <div className={styles.morebutton}>
+                <UILinkButton href="/videos">もっとみる</UILinkButton>
+              </div>
+            </section>
+            <section className={styles.section}>
+              <h1
+                id="recommended"
+                className={clsx(styles.heading, styles.Left)}
+              >
+                <img
+                  className={styles.image}
+                  src="/images/top/headings/recommended-videos.svg"
+                  alt="モナ・リザの戯言チャンネルおすすめ漫画動画のタイトル"
+                />
+              </h1>
+              <SimpleVideoList videos={recommendedVideos} />
+              <div className={styles.morebutton}>
+                <UILinkButton href="/playlist/recommended">
+                  もっとみる
+                </UILinkButton>
+              </div>
+            </section>
+            <section className={styles.section}>
+              <h1 id="goods" className={clsx(styles.heading, styles.Right)}>
+                <img
+                  className={styles.image}
+                  src="/images/top/headings/line-sticker.svg"
+                  alt="モナ・リザの戯言のLINEスタンプ"
+                />
+              </h1>
+              <LineStickers stickers={stickers} />
+            </section>
+            <section className={styles.section}>
+              <h1 id="about" className={styles.heading}>
+                <img
+                  className={styles.image}
+                  src="/images/top/headings/about.svg"
+                  alt="このウェブサイトについてのタイトル"
+                />
+              </h1>
+              <p>lorem ipsum</p>
+            </section>
           </div>
-          <section className={styles.section}>
-            <h1 id="latest" className={styles.heading}>
-              <img
-                className={styles.image}
-                src="/images/top/headings/latest-videos.svg"
-                alt="最新漫画動画のタイトル"
-              />
-            </h1>
-            <SimpleVideoList videos={latestVideos} />
-            <div className={styles.morebutton}>
-              <UILinkButton href="/videos">もっとみる</UILinkButton>
-            </div>
-          </section>
-          <section className={styles.section}>
-            <h1 id="recommended" className={clsx(styles.heading, styles.Left)}>
-              <img
-                className={styles.image}
-                src="/images/top/headings/recommended-videos.svg"
-                alt="モナ・リザの戯言チャンネルおすすめ漫画動画のタイトル"
-              />
-            </h1>
-            <SimpleVideoList videos={recommendedVideos} />
-            <div className={styles.morebutton}>
-              <UILinkButton href="/playlist/recommended">
-                もっとみる
-              </UILinkButton>
-            </div>
-          </section>
-          <section className={styles.section}>
-            <h1 id="goods" className={clsx(styles.heading, styles.Right)}>
-              <img
-                className={styles.image}
-                src="/images/top/headings/line-sticker.svg"
-                alt="モナ・リザの戯言のLINEスタンプ"
-              />
-            </h1>
-            <LineStickers stickers={stickers} />
-          </section>
-          <section className={styles.section}>
-            <h1 id="about" className={styles.heading}>
-              <img
-                className={styles.image}
-                src="/images/top/headings/about.svg"
-                alt="このウェブサイトについてのタイトル"
-              />
-            </h1>
-            <p>lorem ipsum</p>
-          </section>
-        </div>
-      </LayoutContainer>
-    </div>
+        </LayoutContainer>
+      </div>
     </>
   );
 };
