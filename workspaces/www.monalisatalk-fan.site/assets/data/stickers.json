@@ -1,0 +1,29 @@
+{
+  "author": {
+    "id": "1699513",
+    "name": "モナ・リザの戯言"
+  },
+  "stickers": [
+    {
+      "id": "12769554",
+      "name": "モナ・リザの戯言",
+      "description": "Youtubeチャンネル『モナ・リザの戯言』のキャラクター達がLINEスタンプになりました！",
+      "price": 120,
+      "premium": true
+    },
+    {
+      "id": "13269757",
+      "name": "モナ・リザの戯言2",
+      "description": "Youtubeチャンネル『モナ・リザの戯言』のLINEスタンプ第二弾です！",
+      "price": 120,
+      "premium": false
+    },
+    {
+      "id": "14249557",
+      "name": "モナ・リザの戯言3",
+      "description": "Youtubeチャンネル『モナ・リザの戯言』のLINEスタンプ第三弾です",
+      "price": 120,
+      "premium": false
+    }
+  ]
+}

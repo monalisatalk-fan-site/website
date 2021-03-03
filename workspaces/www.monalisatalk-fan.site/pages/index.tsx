@@ -7,16 +7,20 @@ import { LayoutContainer } from '~/components/LayoutContainer';
 import { TopHeroView } from '~/components/TopHeroView';
 import { SimpleVideoList } from '~/components/SimpleVideoList';
 import { UILinkButton } from '~/components/UILinkButton';
+import { LineStickers } from '~/components/LineStickers';
 import { Video } from '~/types';
+import type stickers from '~/assets/data/stickers.json';
 import styles from './index.module.css';
 
 export type StaticProps = {
   latestVideos: Video[];
   recommendedVideos: Video[];
   pickupVideos: string[][];
+  stickers: typeof stickers;
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  const { author, stickers } = await import('~/assets/data/stickers.json');
   const { videos, recommendedVideos } = await import(
     '~/assets/data/resources.json'
   );
@@ -57,6 +61,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
       latestVideos,
       recommendedVideos: recommendedVideos.slice().splice(0, 4),
       pickupVideos,
+      stickers: { author, stickers },
     },
   };
 };
@@ -65,6 +70,7 @@ export const IndexPage: React.VFC<StaticProps> = ({
   latestVideos,
   recommendedVideos,
   pickupVideos,
+  stickers,
 }) => {
   const pickupPlaylistLink = useMemo(
     () =>
@@ -88,7 +94,7 @@ export const IndexPage: React.VFC<StaticProps> = ({
             </Link>
           </div>
           <section className={styles.section}>
-            <h1 className={styles.heading}>
+            <h1 id="latest" className={styles.heading}>
               <img
                 className={styles.image}
                 src="/images/top/headings/latest-videos.svg"
@@ -101,7 +107,7 @@ export const IndexPage: React.VFC<StaticProps> = ({
             </div>
           </section>
           <section className={styles.section}>
-            <h1 className={clsx(styles.heading, styles.Left)}>
+            <h1 id="recommended" className={clsx(styles.heading, styles.Left)}>
               <img
                 className={styles.image}
                 src="/images/top/headings/recommended-videos.svg"
@@ -116,13 +122,23 @@ export const IndexPage: React.VFC<StaticProps> = ({
             </div>
           </section>
           <section className={styles.section}>
-            <h2 className={styles.heading}>
+            <h1 id="goods" className={clsx(styles.heading, styles.Right)}>
+              <img
+                className={styles.image}
+                src="/images/top/headings/line-sticker.svg"
+                alt="モナ・リザの戯言のLINEスタンプ"
+              />
+            </h1>
+            <LineStickers stickers={stickers} />
+          </section>
+          <section className={styles.section}>
+            <h1 id="about" className={styles.heading}>
               <img
                 className={styles.image}
                 src="/images/top/headings/about.svg"
                 alt="このウェブサイトについてのタイトル"
               />
-            </h2>
+            </h1>
             <p>lorem ipsum</p>
           </section>
         </div>

@@ -32,8 +32,6 @@
   }
 
   & > .container > .footer > .link:hover {
-    padding-right: 0;
-    padding-left: 0;
     color: var(--color-white);
     background: var(--color-youtube);
   }
