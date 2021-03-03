@@ -21,7 +21,9 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const yaml = await import('js-yaml');
   const resources = await import('~/assets/data/resources.json');
 
-  const files = fg.sync(path.join(process.cwd(), 'assets/data/changelogs/*.yml'));
+  const files = fg.sync(
+    path.join(process.cwd(), 'assets/data/changelogs/*.yml')
+  );
   const changelogs = await Promise.all(
     files.map(async (filePath) => {
       const file = await fs.promises.readFile(filePath, 'utf-8');
