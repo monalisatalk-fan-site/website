@@ -1,5 +1,6 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
+import { HeadMeta } from '~/components/HeadMeta';
 import { SimpleVideoList } from '~/components/SimpleVideoList';
 import { UIHeading } from '~/components/UIHeading';
 import { UIPagination } from '~/components/UIPagination';
@@ -29,6 +30,11 @@ export const VideosPage: React.VFC<StaticProps> = ({ videos }) => {
   );
 
   return (
+    <>
+    <HeadMeta
+    title="モナ・リザの戯言 漫画動画"
+    pathname="/videos"
+     />
     <div className={styles.videosPage}>
       <LayoutContainer className={styles.container}>
         <UIHeading
@@ -48,6 +54,7 @@ export const VideosPage: React.VFC<StaticProps> = ({ videos }) => {
         )}
       </LayoutContainer>
     </div>
+    </>
   );
 };
 

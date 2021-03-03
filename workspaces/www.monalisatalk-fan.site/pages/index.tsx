@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import clsx from 'clsx';
 import qs from 'qs';
+import { HeadMeta } from '~/components/HeadMeta';
 import { LayoutContainer } from '~/components/LayoutContainer';
 import { TopHeroView } from '~/components/TopHeroView';
 import { SimpleVideoList } from '~/components/SimpleVideoList';
@@ -82,6 +83,12 @@ export const IndexPage: React.VFC<StaticProps> = ({
   );
 
   return (
+    <>
+      <HeadMeta
+        title="モナ・リザの戯言 非公式ファンサイト"
+        withoutTitleTemplate
+        pathname="/"
+      />
     <div className={styles.indexPage}>
       <TopHeroView videos={pickupVideos} />
       <LayoutContainer>
@@ -144,6 +151,7 @@ export const IndexPage: React.VFC<StaticProps> = ({
         </div>
       </LayoutContainer>
     </div>
+    </>
   );
 };
 
