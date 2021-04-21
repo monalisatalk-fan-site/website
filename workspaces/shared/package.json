@@ -1,7 +1,0 @@
-{
-  "name": "shared",
-  "version": "1.0.0",
-  "dependencies": {
-    "firebase": "^8.2.4"
-  }
-}
